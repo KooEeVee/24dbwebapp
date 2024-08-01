@@ -23,6 +23,33 @@ Music Quiz Platform offers users a fun place to refresh and test music related s
 
 ## To-do
 
-WIP
+Routes and app
+* []routes.py: functions for page requests
+* []app.py: application launch
 
+Templates
+* []index.html
+* []login.html
+* []register.html
+* []logout.html
+* []userpage.html
+* []adminpage.html
+
+Create a user account, log in and log out
+* []users.py: []register user (username, password), []login, []logout, []session, []hash password, []username and []password validation rules
+
+Database
+* []db.py: database connection launch
+* []schema.sql
+
+Other files
+* [].gitignore
+* [].env
+* []requirements.txt
+
+Layout
+* WIP
+
+Security and privacy
+* WIP
 
