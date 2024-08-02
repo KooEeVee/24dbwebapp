@@ -24,11 +24,11 @@ Music Quiz Platform offers users a fun place to refresh and test music related s
 ## To-do
 
 Routes and app
-* []routes.py: functions for page requests
-* []app.py: application launch
+* [x]routes.py: functions for page requests
+* [x]app.py: application launch
 
 Templates
-* []index.html
+* [x]index.html
 * []login.html
 * []register.html
 * []logout.html
@@ -43,12 +43,13 @@ Database
 * []schema.sql
 
 Other files
-* [].gitignore
+* [x].gitignore
 * [].env
 * []requirements.txt
 
 Layout
-* WIP
+* Bootstrap template
+* []base.html
 
 Security and privacy
 * WIP
