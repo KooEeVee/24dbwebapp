@@ -4,18 +4,25 @@
 
 <title>Music Quiz | {% block title %}{% endblock %}</title>
 
-<div class="container-fluid">
-    <ul class="nav justify-content-end">
-        <li class="nav-item">
-          <a class="nav-link active" href="/register">Register</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/login">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/logout">Logout</a>
-        </li>
-      </ul>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <a href="/"><h1>Music Quiz</h1></a>   
+        </div>
+        <div class="col">
+            <ul class="nav justify-content-end">
+                <li class="nav-item">
+                  <a class="nav-link active" href="/register">Register</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/login">Login</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/logout">Logout</a>
+                </li>
+              </ul>
+        </div>
+    </div>
     <div class="row">
         <div class="col">
             <h1>Music Quiz</h1>
@@ -23,17 +30,9 @@
         </div>
         <div class="col">
             <h1>Stats</h1>
-            {% block contentrow1col2 %}{% endblock %}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <h1>Music Quiz 2</h1>
-            {% block contentrow2col1 %}{% endblock %}
-        </div>
-        <div class="col">
-            <h1>Stats 2</h1>
-            {% block contentrow2col2 %}{% endblock %}
+            <p>
+                Stats stats stats
+            </p>
         </div>
     </div>
 </div>
