@@ -49,7 +49,7 @@ Other files
 
 Layout
 * Bootstrap template
-* []base.html
+* [x]layout.html
 
 Security and privacy
 * WIP
