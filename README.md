@@ -29,9 +29,9 @@ Routes and app
 
 Templates
 * [x]index.html
-* []login.html
-* []register.html
-* []logout.html
+* [x]login.html
+* [x]register.html
+* [x]logout.html
 * []userpage.html
 * []adminpage.html
 
