@@ -9,8 +9,10 @@ def index():
 def register():
     if request.method=="GET":
         return render_template("register.html")
+    if request.method=="POST" and request.form["userRadio"]=="user":
+        return redirect("/user")
     else:
-        return redirect("/")
+        return redirect("/admin")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
