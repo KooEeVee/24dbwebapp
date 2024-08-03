@@ -32,10 +32,12 @@ Templates
 * [x]login.html
 * [x]register.html
 * [x]logout.html
-* []userpage.html
-* []adminpage.html
+* []quiz.html
+* []user.html
+* []admin.html
+* []accountremove.html
 
-Create a user account, log in and log out
+Create a user account, log in and log out, remove account
 * []users.py: []register user (username, password), []login, []logout, []session, []hash password, []username and []password validation rules
 
 Database
