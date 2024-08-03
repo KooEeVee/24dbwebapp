@@ -4,7 +4,7 @@
 
 {% block contentrow1col1 %}
 <H1>Login</H1>
-<form>
+<form action="/login" method="POST">
     <div class="form-group">
       <label for="username">Username</label>
       <input type="text" class="form-control" id="username", minlength="3", maxlength="10", required="True">
