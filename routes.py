@@ -17,7 +17,7 @@ def login():
     if request.method=="GET":
         return render_template("login.html")
     else:
-        return redirect("/")
+        return redirect("/user")
 
 @app.route("/logout")
 def logout():
