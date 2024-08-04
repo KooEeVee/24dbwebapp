@@ -39,7 +39,10 @@ Templates
 * [x]quizresult.html
 
 Create a user account, log in and log out, remove account
-* []users.py: []register user (username, password), []login, []logout, []session, []hash password, []username and []password validation rules
+* []users.py: []register user (username, password), []login, []logout, []session, []hash password, []username and []password validation rules, []remove account and userdata
+
+Creating and playing a quiz
+* []quizzes.py: []saving quizzes, questions, answer options and correct answers, []checking correct answers when a quiz is played, []returning the quiz result after playing
 
 Database
 * []db.py: database connection launch
@@ -56,4 +59,3 @@ Layout
 
 Security and privacy
 * WIP
-
