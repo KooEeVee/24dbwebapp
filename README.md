@@ -42,15 +42,15 @@ Create a user account, log in and log out, remove account
 * []users.py: []register user (username, password), []login, []logout, []session, []hash password, []username and []password validation rules, []remove account and userdata
 
 Creating and playing a quiz
-* []quizzes.py: []saving quizzes, questions, answer options and correct answers, []checking correct answers when a quiz is played, []returning the quiz result after playing
+* [x]quizzes.py: []saving quizzes, questions, answer options and correct answers, []checking correct answers when a quiz is played, []returning the quiz result after playing
 
 Database
-* []db.py: database connection launch
-* []schema.sql
+* [x]db.py: database connection launch
+* [x]schema.sql
 
 Other files
 * [x].gitignore
-* [].env
+* [x].env
 * []requirements.txt
 
 Layout
