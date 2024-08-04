@@ -47,3 +47,10 @@ def quiz():
 @app.route("/quizresult")
 def quizresult():
     return render_template("quizresult.html")
+
+@app.route("/newquiz", methods=["GET", "POST"])
+def newquiz():
+    if request.method=="GET":
+        return render_template("newquiz.html")
+    else:
+        return redirect("/admin")
