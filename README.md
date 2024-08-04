@@ -35,7 +35,8 @@ Templates
 * [x]user.html
 * [x]admin.html
 * []accountremove.html
-* []quiz.html
+* [x]quiz.html
+* [x]quizresult.html
 
 Create a user account, log in and log out, remove account
 * []users.py: []register user (username, password), []login, []logout, []session, []hash password, []username and []password validation rules

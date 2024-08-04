@@ -38,4 +38,8 @@ def quiz():
     if request.method=="GET":
         return render_template("quiz.html")
     else:
-        return redirect("/")
+        return redirect("/quizresult")
+    
+@app.route("/quizresult")
+def quizresult():
+    return render_template("quizresult.html")
