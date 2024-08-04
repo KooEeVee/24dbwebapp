@@ -33,6 +33,9 @@ def admin():
 def user():
     return render_template("user.html")
 
-@app.route("/quiz")
+@app.route("/quiz", methods=["GET", "POST"])
 def quiz():
-    return render_template("quiz.html")
+    if request.method=="GET":
+        return render_template("quiz.html")
+    else:
+        return redirect("/")
