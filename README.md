@@ -34,7 +34,7 @@ Templates
 * [x]logout.html
 * [x]user.html
 * [x]admin.html
-* []accountremove.html
+* [x]accountremoved.html
 * [x]quiz.html
 * [x]quizresult.html
 

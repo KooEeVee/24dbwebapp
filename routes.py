@@ -33,6 +33,10 @@ def admin():
 def user():
     return render_template("user.html")
 
+@app.route("/accountremoved")
+def accountremoved():
+    return render_template("accountremoved.html")
+
 @app.route("/quiz", methods=["GET", "POST"])
 def quiz():
     if request.method=="GET":
