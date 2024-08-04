@@ -32,3 +32,7 @@ def admin():
 @app.route("/user")
 def user():
     return render_template("user.html")
+
+@app.route("/quiz")
+def quiz():
+    return render_template("quiz.html")
