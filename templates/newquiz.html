@@ -5,37 +5,37 @@
 {% block contentrow1col1 %}
 <H1>Create new quiz</H1>
 
-<form action="/newquiz" method="POST">
+<form action="/admin" method="POST">
     <div class="form-group">
       <label for="quizname">Quiz name</label>
-      <input type="text" class="form-control" id="quizname", minlength="3", maxlength="50", required="True" aria-describedby="quiznameHelp">
+      <input type="text" class="form-control" id="quizname", name="quizname", minlength="3", maxlength="50", required="True" aria-describedby="quiznameHelp">
       <small id="quiznameHelp" class="form-text text-muted">Min 3, max 50 characters.</small>
     </div>
     <div class="form-group">
       <label for="question1">Question1</label>
-      <input type="text" class="form-control" id="question1", minlength="3", maxlength="50", required="True" aria-describedby="questionHelp">
+      <input type="text" class="form-control" id="question1", name="question1", minlength="3", maxlength="50", required="True" aria-describedby="questionHelp">
       <small id="questionHelp" class="form-text text-muted">Min 3, max 50 characters.</small>
     </div>
     <div class="form-group">
       <label for="option1">Option1</label>
-      <input type="text" class="form-control" id="option1", minlength="1", maxlength="50", required="True" aria-describedby="optionHelp">
+      <input type="text" class="form-control" id="option1", name="option1", minlength="1", maxlength="50", required="True" aria-describedby="optionHelp">
       <small id="optionHelp" class="form-text text-muted">Min 1, max 50 characters.</small>
     </div>
     <div class="form-group">
       <label for="option2">Option2</label>
-      <input type="text" class="form-control" id="option2", minlength="1", maxlength="50", required="True" aria-describedby="optionHelp">
+      <input type="text" class="form-control" id="option2", name="option2", minlength="1", maxlength="50", required="True" aria-describedby="optionHelp">
       <small id="optionHelp" class="form-text text-muted">Min 1, max 50 characters.</small>
     </div>
     <div class="form-group">
       <label for="option3">Option3</label>
-      <input type="text" class="form-control" id="option3", minlength="1", maxlength="50", required="True" aria-describedby="optionHelp">
+      <input type="text" class="form-control" id="option3", name="option3", minlength="1", maxlength="50", required="True" aria-describedby="optionHelp">
       <small id="optionHelp" class="form-text text-muted">Min 1, max 50 characters.</small>
     </div>
     <div class="form-group">
         <label for="correctoption">Correct option</label>
-        <input type="text" class="form-control" id="correctoption", minlength="1", maxlength="50", required="True" aria-describedby="correctoptionHelp">
+        <input type="text" class="form-control" id="correctoption", name="correctoption", minlength="1", maxlength="50", required="True" aria-describedby="correctoptionHelp">
         <small id="correctoptionHelp" class="form-text text-muted">Type the correct option.</small>
-      </div>
+    </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 

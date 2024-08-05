@@ -1,5 +1,7 @@
 from app import app
+from db import db
 from flask import render_template, request, redirect
+from sqlalchemy import text
 
 @app.route("/")
 def index():
@@ -25,9 +27,16 @@ def login():
 def logout():
     return render_template("logout.html")
 
-@app.route("/admin")
+@app.route("/admin", methods=["GET", "POST"])
 def admin():
-    return render_template("admin.html")
+    if request.method=="GET":
+        return render_template("admin.html")
+    else:
+        quizname=request.form["quizname"]
+        sql = text("INSERT INTO quizzes (label) VALUES (:label)")
+        db.session.execute(sql, {"label":quizname})
+        db.session.commit()
+        return render_template("admin.html")
 
 @app.route("/user")
 def user():
