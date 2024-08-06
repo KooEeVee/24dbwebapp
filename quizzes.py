@@ -46,3 +46,21 @@ def add_options(questionid, option):
         return True    
     except:
         return False
+    
+def get_optionid(option):
+    try:
+        sql = text("SELECT id FROM options WHERE label=:option")
+        result = db.session.execute(sql, {"option":option})
+        optionid = result.fetchone()[0]
+        return optionid
+    except:
+        return False
+    
+def add_correctoption(optionid):
+    try:
+        sql = text("UPDATE options SET correct_option=:correctoption WHERE id=:optionid")
+        db.session.execute(sql, {"optionid":optionid, "correctoption": True})
+        db.session.commit()
+        return True
+    except:
+        return False
