@@ -1,5 +1,6 @@
 from app import app
 from db import db
+import quizzes
 from flask import render_template, request, redirect
 from sqlalchemy import text
 
@@ -33,9 +34,12 @@ def admin():
         return render_template("admin.html")
     else:
         quizname=request.form["quizname"]
-        sql = text("INSERT INTO quizzes (label) VALUES (:label)")
-        db.session.execute(sql, {"label":quizname})
-        db.session.commit()
+        #question1=request.form["question1"]
+        #option1=request.form["option1"]
+        #option2=request.form["option2"]
+        #option3=request.form["option3"]
+        #correctoption=request.form["correctoption"]
+        quizzes.create_quiz(quizname)
         return render_template("admin.html")
 
 @app.route("/user")
