@@ -34,14 +34,18 @@ def admin():
         return render_template("admin.html")
     else:
         quizname=request.form["quizname"]
-        question1=request.form["question1"]
-        #option1=request.form["option1"]
-        #option2=request.form["option2"]
-        #option3=request.form["option3"]
+        question=request.form["question1"]
+        option1=request.form["option1"]
+        option2=request.form["option2"]
+        option3=request.form["option3"]
         #correctoption=request.form["correctoption"]
         quizzes.create_quiz(quizname)
         quizid = quizzes.get_quizid(quizname)
-        quizzes.add_question(quizid, question1)
+        quizzes.add_question(quizid, question)
+        questionid = quizzes.get_questionid(question)
+        quizzes.add_options(questionid, option1)
+        quizzes.add_options(questionid, option2)
+        quizzes.add_options(questionid, option3)
         return render_template("admin.html")
 
 @app.route("/user")
