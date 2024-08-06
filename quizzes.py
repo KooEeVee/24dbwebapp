@@ -9,3 +9,21 @@ def create_quiz(quizname):
         return True    
     except:
         return False
+    
+def get_quizid(quizname):
+    try:
+        sql = text("SELECT id FROM quizzes WHERE label=:quizname")
+        result = db.session.execute(sql, {"quizname":quizname})
+        quizid = result.fetchone()[0]
+        return quizid
+    except:
+        return False
+
+def add_question(quizid, question):
+    try:
+        sql = text("INSERT INTO questions (quiz_id, label) VALUES (:quiz_id, :label)")
+        db.session.execute(sql, {"quiz_id":quizid, "label":question})
+        db.session.commit()
+        return True    
+    except:
+        return False
