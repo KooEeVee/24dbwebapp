@@ -65,7 +65,7 @@ def add_correctoption(optionid):
     except:
         return False
     
-""" def show_quizzes_toadmin():
+""" def show_quizname_toadmin():
     try:
         sql = text("SELECT id, label, published FROM quizzes")
         result = db.session.execute(sql)
@@ -74,15 +74,42 @@ def add_correctoption(optionid):
     except:
         return False """
     
+
 def show_quizzes_toadmin():
     try:
-        sql = text("""SELECT quizzes.id, quizzes.quiz_label, quizzes.published, questions.question_label, options.option_label, correct_option 
+        sql = text("""SELECT quizzes.quiz_label, quizzes.published, questions.quiz_id, questions.question_label, options.question_id, options.option_label, correct_option 
                    FROM quizzes 
                    LEFT JOIN questions ON quizzes.id=questions.quiz_id 
                    LEFT JOIN options ON questions.id=options.question_id 
                    WHERE quizzes.id=32""")
         result = db.session.execute(sql)
         list_quizzes = result.fetchall()
-        return list_quizzes
+        print(list_quizzes)
+        dict_quizzes = {}
+        for row in list_quizzes:
+            quiz_label = row.quiz_label
+            print(quiz_label)
+            if quiz_label not in dict_quizzes:
+                dict_quizzes[quiz_label] = {
+                    "published": row.published,
+                    "quiz_id": row.quiz_id,
+                    "questions": {}
+                }
+            print(dict_quizzes[quiz_label])
+            question_label = row.question_label
+            print(question_label)
+            if question_label not in dict_quizzes[quiz_label]["questions"]:
+                dict_quizzes[quiz_label]["questions"][question_label] = {
+                    "question_id": row.question_id,
+                    "options": []
+                }
+            print(dict_quizzes[quiz_label]["questions"][question_label])
+            optionlist = {
+                "option_label": row.option_label,
+                "correct_option": row.correct_option
+            }
+            dict_quizzes[quiz_label]["questions"][question_label]["options"].append(optionlist)
+            print(dict_quizzes)
+        return dict_quizzes
     except:
         return False
