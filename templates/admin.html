@@ -2,8 +2,15 @@
 
 {% block contentrow1col1 %}
 <H1>Welcome admin!</H1>
-<H3>List of your unpublished and published quizzes</H3>
-List list list
+<H3>Your quizzes</H3>
+
+{% for quiz in list_quizzes %}
+
+<h4>Name: {{ quiz.label }}</h4>
+<p>Published: {{ quiz.published }}</p>
+
+{% endfor %}
+
 <H3>Stats of your quizzes: how many users, results</H3>
 Stats stats stats<br>
 <a class="btn btn-primary" href="/newquiz" role="button">Create new quiz</a>

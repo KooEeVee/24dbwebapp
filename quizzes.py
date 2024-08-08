@@ -64,3 +64,12 @@ def add_correctoption(optionid):
         return True
     except:
         return False
+    
+def show_quizzes_toadmin():
+    try:
+        sql = text("SELECT label, published FROM quizzes")
+        result = db.session.execute(sql)
+        list_quizzes = result.fetchall()
+        return list_quizzes
+    except:
+        return False

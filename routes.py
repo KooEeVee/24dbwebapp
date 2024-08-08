@@ -31,7 +31,8 @@ def logout():
 @app.route("/admin", methods=["GET", "POST"])
 def admin():
     if request.method=="GET":
-        return render_template("admin.html")
+        list_quizzes = quizzes.show_quizzes_toadmin()
+        return render_template("admin.html", list_quizzes=list_quizzes)
     else:
         quizname=request.form["quizname"]
         question=request.form["question1"]
