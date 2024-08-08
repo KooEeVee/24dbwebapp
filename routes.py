@@ -50,7 +50,7 @@ def admin():
         optionid = quizzes.get_optionid(correctoption)
         print(optionid)
         quizzes.add_correctoption(optionid)
-        return render_template("admin.html")
+        return render_template("admin.html", list_quizzes=list_quizzes)
 
 @app.route("/user")
 def user():

@@ -6,8 +6,11 @@
 
 {% for quiz in list_quizzes %}
 
-<h4>Name: {{ quiz.label }}</h4>
+<h4>Name: {{ quiz.quiz_label }}</h4>
 <p>Published: {{ quiz.published }}</p>
+<p>Question: {{ quiz.question_label }}</p>
+<p>Option: {{ quiz.option_label }}</p>
+<p>Correct option: {{ quiz.correct_option }}</p>
 
 {% endfor %}
 
