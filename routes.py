@@ -49,7 +49,6 @@ def admin():
         quizzes.add_options(questionid, option2)
         quizzes.add_options(questionid, option3)
         optionid = quizzes.get_optionid(correctoption)
-        print(optionid)
         quizzes.add_correctoption(optionid)
         return render_template("admin.html", dict_quizzes=dict_quizzes)
 

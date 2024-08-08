@@ -4,13 +4,23 @@
 <H1>Welcome admin!</H1>
 <H3>Your quizzes</H3>
 
-{% for quiz in list_quizzes %}
+{% for quiz_label, quiz in dict_quizzes.items() %}
+    <h4>Name: {{ quiz_label }}</h4>
+    <p>Published: {{ quiz.published }}</p>
 
-<h4>Name: {{ quiz.quiz_label }}</h4>
-<p>Published: {{ quiz.published }}</p>
-<p>Question: {{ quiz.question_label }}</p>
-<p>Option: {{ quiz.option_label }}</p>
-<p>Correct option: {{ quiz.correct_option }}</p>
+    {% for question_label, question in quiz.questions.items() %}
+        <p>Question: {{ question_label }}</p>
+
+        <ul>
+        {% for option in question.options %}
+            <li>
+            Option: {{ option.option_label }}
+            Correct option: {{ option.correct_option }}
+            </li>
+            {% endfor %}
+        </ul>
+
+    {% endfor %}
 
 {% endfor %}
 
