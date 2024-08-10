@@ -91,7 +91,7 @@ def show_quizzes_toadmin():
                    FROM quizzes 
                    LEFT JOIN questions ON quizzes.id=questions.quiz_id 
                    LEFT JOIN options ON questions.id=options.question_id 
-                   WHERE quizzes.id=42""")
+                   WHERE quizzes.id=1""")
         result = db.session.execute(sql)
         list_quizzes = result.fetchall()
         #print(list_quizzes)
@@ -119,7 +119,7 @@ def show_quizzes_toadmin():
                 "correct_option": row.correct_option
             }
             dict_quizzes[quiz_label]["questions"][question_label]["options"].append(optionlist)
-            #print(dict_quizzes)
+            print(dict_quizzes)
         return dict_quizzes
     except:
         return False
