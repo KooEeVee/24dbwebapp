@@ -1,6 +1,6 @@
 CREATE TABLE quizzes (
     id SERIAL PRIMARY KEY,
-    label TEXT,
+    label TEXT UNIQUE, 
     published BOOLEAN
 );
 
@@ -17,3 +17,11 @@ CREATE TABLE options (
     correct_option BOOLEAN
 );
 
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL,
+    admin TEXT,
+    gdpr TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
