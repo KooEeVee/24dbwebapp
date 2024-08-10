@@ -91,7 +91,7 @@ def show_quizzes_toadmin():
                    FROM quizzes 
                    LEFT JOIN questions ON quizzes.id=questions.quiz_id 
                    LEFT JOIN options ON questions.id=options.question_id 
-                   WHERE quizzes.id=32""")
+                   WHERE quizzes.id=42""")
         result = db.session.execute(sql)
         list_quizzes = result.fetchall()
         print(list_quizzes)
