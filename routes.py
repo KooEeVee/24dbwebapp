@@ -77,4 +77,10 @@ def newquiz():
     if request.method=="GET":
         return render_template("newquiz.html")
     else:
+        quizname=request.form["quizname"]
+        if quizzes.check_quizname(quizname)==True:
+            error = (f"Quiz name {quizname} already exists. Please choose a different one.")
+            return render_template("newquiz.html", error=error)
+        else:
+            return render_template("newquiz.html")
         return redirect("/admin")

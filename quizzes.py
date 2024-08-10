@@ -9,6 +9,15 @@ def create_quiz(quizname):
         return True    
     except:
         return False
+
+def check_quizname(quizname):
+    try:
+        sql = text("SELECT EXISTS(SELECT 1 FROM quizzes WHERE quiz_label=:quizname)")
+        result = db.session.execute(sql, {"quizname":quizname})
+        exists = result.fetchone()[0]
+        return exists
+    except:
+        return False
     
 def get_quizid(quizname):
     try:
