@@ -32,7 +32,7 @@ def logout():
 def admin():
     if request.method=="GET":
         dict_quizzes = quizzes.show_quizzes_toadmin()
-        print(dict_quizzes)
+        #print(dict_quizzes)
         return render_template("admin.html", dict_quizzes=dict_quizzes)
     else:
         quizname=request.form["quizname"]

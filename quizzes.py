@@ -94,32 +94,32 @@ def show_quizzes_toadmin():
                    WHERE quizzes.id=42""")
         result = db.session.execute(sql)
         list_quizzes = result.fetchall()
-        print(list_quizzes)
+        #print(list_quizzes)
         dict_quizzes = {}
         for row in list_quizzes:
             quiz_label = row.quiz_label
-            print(quiz_label)
+            #print(quiz_label)
             if quiz_label not in dict_quizzes:
                 dict_quizzes[quiz_label] = {
                     "published": row.published,
                     "quiz_id": row.quiz_id,
                     "questions": {}
                 }
-            print(dict_quizzes[quiz_label])
+            #print(dict_quizzes[quiz_label])
             question_label = row.question_label
-            print(question_label)
+            #print(question_label)
             if question_label not in dict_quizzes[quiz_label]["questions"]:
                 dict_quizzes[quiz_label]["questions"][question_label] = {
                     "question_id": row.question_id,
                     "options": []
                 }
-            print(dict_quizzes[quiz_label]["questions"][question_label])
+            #print(dict_quizzes[quiz_label]["questions"][question_label])
             optionlist = {
                 "option_label": row.option_label,
                 "correct_option": row.correct_option
             }
             dict_quizzes[quiz_label]["questions"][question_label]["options"].append(optionlist)
-            print(dict_quizzes)
+            #print(dict_quizzes)
         return dict_quizzes
     except:
         return False
