@@ -1,6 +1,7 @@
 from db import db
 from sqlalchemy import text
 
+
 def create_quiz(quizname):
     try:
         sql = text("INSERT INTO quizzes (quiz_label, published) VALUES (:quiz_label, :published)")

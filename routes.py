@@ -41,7 +41,7 @@ def admin():
         option2=request.form["option2"]
         option3=request.form["option3"]
         correctoption=request.form["correctoption"]
-        quizzes.create_quiz(quizname)
+        #quizzes.create_quiz(quizname)
         quizid = quizzes.get_quizid(quizname)
         quizzes.add_question(quizid, question)
         questionid = quizzes.get_questionid(question)
@@ -82,5 +82,6 @@ def newquiz():
             error = (f"Quiz name {quizname} already exists. Please choose a different one.")
             return render_template("newquiz.html", error=error)
         else:
-            return render_template("newquiz.html")
+            quizzes.create_quiz(quizname)
+            return render_template("newquiz.html", quizname=quizname)
         return redirect("/admin")

@@ -11,10 +11,11 @@
       <input type="text" class="form-control" id="quizname", name="quizname", minlength="3", maxlength="50", required="True" aria-describedby="quiznameHelp">
       <small id="quiznameHelp" class="form-text text-muted">Min 3, max 50 characters. Quiz name must be unique.</small>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Check Quiz Name</button>
 </form>
 
-{{ error }}
+<p>{{ error }}</p>
+<H3>{{ quizname }}</H3>
 
 <form action="/admin" method="POST">
   <div class="form-group">
