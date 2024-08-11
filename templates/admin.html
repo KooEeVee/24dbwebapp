@@ -1,6 +1,9 @@
 {% extends "layout.html" %}
 
 {% block contentrow1col1 %}
+
+{% if session.username and session.role == 'admin' %}
+
 <H1>Welcome admin!</H1>
 <H3>Your quizzes</H3>
 
@@ -28,6 +31,12 @@
 Stats stats stats<br>
 <a class="btn btn-primary" href="/newquiz" role="button">Create new quiz</a>
 <a class="btn btn-danger" href="/accountremoved" role="button">Remove your account</a>
+
+{% else %}
+
+<a class="btn btn-primary" href="/login" role="button">Login</a>
+
+{% endif %}
 
 
 {% endblock %}

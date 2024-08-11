@@ -37,8 +37,11 @@ def login(username, password):
         sql = text("SELECT * FROM users WHERE username=:username")
         result = db.session.execute(sql, {"username":username})
         user = result.fetchone()
+        role = user[3]
+        print(role)
         if check_password_hash(user[2], password):
             session["username"] = username
+            session["role"] = role
             return True
         else:
             return False
