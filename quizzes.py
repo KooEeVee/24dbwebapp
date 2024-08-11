@@ -85,14 +85,14 @@ def add_correctoption(optionid):
         return False """
     
 
-def show_quizzes_toadmin():
+def show_quizzes_toadmin(username):
     try:
         sql = text("""SELECT quizzes.quiz_label, quizzes.published, questions.quiz_id, questions.question_label, options.question_id, options.option_label, correct_option 
                    FROM quizzes 
                    LEFT JOIN questions ON quizzes.id=questions.quiz_id 
                    LEFT JOIN options ON questions.id=options.question_id 
-                   WHERE quizzes.id=1""")
-        result = db.session.execute(sql)
+                   WHERE quizzes.created_by=:username""")
+        result = db.session.execute(sql, {"username":username})
         list_quizzes = result.fetchall()
         #print(list_quizzes)
         dict_quizzes = {}

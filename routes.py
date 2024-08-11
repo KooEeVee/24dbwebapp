@@ -59,7 +59,8 @@ def logout():
 @app.route("/admin", methods=["GET", "POST"])
 def admin():
     if request.method=="GET":
-        dict_quizzes = quizzes.show_quizzes_toadmin()
+        username = session["username"]
+        dict_quizzes = quizzes.show_quizzes_toadmin(username)
         #print(dict_quizzes)
         return render_template("admin.html", dict_quizzes=dict_quizzes)
     else:
@@ -126,7 +127,8 @@ def admin():
         quizzes.add_options(questionid, option53)
         optionid = quizzes.get_optionid(correctoption5)
         quizzes.add_correctoption(optionid)
-        dict_quizzes = quizzes.show_quizzes_toadmin()
+        username = session["username"]
+        dict_quizzes = quizzes.show_quizzes_toadmin(username)
         return render_template("admin.html", dict_quizzes=dict_quizzes)
 
 @app.route("/user")

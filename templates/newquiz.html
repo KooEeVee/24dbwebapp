@@ -4,7 +4,7 @@
 
 {% block contentrow1col1 %}
 
-{% if session.username %}
+{% if session.username and session.role == 'admin' %}
 
 <H1>Create new quiz</H1>
 
