@@ -39,8 +39,16 @@ def registersuccess():
 def login():
     if request.method=="GET":
         return render_template("login.html")
-    else:
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+        users.login(username, password)
         return redirect("/user")
+    if not users.login(username, password):
+        error = {f"Username or password failed, try again"}
+        return render_template("login.html", error=error)
+    else:
+        redirect("/")
 
 @app.route("/logout")
 def logout():

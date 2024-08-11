@@ -1,11 +1,21 @@
 {% extends "layout.html" %}
 
 {% block contentrow1col1 %}
-<H1>Welcome user!</H1>
+
+{% if session.username %}
+
+<H1>Welcome user {{ session.username }}!</H1>
 <H3>The results and rankings of your finished quizzes</H3>
 Results results results<br>
 Rankings rankings rankings<br>
 <a class="btn btn-primary" href="/" role="button">Play quizzes</a>
 <a class="btn btn-danger" href="/accountremoved" role="button">Remove your account</a>
 
+{% else %}
+
+<a class="btn btn-primary" href="/login" role="button">Login</a>
+
+{% endif %}
+
 {% endblock %}
+

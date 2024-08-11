@@ -119,7 +119,7 @@ def show_quizzes_toadmin():
                 "correct_option": row.correct_option
             }
             dict_quizzes[quiz_label]["questions"][question_label]["options"].append(optionlist)
-            print(dict_quizzes)
+            #print(dict_quizzes)
         return dict_quizzes
     except:
         return False

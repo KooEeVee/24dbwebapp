@@ -29,5 +29,18 @@ def register(username, password, admin, gdpr):
         db.session.commit()
         return True    
     except Exception as e:
-        print(f"An error occurres: {e}")
+        print(f"An error occurred: {e}")
+        return False
+    
+def login(username, password):
+    try:
+        sql = text("SELECT * FROM users WHERE username=:username")
+        result = db.session.execute(sql, {"username":username})
+        user = result.fetchone()
+        print(user[2])
+        if check_password_hash(user[2], password):
+            session["username"] = username
+            return True
+    except Exception as e:
+        print(f"An error occurred: {e}")
         return False
