@@ -37,10 +37,11 @@ def login(username, password):
         sql = text("SELECT * FROM users WHERE username=:username")
         result = db.session.execute(sql, {"username":username})
         user = result.fetchone()
-        print(user[2])
         if check_password_hash(user[2], password):
             session["username"] = username
             return True
+        else:
+            return False
     except Exception as e:
         print(f"An error occurred: {e}")
         return False
