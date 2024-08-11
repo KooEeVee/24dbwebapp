@@ -19,12 +19,13 @@ Choose your username and password.
 <p>{{ error }}</p>
 <H3>{{ username }}</H3>
 
-<form action="/register" method="POST">
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input type="password" class="form-control" id="password" name="password", minlength="8", maxlength="15", required="True", aria-describedby="passwordHelp">
-      <small id="passwordHelp" class="form-text text-muted">Min 8, max 15 characters.</small>
-    </div>
+<form action="/registersuccess" method="POST">
+  <input type="hidden" id="username", name="username", value="{{ username }}">
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" id="password" name="password", minlength="8", maxlength="15", required="True", aria-describedby="passwordHelp">
+    <small id="passwordHelp" class="form-text text-muted">Min 8, max 15 characters.</small>
+  </div>
     <div class="form-check">
       <input class="form-check-input" type="radio" name="userradio" id="userradio1" value="user" checked="True">
       <label class="form-check-label" for="userradio1">User</label>

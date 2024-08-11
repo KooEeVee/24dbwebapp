@@ -21,6 +21,19 @@ def register():
         else:
             users.create_user(username)
             return render_template("register.html", username=username)
+        
+@app.route("/registersuccess", methods=["GET","POST"])
+def registersuccess():
+    if request.method=="GET":
+        return render_template("registersuccess.html")
+    else:
+        username=request.form["username"]
+        password=request.form["password"]
+        admin=request.form["userradio"]
+        gdpr=request.form["gdprcheck"]
+        print(users.register(username, password, admin, gdpr))
+        return render_template("registersuccess.html", username=username)
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():

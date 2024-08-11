@@ -23,12 +23,11 @@ def check_username(username):
     
 def register(username, password, admin, gdpr):
     h_password = generate_password_hash(password)
-    print(username, password, admin, gdpr)
-    print(h_password)
     try:
-        sql = "INSERT INTO users (username, password, admin, gdpr) VALUES (:username, :password, :admin, :gdpr)"
-        db.session.execute(sql, {"username":username, "password":h_password, "admin":admin, "gdpr":gdpr})
+        sql = text("UPDATE users SET password=:h_password, user_admin=:admin, gdpr=:gdpr WHERE username=:username")
+        db.session.execute(sql, {"username":username, "h_password":h_password, "gdpr":gdpr, "admin":admin})
         db.session.commit()
-        return True
-    except:
+        return True    
+    except Exception as e:
+        print(f"An error occurres: {e}")
         return False
