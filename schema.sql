@@ -16,7 +16,7 @@ CREATE TABLE options (
     id SERIAL PRIMARY KEY,
     question_id INTEGER REFERENCES questions,
     option_label TEXT,
-    correct_option BOOLEAN
+    correct_option BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE users (
