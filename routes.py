@@ -1,6 +1,7 @@
 from app import app
 from db import db
 import quizzes
+import users
 from flask import render_template, request, redirect
 from sqlalchemy import text
 
@@ -12,10 +13,14 @@ def index():
 def register():
     if request.method=="GET":
         return render_template("register.html")
-    if request.method=="POST" and request.form["userRadio"]=="user":
-        return redirect("/user")
     else:
-        return redirect("/admin")
+        username=request.form["username"]
+        if users.check_username(username)==True:
+            error = (f"Username {username} already exists. Please choose a different one.")
+            return render_template("register.html", error=error)
+        else:
+            users.create_user(username)
+            return render_template("register.html", username=username)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -132,4 +137,3 @@ def newquiz():
         else:
             quizzes.create_quiz(quizname)
             return render_template("newquiz.html", quizname=quizname)
-        return redirect("/admin")
