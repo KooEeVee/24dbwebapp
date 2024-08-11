@@ -10,6 +10,7 @@
 {% for quiz_label, quiz in dict_quizzes.items() %}
     <h4>Name: {{ quiz_label }}</h4>
     <p>Published: {{ quiz.published }}</p>
+    <a class="btn btn-primary" href="/adminquiz/{{ quiz.quiz_id }}" role="button">Publish quiz</a>
 
     {% for question_label, question in quiz.questions.items() %}
         <p>Question: {{ question_label }}</p>

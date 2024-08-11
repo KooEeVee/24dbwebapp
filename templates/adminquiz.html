@@ -2,4 +2,13 @@
 
 {% block contentrow1col1 %}
 
+<H3>Quiz name: {{ quizname }}</H3>
+
+<p>Published: {{ published }}</p>
+
+<form action="/adminquiz/{{ quiz_id }}" method="POST">
+    <input type="hidden" id="published", name="published", value="True">
+    <button type="submit" class="btn btn-primary">Publish</button>
+  </form>
+
 {% endblock %}

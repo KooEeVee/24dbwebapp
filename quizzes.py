@@ -28,6 +28,25 @@ def get_quizid(quizname):
         return quizid
     except:
         return False
+    
+def get_quizname(quiz_id):
+    try:
+        sql = text("SELECT quiz_label FROM quizzes WHERE id=:quiz_id")
+        result = db.session.execute(sql, {"quiz_id":quiz_id})
+        quizname = result.fetchone()[0]
+        return quizname
+    except:
+        return False
+    
+def get_published(quiz_id):
+    try:
+        sql = text("SELECT published FROM quizzes WHERE id=:quiz_id")
+        result = db.session.execute(sql, {"quiz_id":quiz_id})
+        published = result.fetchone()[0]
+        return published
+    except:
+        return False
+
 
 def add_question(quizid, question):
     try:
@@ -122,4 +141,25 @@ def show_quizzes_toadmin(username):
             #print(dict_quizzes)
         return dict_quizzes
     except:
+        return False
+    
+def publish_quiz(quiz_id, published):
+    try:
+        sql = text("UPDATE quizzes SET published=:published WHERE id=:quiz_id")
+        db.session.execute(sql, {"quiz_id":quiz_id, "published": published})
+        db.session.commit()
+        return True
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return False
+
+    
+def show_published_quizzes():
+    try:
+        sql = text("SELECT quiz_label, created_by FROM quizzes WHERE published=:published")
+        result = db.session.execute(sql, {"published":True})
+        list_quizzes = result.fetchall()
+        return list_quizzes
+    except Exception as e:
+        print(f"An error occurred: {e}")
         return False

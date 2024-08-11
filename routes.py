@@ -163,3 +163,16 @@ def newquiz():
         else:
             quizzes.create_quiz(quizname, username)
             return render_template("newquiz.html", quizname=quizname)
+        
+@app.route("/adminquiz/<int:quiz_id>", methods=["GET", "POST"])
+def adminquiz(quiz_id):
+    if request.method=="GET":
+        quizname = quizzes.get_quizname(quiz_id)
+        status = quizzes.get_published(quiz_id)
+        return render_template("adminquiz.html", quiz_id=quiz_id, quizname=quizname, published=status)
+    else:
+        published = request.form["published"]
+        quizzes.publish_quiz(quiz_id, published)
+        quizname = quizzes.get_quizname(quiz_id)
+        status = quizzes.get_published(quiz_id)
+        return render_template("adminquiz.html", quiz_id=quiz_id, quizname=quizname, published=status)
