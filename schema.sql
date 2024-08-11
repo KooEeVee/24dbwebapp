@@ -1,7 +1,9 @@
 CREATE TABLE quizzes (
     id SERIAL PRIMARY KEY,
     quiz_label TEXT UNIQUE, 
-    published BOOLEAN
+    published BOOLEAN DEFAULT FALSE,
+    created_by TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE questions (

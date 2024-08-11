@@ -2,10 +2,10 @@ from db import db
 from sqlalchemy import text
 
 
-def create_quiz(quizname):
+def create_quiz(quizname, created_by):
     try:
-        sql = text("INSERT INTO quizzes (quiz_label, published) VALUES (:quiz_label, :published)")
-        db.session.execute(sql, {"quiz_label":quizname, "published":False})
+        sql = text("INSERT INTO quizzes (quiz_label, published, created_by) VALUES (:quiz_label, :published, :created_by)")
+        db.session.execute(sql, {"quiz_label":quizname, "published":False, "created_by":created_by})
         db.session.commit()
         return True    
     except:

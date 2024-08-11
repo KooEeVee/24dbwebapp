@@ -153,10 +153,11 @@ def newquiz():
     if request.method=="GET":
         return render_template("newquiz.html")
     else:
-        quizname=request.form["quizname"]
+        quizname = request.form["quizname"]
+        username = session["username"]
         if quizzes.check_quizname(quizname)==True:
             error = (f"Quiz name {quizname} already exists. Please choose a different one.")
             return render_template("newquiz.html", error=error)
         else:
-            quizzes.create_quiz(quizname)
+            quizzes.create_quiz(quizname, username)
             return render_template("newquiz.html", quizname=quizname)

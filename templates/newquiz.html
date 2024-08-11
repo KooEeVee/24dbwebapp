@@ -3,6 +3,9 @@
 {% block title %}New quiz{% endblock %}
 
 {% block contentrow1col1 %}
+
+{% if session.username %}
+
 <H1>Create new quiz</H1>
 
 <form action="/newquiz" method="POST">
@@ -152,5 +155,12 @@
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+{% else %}
+
+<a class="btn btn-primary" href="/login" role="button">Login</a>
+
+{% endif %}
+
 
 {% endblock %}
