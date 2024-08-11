@@ -58,3 +58,7 @@ def check_ifadmin(username):
     except Exception as e:
         print(f"An error occurred: {e}")
         return False
+    
+def logout(username):
+    del session[username]
+

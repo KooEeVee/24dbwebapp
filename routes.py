@@ -2,7 +2,7 @@ from app import app
 from db import db
 import quizzes
 import users
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, session
 from sqlalchemy import text
 
 @app.route("/")
@@ -53,6 +53,7 @@ def login():
 
 @app.route("/logout")
 def logout():
+    del session["username"]
     return render_template("logout.html")
 
 @app.route("/admin", methods=["GET", "POST"])
