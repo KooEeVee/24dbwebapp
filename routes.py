@@ -150,12 +150,43 @@ def quiz(quiz_id):
         question3 = questions[2][0]
         question4 = questions[3][0]
         question5 = questions[4][0]
-        print(questions)
-        print(question1)
-        print(question2)
-        #options1 = quizzes.get_options(quiz_id, question1)
-        #print(options1)
-        return render_template("quiz.html", quiz_id=quiz_id, quizname=quizname, question1=question1, question2=question2, question3=question3, question4=question4, question5=question5)
+        list_questions = []
+        i = 0
+        while i < 5:
+            list_questions.append(questions[i][0])
+            i += 1
+        options1 = quizzes.get_options(quiz_id, question1)
+        list_options1 = []
+        i = 0
+        while i < 3:
+            list_options1.append(options1[i][0])
+            i += 1
+        options2 = quizzes.get_options(quiz_id, question2)
+        list_options2 = []
+        i = 0
+        while i < 3:
+            list_options2.append(options2[i][0])
+            i += 1
+        options3 = quizzes.get_options(quiz_id, question3)
+        list_options3 = []
+        i = 0
+        while i < 3:
+            list_options3.append(options3[i][0])
+            i += 1
+        options4 = quizzes.get_options(quiz_id, question4)
+        list_options4 = []
+        i = 0
+        while i < 3:
+            list_options4.append(options4[i][0])
+            i += 1
+        options5 = quizzes.get_options(quiz_id, question5)
+        list_options5 = []
+        i = 0
+        while i < 3:
+            list_options5.append(options5[i][0])
+            i += 1
+        print(list_options1)
+        return render_template("quiz.html", quiz_id=quiz_id, quizname=quizname, list_questions=list_questions, list_options1=list_options1, list_options2=list_options2, list_options3=list_options3, list_options4=list_options4, list_options5=list_options5)
     else:
         return redirect("/quizresult")
     
