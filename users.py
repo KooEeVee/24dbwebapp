@@ -44,3 +44,16 @@ def login(username, password):
     except Exception as e:
         print(f"An error occurred: {e}")
         return False
+
+def check_ifadmin(username):
+    try:
+        sql = text("SELECT * FROM users WHERE username=:username")
+        result = db.session.execute(sql, {"username":username})
+        user = result.fetchone()
+        if user[3]=="admin":
+            return True
+        else:
+            return False
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return False

@@ -43,7 +43,10 @@ def login():
         username = request.form["username"]
         password = request.form["password"]
         users.login(username, password)
-        return redirect("/user")
+        if users.check_ifadmin(username):
+            return redirect("/admin")
+        else:
+            return redirect("/user")
     if not users.login(username, password):
         error = {f"Username or password failed, try again"}
         return render_template("login.html", error=error)
