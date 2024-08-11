@@ -2,6 +2,8 @@
 
 {% block contentrow1col1 %}
 
+{% if session.username and session.role == 'admin' %}
+
 <H3>Quiz name: {{ quizname }}</H3>
 
 <p>Published: {{ published }}</p>
@@ -10,5 +12,13 @@
     <input type="hidden" id="published", name="published", value="True">
     <button type="submit" class="btn btn-primary">Publish</button>
   </form>
+
+<a class="btn btn-primary" href="/admin" role="button">Back to admin page</a>
+
+{% else %}
+
+<a class="btn btn-primary" href="/login" role="button">Login</a>
+  
+{% endif %}
 
 {% endblock %}

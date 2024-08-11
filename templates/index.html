@@ -3,15 +3,16 @@
 {% block title %}Welcome!{% endblock %}
 
 {% block contentrow1col1 %}
-<H1>Music Quiz</H1>
-<H3>Quiz1</H3>
-<a class="btn btn-primary" href="/quiz" role="button">Play</a>
-<br>
-<H3>Quiz2</H3>
-<a class="btn btn-primary" href="/quiz" role="button">Play</a>
-<br>
-<H3>Quiz3</H3>
-<a class="btn btn-primary" href="/quiz" role="button">Play</a>
+<H1>Music Quizzes</H1>
+
+{% for quiz in published_quizzes %}
+            
+    <H3>{{ quiz.quiz_label }}</H3>
+    <p>Created by: {{ quiz.created_by }}
+
+    <p><a class="btn btn-primary" href="/quiz/{{ quiz.id }}" role="button">Play</a></p>
+            
+{% endfor %}
 
 
 {% endblock %}

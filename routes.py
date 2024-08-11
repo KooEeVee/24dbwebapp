@@ -7,7 +7,8 @@ from sqlalchemy import text
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    published_quizzes = quizzes.show_published_quizzes()
+    return render_template("index.html", published_quizzes=published_quizzes)
 
 @app.route("/register", methods=["GET","POST"])
 def register():

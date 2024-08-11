@@ -152,11 +152,10 @@ def publish_quiz(quiz_id, published):
     except Exception as e:
         print(f"An error occurred: {e}")
         return False
-
     
 def show_published_quizzes():
     try:
-        sql = text("SELECT quiz_label, created_by FROM quizzes WHERE published=:published")
+        sql = text("SELECT id, quiz_label, created_by FROM quizzes WHERE published=:published")
         result = db.session.execute(sql, {"published":True})
         list_quizzes = result.fetchall()
         return list_quizzes
