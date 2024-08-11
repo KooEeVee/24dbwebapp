@@ -140,10 +140,22 @@ def user():
 def accountremoved():
     return render_template("accountremoved.html")
 
-@app.route("/quiz", methods=["GET", "POST"])
-def quiz():
+@app.route("/quiz/<int:quiz_id>", methods=["GET", "POST"])
+def quiz(quiz_id):
     if request.method=="GET":
-        return render_template("quiz.html")
+        quizname = quizzes.get_quizname(quiz_id)
+        questions = quizzes.get_questions(quiz_id)
+        question1 = questions[0][0]
+        question2 = questions[1][0]
+        question3 = questions[2][0]
+        question4 = questions[3][0]
+        question5 = questions[4][0]
+        print(questions)
+        print(question1)
+        print(question2)
+        #options1 = quizzes.get_options(quiz_id, question1)
+        #print(options1)
+        return render_template("quiz.html", quiz_id=quiz_id, quizname=quizname, question1=question1, question2=question2, question3=question3, question4=question4, question5=question5)
     else:
         return redirect("/quizresult")
     
