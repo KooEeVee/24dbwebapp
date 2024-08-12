@@ -61,7 +61,7 @@ def get_questions(quiz_id):
     
 def get_options(quiz_id, questionname):
     try:
-        sql = text("""SELECT options.option_label FROM quizzes 
+        sql = text("""SELECT options.option_label, options.id FROM quizzes 
                    LEFT JOIN questions ON quizzes.id=questions.quiz_id 
                    LEFT JOIN options ON questions.id=options.question_id 
                    WHERE quizzes.id=:quiz_id AND questions.question_label=:questionname""")
@@ -223,6 +223,16 @@ def show_quiz_tousers(quiz_id):
             dict_quizzes[quiz_label]["questions"][question_label]["options"].append(optionlist)
             #print(dict_quizzes)
         return dict_quizzes
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return False
+    
+def save_answer(username, option_id):
+    try:
+        sql = text("INSERT INTO answers (username, option_id) VALUES (:username, :option_id)")
+        db.session.execute(sql, {"username":username, "option_id":option_id})
+        db.session.commit()
+        return True    
     except Exception as e:
         print(f"An error occurred: {e}")
         return False
