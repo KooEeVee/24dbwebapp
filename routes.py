@@ -60,10 +60,13 @@ def logout():
 @app.route("/admin", methods=["GET", "POST"])
 def admin():
     if request.method=="GET":
-        username = session["username"]
-        dict_quizzes = quizzes.show_quizzes_toadmin(username)
-        #print(dict_quizzes)
-        return render_template("admin.html", dict_quizzes=dict_quizzes)
+        if "username" in session:
+            username = session["username"]
+            dict_quizzes = quizzes.show_quizzes_toadmin(username)
+            #print(dict_quizzes)
+            return render_template("admin.html", dict_quizzes=dict_quizzes)
+        else:
+            return render_template("admin.html")
     else:
         quizname=request.form["quizname"]
         question1=request.form["question1"]
