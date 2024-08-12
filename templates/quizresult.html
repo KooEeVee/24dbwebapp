@@ -5,14 +5,14 @@
 {% block contentrow1col1 %}
 <H1>Result</H1>
 
-You got 5/5 questions correct
+<p>You got {{ correct_answers }} / 5 answers correct!</p>
 
 <H3>Correct answers</H3>
-Question1: First option<br>
-Question2: First option<br>
-Question3: First option<br>
-Question4: First option<br>
-Question5: First option<br>
+<p>Question1: {{ correct_answer1 }}</p>
+<p>Question2: {{ correct_answer2 }}</p>
+<p>Question3: {{ correct_answer3 }}</p>
+<p>Question4: {{ correct_answer4 }}</p>
+<p>Question5: {{ correct_answer5 }}</p>
 
 <a class="btn btn-primary" href="/" role="button">Play more quizzes</a>
 

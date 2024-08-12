@@ -171,17 +171,38 @@ def quizresult():
             username = session["username"]
         else:
             username = "guest"
+        correct_answers = 0
         question1_answer = request.form["quizOptions1"]
         quizzes.save_answer(username, question1_answer)
+        if quizzes.check_ifcorrectoption(question1_answer):
+            correct_answers +=1
         question2_answer = request.form["quizOptions2"]
         quizzes.save_answer(username, question2_answer)
+        if quizzes.check_ifcorrectoption(question2_answer):
+            correct_answers +=1
         question3_answer = request.form["quizOptions3"]
         quizzes.save_answer(username, question3_answer)
+        if quizzes.check_ifcorrectoption(question3_answer):
+            correct_answers +=1        
         question4_answer = request.form["quizOptions4"]
         quizzes.save_answer(username, question4_answer)
+        if quizzes.check_ifcorrectoption(question4_answer):
+            correct_answers +=1
         question5_answer = request.form["quizOptions5"]
         quizzes.save_answer(username, question5_answer)
-        return render_template("quizresult.html")
+        if quizzes.check_ifcorrectoption(question5_answer):
+            correct_answers +=1
+        question1_id = quizzes.get_questionid_option(question1_answer)
+        question2_id = quizzes.get_questionid_option(question2_answer)
+        question3_id = quizzes.get_questionid_option(question3_answer)
+        question4_id = quizzes.get_questionid_option(question4_answer)
+        question5_id = quizzes.get_questionid_option(question5_answer)
+        correct_answer1 = quizzes.get_correctoption_label(question1_id)
+        correct_answer2 = quizzes.get_correctoption_label(question2_id)
+        correct_answer3 = quizzes.get_correctoption_label(question3_id)
+        correct_answer4 = quizzes.get_correctoption_label(question4_id)
+        correct_answer5 = quizzes.get_correctoption_label(question5_id)
+        return render_template("quizresult.html", correct_answers=correct_answers, correct_answer1=correct_answer1, correct_answer2=correct_answer2, correct_answer3=correct_answer3, correct_answer4=correct_answer4, correct_answer5=correct_answer5)
 @app.route("/newquiz", methods=["GET", "POST"])
 def newquiz():
     if request.method=="GET":

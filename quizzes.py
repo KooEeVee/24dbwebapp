@@ -59,6 +59,24 @@ def get_questions(quiz_id):
         print(f"An error occurred: {e}")
         return False
     
+def get_questionid(question):
+    try:
+        sql = text("SELECT id FROM questions WHERE question_label=:question")
+        result = db.session.execute(sql, {"question":question})
+        questionid = result.fetchone()[0]
+        return questionid
+    except:
+        return False
+    
+def get_questionid_option(option_id):
+    try:
+        sql = text("SELECT question_id FROM options WHERE id=:option_id")
+        result = db.session.execute(sql, {"option_id":option_id})
+        questionid = result.fetchone()[0]
+        return questionid
+    except:
+        return False
+    
 def get_options(quiz_id, questionname):
     try:
         sql = text("""SELECT options.option_label, options.id FROM quizzes 
@@ -71,6 +89,35 @@ def get_options(quiz_id, questionname):
     except Exception as e:
         print(f"An error occurred: {e}")
         return False
+    
+def get_optionid(option):
+    try:
+        sql = text("SELECT id FROM options WHERE option_label=:option")
+        result = db.session.execute(sql, {"option":option})
+        optionid = result.fetchone()[0]
+        return optionid
+    except:
+        return False
+
+def check_ifcorrectoption(option_id):
+    try:
+        sql = text("SELECT correct_option FROM options WHERE id=:option_id")
+        result = db.session.execute(sql, {"option_id":option_id})
+        correct_option = result.fetchone()[0]
+        return correct_option
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return False
+    
+def get_correctoption_label(question_id):
+    try:
+        sql = text("SELECT option_label FROM options WHERE question_id=:question_id AND correct_option=:correct_option")
+        result = db.session.execute(sql, {"question_id":question_id, "correct_option":True})
+        correct_option = result.fetchone()[0]
+        return correct_option
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return False
 
 def add_question(quizid, question):
     try:
@@ -80,16 +127,6 @@ def add_question(quizid, question):
         return True    
     except:
         return False
-    
-def get_questionid(question):
-    try:
-        sql = text("SELECT id FROM questions WHERE question_label=:question")
-        result = db.session.execute(sql, {"question":question})
-        questionid = result.fetchone()[0]
-        return questionid
-    except:
-        return False
-    
 
 def add_options(questionid, option):
     try:
@@ -97,15 +134,6 @@ def add_options(questionid, option):
         db.session.execute(sql, {"question_id":questionid, "option_label":option})
         db.session.commit()
         return True    
-    except:
-        return False
-    
-def get_optionid(option):
-    try:
-        sql = text("SELECT id FROM options WHERE option_label=:option")
-        result = db.session.execute(sql, {"option":option})
-        optionid = result.fetchone()[0]
-        return optionid
     except:
         return False
     
