@@ -31,7 +31,7 @@ CREATE TABLE users (
 
 CREATE TABLE answers (
     id SERIAL PRIMARY KEY,
-    username TEXT DEFAULT 'guest',
+    username TEXT,
     option_id INTEGER REFERENCES options,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
