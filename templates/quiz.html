@@ -5,6 +5,8 @@
 {% block contentrow1col1 %}
 <H1>{{ quizname }}</H1>
 
+{{ message }}
+
 <form action="/quizresult" method="POST">
   <input type="hidden" id="quiz_id", name="quiz_id", value="{{ quiz_id }}">
     <fieldset class="form-group">

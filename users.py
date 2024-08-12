@@ -61,4 +61,18 @@ def check_ifadmin(username):
     except Exception as e:
         print(f"An error occurred: {e}")
         return False
+    
+def check_ifplayed(quiz_id, username):
+    try:
+        sql = text("SELECT quiz_id FROM answers WHERE username=:username")
+        result = db.session.execute(sql, {"username":username})
+        quizzes = result.fetchall()
+        for quiz in quizzes:
+            if quiz==quiz_id:
+                return True
+            else:
+                return False
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return False
 

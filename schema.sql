@@ -33,6 +33,7 @@ CREATE TABLE answers (
     id SERIAL PRIMARY KEY,
     username TEXT,
     option_id INTEGER REFERENCES options,
+    quiz_id INTEGER REFERENCES quizzes,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

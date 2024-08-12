@@ -29,6 +29,17 @@ def get_quizid(quizname):
     except:
         return False
     
+def get_quizid_option(option_id):
+    try:
+        sql = text("SELECT questions.quiz_id FROM questions LEFT JOIN options ON questions.id = options.questionn_id WHERE options.id=:option_id")
+        result = db.session.execute(sql, {"option_id":option_id})
+        quiz_id = result.fetchone()[0]
+        return quiz_id
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return False
+    
+    
 def get_quizname(quiz_id):
     try:
         sql = text("SELECT quiz_label FROM quizzes WHERE id=:quiz_id")
@@ -255,10 +266,10 @@ def show_quiz_tousers(quiz_id):
         print(f"An error occurred: {e}")
         return False
     
-def save_answer(username, option_id):
+def save_answer(username, option_id, quiz_id):
     try:
-        sql = text("INSERT INTO answers (username, option_id) VALUES (:username, :option_id)")
-        db.session.execute(sql, {"username":username, "option_id":option_id})
+        sql = text("INSERT INTO answers (username, option_id, quiz_id) VALUES (:username, :option_id, :quiz_id)")
+        db.session.execute(sql, {"username":username, "option_id":option_id, "quiz_id":quiz_id})
         db.session.commit()
         return True    
     except Exception as e:
