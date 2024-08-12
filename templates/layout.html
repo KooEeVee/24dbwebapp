@@ -33,6 +33,15 @@
         </div>
     </div>
     <div class="row">
+        <div class="col">  
+        </div>
+        <div class="col">
+            {% if session.username %}                    
+            <p>You're logged in as {{ session.username }} </p>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
         <div class="col">
             {% block contentrow1col1 %}{% endblock %}
         </div>
