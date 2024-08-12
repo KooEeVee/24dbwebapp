@@ -3,7 +3,8 @@ CREATE TABLE quizzes (
     quiz_label TEXT UNIQUE, 
     published BOOLEAN DEFAULT FALSE,
     created_by TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    published_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE questions (
@@ -27,3 +28,11 @@ CREATE TABLE users (
     gdpr TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE answers (
+    id SERIAL PRIMARY KEY,
+    username TEXT DEFAULT 'guest',
+    option_id INTEGER REFERENCES options,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
