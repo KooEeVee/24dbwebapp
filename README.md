@@ -93,6 +93,7 @@ Misc tasks
 * [x]Add publish quiz time stamp when quiz is published
 * Add unpublish quiz button
 * Hide publish button if quiz is published
-* List quizzes newest first on admin page
+* [x]List quizzes newest first on admin page
+* Fix question and option order when showing quizzes
 * Internal Server Error when palying as not loggedin
 * Loggedin users can play a quiz only once

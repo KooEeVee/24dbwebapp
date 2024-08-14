@@ -194,7 +194,8 @@ def show_quizzes_toadmin(username):
                    FROM quizzes 
                    LEFT JOIN questions ON quizzes.id=questions.quiz_id 
                    LEFT JOIN options ON questions.id=options.question_id 
-                   WHERE quizzes.created_by=:username""")
+                   WHERE quizzes.created_by=:username
+                   ORDER BY quizzes.published_at DESC""")
         result = db.session.execute(sql, {"username":username})
         list_quizzes = result.fetchall()
         #print(list_quizzes)
