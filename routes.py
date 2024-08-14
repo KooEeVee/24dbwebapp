@@ -210,6 +210,7 @@ def quizresult():
         correct_answer4 = quizzes.get_correctoption_label(question4_id)
         correct_answer5 = quizzes.get_correctoption_label(question5_id)
         return render_template("quizresult.html", correct_answers=correct_answers, correct_answer1=correct_answer1, correct_answer2=correct_answer2, correct_answer3=correct_answer3, correct_answer4=correct_answer4, correct_answer5=correct_answer5)
+
 @app.route("/newquiz", methods=["GET", "POST"])
 def newquiz():
     if request.method=="GET":
@@ -229,7 +230,8 @@ def adminquiz(quiz_id):
     if request.method=="GET":
         quizname = quizzes.get_quizname(quiz_id)
         status = quizzes.get_published(quiz_id)
-        return render_template("adminquiz.html", quiz_id=quiz_id, quizname=quizname, published=status)
+        published_at = quizzes.get_published_at(quiz_id)
+        return render_template("adminquiz.html", quiz_id=quiz_id, quizname=quizname, published=status, published_at=published_at)
     else:
         published = request.form["published"]
         quizzes.publish_quiz(quiz_id, published)

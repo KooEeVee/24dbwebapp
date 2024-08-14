@@ -90,10 +90,9 @@ Misc tasks
 * [x]Internar Server Error if log out when not logged in
 * Hide Quiz name field after successful quiz name check
 * Drop down menu or field check for correct options
-* Add publish quiz time stamp when quiz is published
+* [x]Add publish quiz time stamp when quiz is published
 * Add unpublish quiz button
 * Hide publish button if quiz is published
-* Show quiz publish time
 * List quizzes newest first on admin page
 * Internal Server Error when palying as not loggedin
 * Loggedin users can play a quiz only once

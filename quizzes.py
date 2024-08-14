@@ -63,6 +63,16 @@ def get_published(quiz_id):
         print(f"An error occurred: {e}")
         return False
     
+def get_published_at(quiz_id):
+    try:
+        sql = text("SELECT published_at FROM quizzes WHERE id=:quiz_id")
+        result = db.session.execute(sql, {"quiz_id":quiz_id})
+        published_at = result.fetchone()[0]
+        return published_at
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return False
+    
 def get_questions(quiz_id):
     try:
         sql = text("""SELECT questions.question_label FROM quizzes 
@@ -180,7 +190,7 @@ def add_correctoption(optionid):
 
 def show_quizzes_toadmin(username):
     try:
-        sql = text("""SELECT quizzes.quiz_label, quizzes.published, questions.quiz_id, questions.question_label, options.question_id, options.option_label, options.correct_option 
+        sql = text("""SELECT quizzes.quiz_label, quizzes.published, quizzes.published_at, questions.quiz_id, questions.question_label, options.question_id, options.option_label, options.correct_option 
                    FROM quizzes 
                    LEFT JOIN questions ON quizzes.id=questions.quiz_id 
                    LEFT JOIN options ON questions.id=options.question_id 
@@ -196,6 +206,7 @@ def show_quizzes_toadmin(username):
                 dict_quizzes[quiz_label] = {
                     "published": row.published,
                     "quiz_id": row.quiz_id,
+                    "published_at": row.published_at,
                     "questions": {}
                 }
             #print(dict_quizzes[quiz_label])
