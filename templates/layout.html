@@ -14,21 +14,51 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="/">Home</a>
                 </li>
+                {% if session.username %}
                 <li class="nav-item">
-                  <a class="nav-link active" href="/register">Register</a>
+                  <a class="nav-link disabled" href="/register">Register</a>
                 </li>
+                {% else %}
                 <li class="nav-item">
-                  <a class="nav-link" href="/login">Login</a>
-                </li>
+                    <a class="nav-link active" href="/register">Register</a>
+                  </li>
+                {% endif %}
+                {% if session.username %}
                 <li class="nav-item">
-                  <a class="nav-link" href="/logout">Logout</a>
+                  <a class="nav-link disabled" href="/login">Login</a>
                 </li>
+                {% else %}
                 <li class="nav-item">
-                    <a class="nav-link" href="/user">User</a>
-                </li>
+                    <a class="nav-link active" href="/login">Login</a>
+                  </li>
+                {% endif %}
+                {% if session.username %}
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin">Admin</a>
+                  <a class="nav-link active" href="/logout">Logout</a>
                 </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="/logout">Logout</a>
+                </li>
+                {% endif %}
+                {% if session.username and session.role == 'user' %}
+                <li class="nav-item">
+                    <a class="nav-link active" href="/user">User</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="/user">User</a>
+                </li>
+                {% endif %}
+                {% if session.username and session.role == 'admin' %}
+                <li class="nav-item">
+                    <a class="nav-link active" href="/admin">Admin</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="/admin">Admin</a>
+                </li>
+                {% endif %}
               </ul>
         </div>
     </div>

@@ -84,10 +84,10 @@ Security and privacy
 * WIP
 
 Misc tasks
-* Show menu items according to user login status
+* [x]Show menu items according to user login status
 * Hide the Username field after successful username check
 * 20 character username
-* Internar Server Error if log out when not logged in
+* [x]Internar Server Error if log out when not logged in
 * Hide Quiz name field after successful quiz name check
 * Drop down menu or field check for correct options
 * Add publish quiz time stamp when quiz is published
