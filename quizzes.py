@@ -4,11 +4,12 @@ from sqlalchemy import text
 
 def create_quiz(quizname, created_by):
     try:
-        sql = text("INSERT INTO quizzes (quiz_label, published, created_by) VALUES (:quiz_label, :published, :created_by)")
-        db.session.execute(sql, {"quiz_label":quizname, "published":False, "created_by":created_by})
+        sql = text("INSERT INTO quizzes (quiz_label, created_by) VALUES (:quiz_label, :created_by)")
+        db.session.execute(sql, {"quiz_label":quizname, "created_by":created_by})
         db.session.commit()
         return True    
-    except:
+    except Exception as e:
+        print(f"An error occurred: {e}")
         return False
 
 def check_quizname(quizname):
@@ -17,7 +18,8 @@ def check_quizname(quizname):
         result = db.session.execute(sql, {"quizname":quizname})
         exists = result.fetchone()[0]
         return exists
-    except:
+    except Exception as e:
+        print(f"An error occurred: {e}")
         return False
     
 def get_quizid(quizname):
@@ -26,7 +28,8 @@ def get_quizid(quizname):
         result = db.session.execute(sql, {"quizname":quizname})
         quizid = result.fetchone()[0]
         return quizid
-    except:
+    except Exception as e:
+        print(f"An error occurred: {e}")
         return False
     
 def get_quizid_option(option_id):
@@ -46,7 +49,8 @@ def get_quizname(quiz_id):
         result = db.session.execute(sql, {"quiz_id":quiz_id})
         quizname = result.fetchone()[0]
         return quizname
-    except:
+    except Exception as e:
+        print(f"An error occurred: {e}")
         return False
     
 def get_published(quiz_id):
@@ -55,7 +59,8 @@ def get_published(quiz_id):
         result = db.session.execute(sql, {"quiz_id":quiz_id})
         published = result.fetchone()[0]
         return published
-    except:
+    except Exception as e:
+        print(f"An error occurred: {e}")
         return False
     
 def get_questions(quiz_id):
@@ -76,7 +81,8 @@ def get_questionid(question):
         result = db.session.execute(sql, {"question":question})
         questionid = result.fetchone()[0]
         return questionid
-    except:
+    except Exception as e:
+        print(f"An error occurred: {e}")
         return False
     
 def get_questionid_option(option_id):
@@ -85,7 +91,8 @@ def get_questionid_option(option_id):
         result = db.session.execute(sql, {"option_id":option_id})
         questionid = result.fetchone()[0]
         return questionid
-    except:
+    except Exception as e:
+        print(f"An error occurred: {e}")
         return False
     
 def get_options(quiz_id, questionname):
@@ -107,7 +114,8 @@ def get_optionid(option):
         result = db.session.execute(sql, {"option":option})
         optionid = result.fetchone()[0]
         return optionid
-    except:
+    except Exception as e:
+        print(f"An error occurred: {e}")
         return False
 
 def check_ifcorrectoption(option_id):
@@ -136,7 +144,8 @@ def add_question(quizid, question):
         db.session.execute(sql, {"quiz_id":quizid, "question_label":question})
         db.session.commit()
         return True    
-    except:
+    except Exception as e:
+        print(f"An error occurred: {e}")
         return False
 
 def add_options(questionid, option):
@@ -145,7 +154,8 @@ def add_options(questionid, option):
         db.session.execute(sql, {"question_id":questionid, "option_label":option})
         db.session.commit()
         return True    
-    except:
+    except Exception as e:
+        print(f"An error occurred: {e}")
         return False
     
 def add_correctoption(optionid):
@@ -154,7 +164,8 @@ def add_correctoption(optionid):
         db.session.execute(sql, {"optionid":optionid, "correctoption": True})
         db.session.commit()
         return True
-    except:
+    except Exception as e:
+        print(f"An error occurred: {e}")
         return False
     
 """ def show_quizname_toadmin():
@@ -203,7 +214,8 @@ def show_quizzes_toadmin(username):
             dict_quizzes[quiz_label]["questions"][question_label]["options"].append(optionlist)
             #print(dict_quizzes)
         return dict_quizzes
-    except:
+    except Exception as e:
+        print(f"An error occurred: {e}")
         return False
     
 def publish_quiz(quiz_id, published):

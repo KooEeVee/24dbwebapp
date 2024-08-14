@@ -61,7 +61,7 @@ Create a user account, log in and log out, remove account (WIP)
 * [x]users.py: [x]register user (username, password, admin or user, gdpr check, created at), [x]login, [x]logout, [x]session, [x]hash password, []username and []password validation rules, []remove account and userdata
 
 Create and play a quiz (WIP)
-* [x]quizzes.py: [x]saving quizzes, questions, answer options and correct answers, [x]showing quizzes on admin page, [x]checking correct answers when a quiz is played, [x]returning the quiz result after playing, [x]showing quizzes on the front page, []tagging and rating the quizzes, []searching quizzes, []loggedin users can play a quiz only once
+* [x]quizzes.py: [x]saving quizzes, questions, answer options and correct answers, [x]showing quizzes on admin page, [x]checking correct answers when a quiz is played, [x]returning the quiz result after playing, [x]showing quizzes on the front page, []tagging and rating the quizzes, []searching quizzes, []
 
 Stats and ranking lists (WIP)
 * []stats.py: []creating the ranking lists, []showing the ranking lists, []creating the stats, []showing the stats
@@ -82,3 +82,18 @@ Layout and design (WIP)
 
 Security and privacy
 * WIP
+
+Misc tasks
+* Show menu items according to user login status
+* Hide the Username field after successful username check
+* 20 character username
+* Internar Server Error if log out when not logged in
+* Hide Quiz name field after successful quiz name check
+* Drop down menu or field check for correct options
+* Add publish quiz time stamp when quiz is published
+* Add unpublish quiz button
+* Hide publish button if quiz is published
+* Show quiz publish time
+* List quizzes newest first on admin page
+* Internal Server Error when palying as not loggedin
+* Loggedin users can play a quiz only once

@@ -9,7 +9,8 @@ def create_user(username):
         db.session.execute(sql, {"username":username})
         db.session.commit()
         return True    
-    except:
+    except Exception as e:
+        print(f"An error occurred: {e}")
         return False
 
 def check_username(username):
@@ -18,7 +19,8 @@ def check_username(username):
         result = db.session.execute(sql, {"username":username})
         exists = result.fetchone()[0]
         return exists
-    except:
+    except Exception as e:
+        print(f"An error occurred: {e}")
         return False
     
 def register(username, password, admin, gdpr):
@@ -67,11 +69,10 @@ def check_ifplayed(quiz_id, username):
         sql = text("SELECT quiz_id FROM answers WHERE username=:username")
         result = db.session.execute(sql, {"username":username})
         quizzes = result.fetchall()
-        for quiz in quizzes:
-            if quiz==quiz_id:
-                return True
-            else:
-                return False
+        if quiz_id in quizzes:
+            return True
+        else:
+            return False
     except Exception as e:
         print(f"An error occurred: {e}")
         return False
