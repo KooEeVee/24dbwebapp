@@ -11,7 +11,7 @@
     <h4>Name: {{ quiz_label }}</h4>
     <p>Published: {{ quiz.published }}</p>
     <p>Published at: {{ quiz.published_at }}</p>
-    <a class="btn btn-primary" href="/adminquiz/{{ quiz.quiz_id }}" role="button">Publish quiz</a>
+    <a class="btn btn-primary" href="/adminquiz/{{ quiz.quiz_id }}" role="button">Define correct options and Publish quiz</a>
 
     {% for question_label, question in quiz.questions.items() %}
         <p>Question: {{ question_label }}</p>
@@ -20,7 +20,6 @@
         {% for option in question.options %}
             <li>
             Option: {{ option.option_label }}
-            Correct option: {{ option.correct_option }}
             </li>
         {% endfor %}
         </ul>

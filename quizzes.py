@@ -190,7 +190,7 @@ def add_correctoption(optionid):
 
 def show_quizzes_toadmin(username):
     try:
-        sql = text("""SELECT quizzes.quiz_label, quizzes.published, quizzes.published_at, questions.quiz_id, questions.question_label, options.question_id, options.option_label, options.correct_option 
+        sql = text("""SELECT quizzes.quiz_label, quizzes.published, quizzes.published_at, questions.quiz_id, questions.question_label, options.question_id, options.option_label 
                    FROM quizzes 
                    LEFT JOIN questions ON quizzes.id=questions.quiz_id 
                    LEFT JOIN options ON questions.id=options.question_id 
@@ -220,8 +220,7 @@ def show_quizzes_toadmin(username):
                 }
             #print(dict_quizzes[quiz_label]["questions"][question_label])
             optionlist = {
-                "option_label": row.option_label,
-                "correct_option": row.correct_option
+                "option_label": row.option_label
             }
             dict_quizzes[quiz_label]["questions"][question_label]["options"].append(optionlist)
             #print(dict_quizzes)
