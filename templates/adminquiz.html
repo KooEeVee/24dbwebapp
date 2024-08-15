@@ -7,7 +7,6 @@
 <H3>Quiz name: {{ quizname }}</H3>
 
 <p>Published: {{ published }}</p>
-<p>Published at: {{ published_at }}</p>
 
 <form action="/adminquiz/{{ quiz_id }}" method="POST">
     <input type="hidden" id="published", name="published", value="True">

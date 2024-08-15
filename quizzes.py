@@ -232,7 +232,7 @@ def show_quizzes_toadmin(username):
     
 def publish_quiz(quiz_id, published):
     try:
-        sql = text("UPDATE quizzes SET published=:published WHERE id=:quiz_id")
+        sql = text("UPDATE quizzes SET published=:published, published_at=NOW() WHERE id=:quiz_id")
         db.session.execute(sql, {"quiz_id":quiz_id, "published": published})
         db.session.commit()
         return True
