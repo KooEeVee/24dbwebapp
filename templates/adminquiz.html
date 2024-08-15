@@ -9,9 +9,54 @@
 <p>Published: {{ published }}</p>
 
 <form action="/adminquiz/{{ quiz_id }}" method="POST">
-    <input type="hidden" id="published", name="published", value="True">
-    <button type="submit" class="btn btn-primary">Publish</button>
-  </form>
+  <H4>{{ questions[0][0] }}</H4>
+  <div class="form-group">
+    <label for="correctoption1">Choose the correct option:</label>
+    <select id="correctoption1" name="correctoption1">
+        <option value="{{ options1[0][1] }}">{{ options1[0][0] }}</option>
+        <option value="{{ options1[1][1] }}">{{ options1[1][0] }}</option>
+        <option value="{{ options1[2][1] }}">{{ options1[2][0] }}</option>
+    </select>
+  </div>
+  <H4>{{ questions[1][0] }}</H4>
+  <div class="form-group">
+    <label for="correctoption2">Choose the correct option:</label>
+    <select id="correctoption2" name="correctoption2">
+        <option value="{{ options2[0][1] }}">{{ options2[0][0] }}</option>
+        <option value="{{ options2[1][1] }}">{{ options2[1][0] }}</option>
+        <option value="{{ options2[2][1] }}">{{ options2[2][0] }}</option>
+    </select>
+  </div>
+  <H4>{{ questions[2][0] }}</H4>
+  <div class="form-group">
+    <label for="correctoption3">Choose the correct option:</label>
+    <select id="correctoption3" name="correctoption3">
+        <option value="{{ options3[0][1] }}">{{ options3[0][0] }}</option>
+        <option value="{{ options3[1][1] }}">{{ options3[1][0] }}</option>
+        <option value="{{ options3[2][1] }}">{{ options3[2][0] }}</option>
+    </select>
+  </div>
+  <H4>{{ questions[3][0] }}</H4>
+  <div class="form-group">
+    <label for="correctoption4">Choose the correct option:</label>
+    <select id="correctoption4" name="correctoption4">
+        <option value="{{ options4[0][1] }}">{{ options4[0][0] }}</option>
+        <option value="{{ options4[1][1] }}">{{ options4[1][0] }}</option>
+        <option value="{{ options4[2][1] }}">{{ options4[2][0] }}</option>
+    </select>
+  </div>
+  <H4>{{ questions[4][0] }}</H4>
+  <div class="form-group">
+    <label for="correctoption5">Choose the correct option:</label>
+    <select id="correctoption5" name="correctoption5">
+        <option value="{{ options5[0][1] }}">{{ options5[0][0] }}</option>
+        <option value="{{ options5[1][1] }}">{{ options5[1][0] }}</option>
+        <option value="{{ options5[2][1] }}">{{ options5[2][0] }}</option>
+    </select>
+  </div>
+  <input type="hidden" id="published", name="published", value="True">
+  <button type="submit" class="btn btn-primary">Publish</button>
+</form>
 
 <a class="btn btn-primary" href="/admin" role="button">Back to admin page</a>
 

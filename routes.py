@@ -215,11 +215,29 @@ def adminquiz(quiz_id):
     if request.method=="GET":
         quizname = quizzes.get_quizname(quiz_id)
         status = quizzes.get_published(quiz_id)
-        published_at = quizzes.get_published_at(quiz_id)
-        return render_template("adminquiz.html", quiz_id=quiz_id, quizname=quizname, published=status, published_at=published_at)
+        questions = quizzes.get_questions(quiz_id)
+        question1 = questions[0][0]
+        question2 = questions[1][0]
+        question3 = questions[2][0]
+        question4 = questions[3][0]
+        question5 = questions[4][0]
+        options1 = quizzes.get_options(quiz_id, question1)
+        options2 = quizzes.get_options(quiz_id, question2)
+        options3 = quizzes.get_options(quiz_id, question3)
+        options4 = quizzes.get_options(quiz_id, question4)
+        options5 = quizzes.get_options(quiz_id, question5)
+        return render_template("adminquiz.html", quiz_id=quiz_id, quizname=quizname, published=status, options1=options1, options2=options2, options3=options3, options4=options4, options5=options5, questions=questions)
     else:
         published = request.form["published"]
         quizzes.publish_quiz(quiz_id, published)
-        quizname = quizzes.get_quizname(quiz_id)
-        status = quizzes.get_published(quiz_id)
-        return render_template("adminquiz.html", quiz_id=quiz_id, quizname=quizname, published=status)
+        correctoption1 = request.form["correctoption1"]
+        quizzes.add_correctoption(correctoption1)
+        correctoption2 = request.form["correctoption2"]
+        quizzes.add_correctoption(correctoption2)
+        correctoption3 = request.form["correctoption3"]
+        quizzes.add_correctoption(correctoption3)
+        correctoption4 = request.form["correctoption4"]
+        quizzes.add_correctoption(correctoption4)
+        correctoption5 = request.form["correctoption5"]
+        quizzes.add_correctoption(correctoption5)
+        return redirect("/admin")

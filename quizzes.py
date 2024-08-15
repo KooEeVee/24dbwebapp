@@ -229,6 +229,34 @@ def show_quizzes_toadmin(username):
         print(f"An error occurred: {e}")
         return False
     
+def show_questions_options(quiz_id):
+    try:
+        sql = text("""SELECT questions.quiz_id, questions.question_label, options.question_id, options.option_label 
+                   FROM questions
+                   LEFT JOIN options ON questions.id=options.question_id 
+                   WHERE questions.quiz_id=:quiz_id""")
+        result = db.session.execute(sql, {"quiz_id":quiz_id})
+        list_questions = result.fetchall()
+        #print(list_quizzes)
+        dict_questions = {}
+        for row in list_questions:
+            question_label = row.question_label
+            #print(quiz_label)
+            if question_label not in dict_questions:
+                dict_questions[question_label] = {
+                    "question_id": row.question_id,
+                    "options": []
+                }
+            optionlist = {
+                "option_label": row.option_label
+            }
+            dict_questions[question_label]["options"].append(optionlist)
+            #print(dict_quizzes)
+        return dict_questions
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return False
+    
 def publish_quiz(quiz_id, published):
     try:
         sql = text("UPDATE quizzes SET published=:published, published_at=NOW() WHERE id=:quiz_id")
