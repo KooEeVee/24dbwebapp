@@ -19,7 +19,7 @@
         <ul>
         {% for option in question.options %}
             <li>
-            Option: {{ option.option_label }}
+            <p>Option: {{ option.option_label }} ({{ option.correct_option }})</p>
             </li>
         {% endfor %}
         </ul>
