@@ -5,13 +5,15 @@
 {% if session.username and session.role == 'admin' %}
 
 <H1>Welcome admin!</H1>
-<H3>Your quizzes</H3>
+
+<p><a class="btn btn-primary" href="/newquiz" role="button">Create new quiz</a></p>
+
+<H2>Your quizzes</H2>
 
 {% for quiz_label, quiz in dict_quizzes.items() %}
     <h4>Name: {{ quiz_label }}</h4>
-    <p>Published: {{ quiz.published }}</p>
-    <p>Published at: {{ quiz.published_at }}</p>
-    <a class="btn btn-primary" href="/adminquiz/{{ quiz.quiz_id }}" role="button">Define correct options and Publish quiz</a>
+    <H6>Published: {{ quiz.published }}</h6>
+    <h6>Published at: {{ quiz.published_at }}</h6>
 
     {% for question_label, question in quiz.questions.items() %}
         <p>Question: {{ question_label }}</p>
@@ -25,17 +27,20 @@
         </ul>
 
     {% endfor %}
+    <p><a class="btn btn-primary" href="/adminquiz/{{ quiz.quiz_id }}" role="button">Set correct options and publish quiz</a></p>
+    
 
 {% endfor %}
 
 <H3>Stats of your quizzes: how many users, results</H3>
 Stats stats stats<br>
-<a class="btn btn-primary" href="/newquiz" role="button">Create new quiz</a>
+
 <a class="btn btn-danger" href="/accountremoved" role="button">Remove your account</a>
 
-{% else %}
 
-<a class="btn btn-primary" href="/login" role="button">Login</a>
+{% else %}
+<p><a class="btn btn-primary" href="/login" role="button">Login</a></p>
+
 
 {% endif %}
 
