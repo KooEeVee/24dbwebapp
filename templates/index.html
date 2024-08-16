@@ -12,7 +12,15 @@
     <H3>{{ quiz.quiz_label }}</H3>
     <h6>Created by: {{ quiz.created_by }}</h6>
 
+    {% if session.username == quiz.created_by %}
+
+    <p><a class="btn btn-primary disabled" href="/quiz/{{ quiz.id }}" role="button" aria-disabled="true">Play</a></p>
+
+    {% else %}
+
     <p><a class="btn btn-primary" href="/quiz/{{ quiz.id }}" role="button">Play</a></p>
+
+    {% endif %}
             
 {% endfor %}
 

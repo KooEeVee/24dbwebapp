@@ -95,8 +95,9 @@ Misc tasks
 * Hide publish button if quiz is published
 * [x]List quizzes newest first on admin page
 * Fix question and option order when showing quizzes
-* Internal Server Error when playing as not loggedin
+* [x]Internal Server Error when playing as not loggedin
 * Loggedin users can play a quiz only once
+* [x]Admin can't play own quiz
 * [x]Add cancel buttons to forms
 * [x]Message no quizzes yet on admin page
 * [x]Add your answers to quiz result page
