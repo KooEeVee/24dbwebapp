@@ -205,11 +205,12 @@ def newquiz():
         quizname = request.form["quizname"]
         username = session["username"]
         if quizzes.check_quizname(quizname)==True:
-            error = (f"Quiz name {quizname} already exists. Please choose a different one.")
-            return render_template("newquiz.html", error=error)
+            message = (f"Quiz name {quizname} already exists. Please choose a different one.")
+            return render_template("newquiz.html", message=message)
         else:
+            message = (f"Success! Please continue to set questions and options. Submit all questions and options at once, you can't edit them later.")
             quizzes.create_quiz(quizname, username)
-            return render_template("newquiz.html", quizname=quizname)
+            return render_template("newquiz.html", quizname=quizname, message=message)
         
 @app.route("/adminquiz/<int:quiz_id>", methods=["GET", "POST"])
 def adminquiz(quiz_id):

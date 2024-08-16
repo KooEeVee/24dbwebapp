@@ -18,7 +18,10 @@
     <button type="submit" class="btn btn-primary">Check Quiz Name</button>
 </form>
 
-<p>{{ error }}</p>
+<br>
+<div class="alert alert-primary" role="alert">
+  {{ message }}
+</div>
 <H3>{{ quizname }}</H3>
 
 <form action="/admin" method="POST">

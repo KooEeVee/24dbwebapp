@@ -88,7 +88,7 @@ Misc tasks
 * [x]Guide the user after successful username check
 * [x]20 character username
 * [x]Internar Server Error if log out when not logged in
-* Hide Quiz name field after successful quiz name check
+* [x]Guide user after successful quiz name check
 * [x]Drop down menu or field check for correct options
 * [x]Add publish quiz time stamp when quiz is published
 * Add unpublish quiz button
