@@ -96,7 +96,7 @@ Misc tasks
 * [x]List quizzes newest first on admin page
 * Fix question and option order when showing quizzes
 * [x]Internal Server Error when playing as not loggedin
-* Loggedin users can play a quiz only once
+* [x]Loggedin users' answers are saved only once
 * [x]Admin can't play own quiz
 * [x]Add cancel buttons to forms
 * [x]Message no quizzes yet on admin page

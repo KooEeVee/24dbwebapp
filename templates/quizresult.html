@@ -5,29 +5,40 @@
 {% block contentrow1col1 %}
 <H1>Result</H1>
 
+{% if correct_answers == 0 %}
+<p>What just happened? Perhaps the questions just were bad. </p>
+<p>You got {{ correct_answers }} / 5 answers correct</p>
+<p>{{ message }}</p>
+{% endif %}
+
 {% if correct_answers == 1 %}
 <p>Did you skip your music lessons?</p>
-<p>You got {{ correct_answers }} / 5 answers correct!</p>
+<p>You got {{ correct_answers }} / 5 answers correct</p>
+<p>{{ message }}</p>
 {% endif %}
 
 {% if correct_answers == 2 %}
 <p>You need more practice, better start finding your recorder.</p>
-<p>You got {{ correct_answers }} / 5 answers correct!</p>
+<p>You got {{ correct_answers }} / 5 answers correct</p>
+<p>{{ message }}</p>
 {% endif %}
 
 {% if correct_answers == 3 %}
-<p>That's a nice result, you have read your Rolling Stones'.</p>
-<p>You got {{ correct_answers }} / 5 answers correct!</p>
+<p>That's a nice result, you have read your Rolling Stones.</p>
+<p>You got {{ correct_answers }} / 5 answers correct</p>
+<p>{{ message }}</p>
 {% endif %}
 
 {% if correct_answers == 4 %}
 <p>Fabulous! Almost a virtuoso.</p>
-<p>You got {{ correct_answers }} / 5 answers correct!</p>
+<p>You got {{ correct_answers }} / 5 answers correct</p>
+<p>{{ message }}</p>
 {% endif %}
 
 {% if correct_answers == 5 %}
 <p>Amazing! You must be the composer of Eine kleine Nachtmusik.</p>
-<p>You got {{ correct_answers }} / 5 answers correct!</p>
+<p>You got {{ correct_answers }} / 5 answers correct</p>
+<p>{{ message }}</p>
 {% endif %}
 
 <H3>Your answers</H3>
