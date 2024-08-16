@@ -58,7 +58,7 @@ Templates
 * [x]newquiz.html
 
 Create a user account, log in and log out, remove account (WIP)
-* [x]users.py: [x]register user (username, password, admin or user, gdpr check, created at), [x]login, [x]logout, [x]session, [x]hash password, []username and []password validation rules, []remove account and userdata
+* [x]users.py: [x]register user (username, password, admin or user, gdpr check, created at), [x]login, [x]logout, [x]session, [x]hash password, []remove account and userdata
 
 Create and play a quiz (WIP)
 * [x]quizzes.py: [x]saving quizzes, questions, answer options and correct answers, [x]showing quizzes on admin page, [x]checking correct answers when a quiz is played, [x]returning the quiz result after playing, [x]showing quizzes on the front page, []tagging and rating the quizzes, []searching quizzes
@@ -85,7 +85,7 @@ Security and privacy
 
 Misc tasks
 * [x]Show menu items according to user login status
-* Hide the Username field after successful username check
+* [x]Guide the user after successful username check
 * [x]20 character username
 * [x]Internar Server Error if log out when not logged in
 * Hide Quiz name field after successful quiz name check

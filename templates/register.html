@@ -16,7 +16,10 @@ Choose your username and password.
   <button type="submit" class="btn btn-primary">Check Username</button>
 </form>
 
-<p>{{ error }}</p>
+<br>
+<div class="alert alert-primary" role="alert">
+  {{ message }}
+</div>
 <H3>{{ username }}</H3>
 
 <form action="/registersuccess" method="POST">

@@ -17,11 +17,12 @@ def register():
     else:
         username=request.form["username"]
         if users.check_username(username)==True:
-            error = (f"Username {username} already exists. Please choose a different one.")
-            return render_template("register.html", error=error)
+            message = (f"Username {username} already exists. Please choose a different one.")
+            return render_template("register.html", message=message)
         else:
+            message = (f"Success! Please continue to set your password.")
             users.create_user(username)
-            return render_template("register.html", username=username)
+            return render_template("register.html", username=username, message=message)
         
 @app.route("/registersuccess", methods=["GET","POST"])
 def registersuccess():
