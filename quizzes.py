@@ -127,6 +127,16 @@ def get_optionid(option):
     except Exception as e:
         print(f"An error occurred: {e}")
         return False
+    
+def get_option(option_id):
+    try:
+        sql = text("SELECT option_label FROM options WHERE id=:option_id")
+        result = db.session.execute(sql, {"option_id":option_id})
+        option = result.fetchone()[0]
+        return option
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return False
 
 def check_ifcorrectoption(option_id):
     try:

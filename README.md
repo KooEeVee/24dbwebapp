@@ -99,5 +99,5 @@ Misc tasks
 * Loggedin users can play a quiz only once
 * [x]Add cancel buttons to forms
 * [x]Message no quizzes yet on admin page
-* Add your answers to quiz result page
-* Messages according to the result on the result page
+* [x]Add your answers to quiz result page
+* [x]Messages according to the result on the result page

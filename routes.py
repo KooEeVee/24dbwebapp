@@ -133,27 +133,21 @@ def accountremoved():
 @app.route("/quiz/<int:quiz_id>", methods=["GET", "POST"])
 def quiz(quiz_id):
     if request.method=="GET":
-        if "username" in session:
-            username = session["username"]
-            if users.check_ifplayed(quiz_id, username):
-                message = f"You have already played this quiz. Try another one."
-                return render_template("quiz.html", message=message)
-            else:
-                quizname = quizzes.get_quizname(quiz_id)
-                questions = quizzes.get_questions(quiz_id)
-                question1 = questions[0][0]
-                question2 = questions[1][0]
-                question3 = questions[2][0]
-                question4 = questions[3][0]
-                question5 = questions[4][0]
-                options1 = quizzes.get_options(quiz_id, question1)
-                options2 = quizzes.get_options(quiz_id, question2)
-                options3 = quizzes.get_options(quiz_id, question3)
-                options4 = quizzes.get_options(quiz_id, question4)
-                options5 = quizzes.get_options(quiz_id, question5)
-                return render_template("quiz.html", quiz_id=quiz_id, quizname=quizname, options1=options1, options2=options2, options3=options3, options4=options4, options5=options5, questions=questions)
+        quizname = quizzes.get_quizname(quiz_id)
+        questions = quizzes.get_questions(quiz_id)
+        question1 = questions[0][0]
+        question2 = questions[1][0]
+        question3 = questions[2][0]
+        question4 = questions[3][0]
+        question5 = questions[4][0]
+        options1 = quizzes.get_options(quiz_id, question1)
+        options2 = quizzes.get_options(quiz_id, question2)
+        options3 = quizzes.get_options(quiz_id, question3)
+        options4 = quizzes.get_options(quiz_id, question4)
+        options5 = quizzes.get_options(quiz_id, question5)
+        return render_template("quiz.html", quiz_id=quiz_id, quizname=quizname, options1=options1, options2=options2, options3=options3, options4=options4, options5=options5, questions=questions)
     else:
-        return redirect("/quizresult")
+        return redirect("/")
     
 @app.route("/quizresult", methods=["GET", "POST"])
 def quizresult():
@@ -165,24 +159,30 @@ def quizresult():
         else:
             username = "guest"
         correct_answers = 0
+        answers = []
         quiz_id = request.form["quiz_id"]
         question1_answer = request.form["quizOptions1"]
+        answers.append(quizzes.get_option(question1_answer))
         quizzes.save_answer(username, question1_answer, quiz_id)
         if quizzes.check_ifcorrectoption(question1_answer):
             correct_answers +=1
         question2_answer = request.form["quizOptions2"]
+        answers.append(quizzes.get_option(question2_answer))
         quizzes.save_answer(username, question2_answer, quiz_id)
         if quizzes.check_ifcorrectoption(question2_answer):
             correct_answers +=1
         question3_answer = request.form["quizOptions3"]
+        answers.append(quizzes.get_option(question3_answer))
         quizzes.save_answer(username, question3_answer, quiz_id)
         if quizzes.check_ifcorrectoption(question3_answer):
             correct_answers +=1        
         question4_answer = request.form["quizOptions4"]
+        answers.append(quizzes.get_option(question4_answer))
         quizzes.save_answer(username, question4_answer, quiz_id)
         if quizzes.check_ifcorrectoption(question4_answer):
             correct_answers +=1
         question5_answer = request.form["quizOptions5"]
+        answers.append(quizzes.get_option(question5_answer))
         quizzes.save_answer(username, question5_answer, quiz_id)
         if quizzes.check_ifcorrectoption(question5_answer):
             correct_answers +=1
@@ -196,7 +196,7 @@ def quizresult():
         correct_answer3 = quizzes.get_correctoption_label(question3_id)
         correct_answer4 = quizzes.get_correctoption_label(question4_id)
         correct_answer5 = quizzes.get_correctoption_label(question5_id)
-        return render_template("quizresult.html", correct_answers=correct_answers, correct_answer1=correct_answer1, correct_answer2=correct_answer2, correct_answer3=correct_answer3, correct_answer4=correct_answer4, correct_answer5=correct_answer5)
+        return render_template("quizresult.html", answers=answers, correct_answers=correct_answers, correct_answer1=correct_answer1, correct_answer2=correct_answer2, correct_answer3=correct_answer3, correct_answer4=correct_answer4, correct_answer5=correct_answer5)
 
 @app.route("/newquiz", methods=["GET", "POST"])
 def newquiz():

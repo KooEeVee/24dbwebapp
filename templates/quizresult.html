@@ -5,7 +5,37 @@
 {% block contentrow1col1 %}
 <H1>Result</H1>
 
+{% if correct_answers == 1 %}
+<p>Did you skip your music lessons?</p>
 <p>You got {{ correct_answers }} / 5 answers correct!</p>
+{% endif %}
+
+{% if correct_answers == 2 %}
+<p>You need more practice, better start finding your recorder.</p>
+<p>You got {{ correct_answers }} / 5 answers correct!</p>
+{% endif %}
+
+{% if correct_answers == 3 %}
+<p>That's a nice result, you have read your Rolling Stones'.</p>
+<p>You got {{ correct_answers }} / 5 answers correct!</p>
+{% endif %}
+
+{% if correct_answers == 4 %}
+<p>Fabulous! Almost a virtuoso.</p>
+<p>You got {{ correct_answers }} / 5 answers correct!</p>
+{% endif %}
+
+{% if correct_answers == 5 %}
+<p>Amazing! You must be the composer of Eine kleine Nachtmusik.</p>
+<p>You got {{ correct_answers }} / 5 answers correct!</p>
+{% endif %}
+
+<H3>Your answers</H3>
+<p>Question1: {{ answers[0] }}</p>
+<p>Question2: {{ answers[1] }}</p>
+<p>Question3: {{ answers[2] }}</p>
+<p>Question4: {{ answers[3] }}</p>
+<p>Question5: {{ answers[4] }}</p>
 
 <H3>Correct answers</H3>
 <p>Question1: {{ correct_answer1 }}</p>
