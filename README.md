@@ -97,7 +97,7 @@ Misc tasks
 * Fix question and option order when showing quizzes
 * Internal Server Error when palying as not loggedin
 * Loggedin users can play a quiz only once
-* Add cancel buttons to forms
+* [x]Add cancel buttons to forms
 * Message no quizes yet on admin page
 * Add your answers to quiz result page
 * Messages according to the result on the result page
