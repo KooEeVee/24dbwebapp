@@ -58,19 +58,16 @@ Templates
 * [x]newquiz.html
 
 Create a user account, log in and log out, remove account (WIP)
-* [x]users.py: [x]register user (username, password, admin or user, gdpr check, created at), [x]login, [x]logout, [x]session, [x]hash password, []remove account and userdata
+* [x]users.py: [x]register user (username, password, admin or user, gdpr check, created at), [x]login, [x]logout, [x]session, [x]hash password, []remove account and userdata, [x]creating the ranking list, [x]showing the ranking list, [x]creating the user stats, [x]showing the user stats, []creating the admin stats, []showing the admin stats
 
 Create and play a quiz (WIP)
 * [x]quizzes.py: [x]saving quizzes, questions, answer options and correct answers, [x]showing quizzes on admin page, [x]checking correct answers when a quiz is played, [x]returning the quiz result after playing, [x]showing quizzes on the front page, []tagging and rating the quizzes, []searching quizzes
 
-Stats and ranking lists (WIP)
-* []creating the ranking lists, []showing the ranking lists, [x]creating the stats, [x]showing the stats
-
-Database (WIP)
+Database
 * [x]db.py: database connection launch
 * [x]schema.sql
 
-Other files
+Other files (WIP)
 * [x].gitignore
 * [x].env
 * []requirements.txt
