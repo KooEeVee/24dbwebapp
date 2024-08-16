@@ -6,9 +6,16 @@
 
 <H1>Welcome admin!</H1>
 
+<H2>Your quizzes</H2>
+
+{% if not dict_quizzes %}
+
+<p>{{ message }}</p>
 <p><a class="btn btn-primary" href="/newquiz" role="button">Create new quiz</a></p>
 
-<H2>Your quizzes</H2>
+{% else %}
+
+<p><a class="btn btn-primary" href="/newquiz" role="button">Create new quiz</a></p>
 
 {% for quiz_label, quiz in dict_quizzes.items() %}
     <h4>Name: {{ quiz_label }}</h4>
@@ -31,6 +38,8 @@
     
 
 {% endfor %}
+
+{% endif %}
 
 <H3>Stats of your quizzes: how many users, results</H3>
 Stats stats stats<br>

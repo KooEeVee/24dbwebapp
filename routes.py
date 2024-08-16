@@ -64,8 +64,9 @@ def admin():
         if "username" in session:
             username = session["username"]
             dict_quizzes = quizzes.show_quizzes_toadmin(username)
+            message = f"You don't have any quizzes yet."
             #print(dict_quizzes)
-            return render_template("admin.html", dict_quizzes=dict_quizzes)
+            return render_template("admin.html", dict_quizzes=dict_quizzes, message=message)
         else:
             return render_template("admin.html")
     else:
