@@ -124,7 +124,12 @@ def admin():
 
 @app.route("/user")
 def user():
-    return render_template("user.html")
+    username = session["username"]
+    correct_answers = users.calculate_correctanswers(username)
+    played_quizzes = users.calculate_playedquizzes(username)
+    print(correct_answers)
+    print(played_quizzes)
+    return render_template("user.html", correct_answers=correct_answers, played_quizzes=played_quizzes)
 
 @app.route("/accountremoved")
 def accountremoved():

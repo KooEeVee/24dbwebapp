@@ -73,4 +73,29 @@ def check_ifplayed(quiz_id, username):
     except Exception as e:
         print(f"An error occurred: {e}")
         return False
+    
+def calculate_correctanswers(username):
+    try:
+        sql = text("""SELECT answers.username, COUNT(*) AS correct_answer_count FROM answers 
+                   LEFT JOIN options ON answers.option_id = options.id
+                   WHERE answers.username=:username AND options.correct_option =:correct_option
+                   GROUP BY answers.username""")
+        result = db.session.execute(sql, {"username":username, "correct_option":True})
+        stats = result.fetchall()[0]
+        return stats
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return False
+    
+def calculate_playedquizzes(username):
+    try:
+        sql = text("""SELECT answers.quiz_id, COUNT(DISTINCT quiz_id) AS played_quizzes_count FROM answers
+                   WHERE answers.username=:username
+                   GROUP BY answers.quiz_id""")
+        result = db.session.execute(sql, {"username":username})
+        stats = result.fetchall()[0]
+        return stats
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return False
 

@@ -64,7 +64,7 @@ Create and play a quiz (WIP)
 * [x]quizzes.py: [x]saving quizzes, questions, answer options and correct answers, [x]showing quizzes on admin page, [x]checking correct answers when a quiz is played, [x]returning the quiz result after playing, [x]showing quizzes on the front page, []tagging and rating the quizzes, []searching quizzes
 
 Stats and ranking lists (WIP)
-* []stats.py: []creating the ranking lists, []showing the ranking lists, []creating the stats, []showing the stats
+* []creating the ranking lists, []showing the ranking lists, [x]creating the stats, [x]showing the stats
 
 Database (WIP)
 * [x]db.py: database connection launch

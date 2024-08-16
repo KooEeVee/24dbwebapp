@@ -5,9 +5,18 @@
 {% if session.username %}
 
 <H1>Welcome user {{ session.username }}!</H1>
-<H3>The results and rankings of your finished quizzes</H3>
-Results results results<br>
-Rankings rankings rankings<br>
+<H3>Correct answers</H3>
+
+<div class="alert alert-primary" role="alert">
+    Your all time correct answers: {{ correct_answers[1] }}
+</div>
+
+<H3>Played quizzes</H3>
+
+<div class="alert alert-primary" role="alert">
+    Your all time played quizzes: {{ played_quizzes[1] }}
+</div>
+
 <a class="btn btn-primary" href="/" role="button">Play quizzes</a>
 <a class="btn btn-danger" href="/accountremoved" role="button">Remove your account</a>
 
