@@ -28,7 +28,33 @@
 {% endblock %}
 
 {% block contentrow1col2 %}
-Stats stats stats
+<h1>Leaderboard</h1>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Username</th>
+        <th scope="col">Correct answers</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">{{ leaderboard[0][2] }}</th>
+        <td>{{ leaderboard[0][0] }}</td>
+        <td>{{ leaderboard[0][1] }}</td>
+      </tr>
+      <tr>
+        <th scope="row">{{ leaderboard[1][2] }}</th>
+        <td>{{ leaderboard[1][0] }}</td>
+        <td>{{ leaderboard[1][1] }}</td>
+      </tr>
+      <tr>
+        <th scope="row">{{ leaderboard[2][2] }}</th>
+        <td>{{ leaderboard[2][0] }}</td>
+        <td>{{ leaderboard[2][1] }}</td>
+      </tr>
+    </tbody>
+  </table>
 {% endblock %}
 
 {% block contentrow2col1 %}

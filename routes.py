@@ -5,10 +5,13 @@ import users
 from flask import render_template, request, redirect, session
 from sqlalchemy import text
 
+
 @app.route("/")
 def index():
     published_quizzes = quizzes.show_published_quizzes()
-    return render_template("index.html", published_quizzes=published_quizzes)
+    leaderboard = users.calculate_leaderboard()
+    print(leaderboard)
+    return render_template("index.html", published_quizzes=published_quizzes, leaderboard=leaderboard)
 
 @app.route("/register", methods=["GET","POST"])
 def register():
@@ -127,9 +130,11 @@ def user():
     username = session["username"]
     correct_answers = users.calculate_correctanswers(username)
     played_quizzes = users.calculate_playedquizzes(username)
+    leaderboard = users.calculate_leaderboard()
     print(correct_answers)
     print(played_quizzes)
-    return render_template("user.html", correct_answers=correct_answers, played_quizzes=played_quizzes)
+    print(leaderboard)
+    return render_template("user.html", leaderboard=leaderboard, correct_answers=correct_answers, played_quizzes=played_quizzes)
 
 @app.route("/accountremoved")
 def accountremoved():

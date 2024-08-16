@@ -81,7 +81,7 @@ def calculate_correctanswers(username):
                    WHERE answers.username=:username AND options.correct_option =:correct_option
                    GROUP BY answers.username""")
         result = db.session.execute(sql, {"username":username, "correct_option":True})
-        stats = result.fetchall()[0]
+        stats = result.fetchall()
         return stats
     except Exception as e:
         print(f"An error occurred: {e}")
@@ -93,9 +93,40 @@ def calculate_playedquizzes(username):
                    WHERE answers.username=:username
                    GROUP BY answers.quiz_id""")
         result = db.session.execute(sql, {"username":username})
-        stats = result.fetchall()[0]
+        stats = result.fetchall()
         return stats
     except Exception as e:
         print(f"An error occurred: {e}")
         return False
+    
+def calculate_leaderboard():
+    try:
+        sql = text("""SELECT users.username, COUNT(answers.id) AS correct_answer_count, DENSE_RANK() OVER (ORDER BY COUNT(answers.id) DESC) AS rank
+                   FROM users
+                   LEFT JOIN answers ON users.username = answers.username
+                   LEFT JOIN options ON answers.option_id = options.id
+                   WHERE options.correct_option =:correct_option AND answers.username != 'guest'
+                   GROUP BY users.username
+                   ORDER BY rank""")
+        result = db.session.execute(sql, {"correct_option":True})
+        stats = result.fetchall()
+        return stats
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return False
+
+    
+""" def calculate_leaderboard():
+    try:
+        sql = text("SELECT answers.username, COUNT(*) AS correct_answer_count FROM answers 
+                   LEFT JOIN options ON answers.option_id = options.id
+                   WHERE options.correct_option =:correct_option AND answers.username != 'guest'
+                   GROUP BY answers.username
+                   ORDER BY correct_answer_count DESC")
+        result = db.session.execute(sql, {"correct_option":True})
+        stats = result.fetchall()
+        return stats
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return False """
 
