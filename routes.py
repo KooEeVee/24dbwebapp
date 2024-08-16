@@ -10,7 +10,6 @@ from sqlalchemy import text
 def index():
     published_quizzes = quizzes.show_published_quizzes()
     leaderboard = users.calculate_leaderboard()
-    print(leaderboard)
     return render_template("index.html", published_quizzes=published_quizzes, leaderboard=leaderboard)
 
 @app.route("/register", methods=["GET","POST"])

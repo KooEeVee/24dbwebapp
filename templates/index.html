@@ -38,21 +38,13 @@
       </tr>
     </thead>
     <tbody>
+      {% for row in leaderboard %}
       <tr>
-        <th scope="row">{{ leaderboard[0][2] }}</th>
-        <td>{{ leaderboard[0][0] }}</td>
-        <td>{{ leaderboard[0][1] }}</td>
+        <th scope="row">{{ row.rank }}</th>
+        <td>{{ row.username }}</td>
+        <td>{{ row.correct_answer_count }}</td>
       </tr>
-      <tr>
-        <th scope="row">{{ leaderboard[1][2] }}</th>
-        <td>{{ leaderboard[1][0] }}</td>
-        <td>{{ leaderboard[1][1] }}</td>
-      </tr>
-      <tr>
-        <th scope="row">{{ leaderboard[2][2] }}</th>
-        <td>{{ leaderboard[2][0] }}</td>
-        <td>{{ leaderboard[2][1] }}</td>
-      </tr>
+      {% endfor %}
     </tbody>
   </table>
 {% endblock %}
