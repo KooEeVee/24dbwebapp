@@ -5,17 +5,42 @@
 {% if session.username %}
 
 <H1>Welcome user {{ session.username }}!</H1>
+
+{% if not correct_answers %}
+
+<H3>Correct answers</H3>
+
+<div class="alert alert-primary" role="alert">
+    Your all time correct answers: {{ message }}
+</div>
+
+{% else %}
+
 <H3>Correct answers</H3>
 
 <div class="alert alert-primary" role="alert">
     Your all time correct answers: {{ correct_answers[0][1] }}
 </div>
 
+{% endif %}
+
+{% if not played_quizzes %}
+
+<H3>Played quizzes</H3>
+
+<div class="alert alert-primary" role="alert">
+    Your all time played quizzes: {{ message }}
+</div>
+
+{% else %
+}
 <H3>Played quizzes</H3>
 
 <div class="alert alert-primary" role="alert">
     Your all time played quizzes: {{ played_quizzes[0][1] }}
 </div>
+
+{% endif %}
 
 <a class="btn btn-primary" href="/" role="button">Play quizzes</a>
 <a class="btn btn-danger" href="/accountremoved" role="button">Remove your account</a>

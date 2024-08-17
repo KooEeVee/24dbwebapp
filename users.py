@@ -115,18 +115,16 @@ def calculate_leaderboard():
         print(f"An error occurred: {e}")
         return False
 
-    
-""" def calculate_leaderboard():
+def calculate_playedquizzes_created(username):
     try:
-        sql = text("SELECT answers.username, COUNT(*) AS correct_answer_count FROM answers 
-                   LEFT JOIN options ON answers.option_id = options.id
-                   WHERE options.correct_option =:correct_option AND answers.username != 'guest'
-                   GROUP BY answers.username
-                   ORDER BY correct_answer_count DESC")
-        result = db.session.execute(sql, {"correct_option":True})
+        sql = text("""SELECT quizzes.created_by, quizzes.quiz_label, COUNT(answers.quiz_id) AS played_quizzes_count FROM answers
+                   LEFT JOIN quizzes ON quizzes.id = answers.quiz_id
+                   WHERE quizzes.created_by=:username
+                   GROUP BY quizzes.quiz_label, quizzes.created_by""")
+        result = db.session.execute(sql, {"username":username})
         stats = result.fetchall()
         return stats
     except Exception as e:
         print(f"An error occurred: {e}")
-        return False """
+        return False
 

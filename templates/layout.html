@@ -41,7 +41,7 @@
                     <a class="nav-link disabled" href="/logout">Logout</a>
                 </li>
                 {% endif %}
-                {% if session.username %}
+                {% if session.username and session.role == 'user' %}
                 <li class="nav-item">
                     <a class="nav-link active" href="/user">User</a>
                 </li>

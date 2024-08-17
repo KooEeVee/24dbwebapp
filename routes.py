@@ -67,8 +67,13 @@ def admin():
             username = session["username"]
             dict_quizzes = quizzes.show_quizzes_toadmin(username)
             message = f"You don't have any quizzes yet."
+            correct_answers = users.calculate_correctanswers(username)
+            played_quizzes = users.calculate_playedquizzes(username)
+            message2 = f"You haven't played anything yet."
+            own_quizzes = users.calculate_playedquizzes_created(username)
+            print(own_quizzes)
             #print(dict_quizzes)
-            return render_template("admin.html", dict_quizzes=dict_quizzes, message=message)
+            return render_template("admin.html", own_quizzes=own_quizzes, message2=message2, dict_quizzes=dict_quizzes, message=message, correct_answers=correct_answers, played_quizzes=played_quizzes)
         else:
             return render_template("admin.html")
     else:
@@ -133,7 +138,8 @@ def user():
     print(correct_answers)
     print(played_quizzes)
     print(leaderboard)
-    return render_template("user.html", leaderboard=leaderboard, correct_answers=correct_answers, played_quizzes=played_quizzes)
+    message = f"You haven't played anything yet."
+    return render_template("user.html", message=message, leaderboard=leaderboard, correct_answers=correct_answers, played_quizzes=played_quizzes)
 
 @app.route("/accountremoved")
 def accountremoved():
