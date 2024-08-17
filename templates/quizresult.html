@@ -55,6 +55,8 @@
 <p>Question4: {{ correct_answer4 }}</p>
 <p>Question5: {{ correct_answer5 }}</p>
 
+{% if session.username %}
+
 <form action="/rating/{{ quiz_id }}" method="POST">
   <H3>Rate quiz</H3>
   <div class="btn-group" role="group" aria-label="rate">
@@ -65,8 +67,27 @@
     <input class="btn-check" type="radio" id="diamond" name="rating" value="diamond">
     <label class="btn btn-outline-success" for="diamond">Diamond</label>
   </div>
-  <p><button type="submit" class="btn btn-primary">Submit rating</button></p>
+  <p><button type="submit" class="btn btn-success">Submit rating</button></p>
 </form>
+
+{% else %}
+
+<p>You need to log in to rate quizzes.</p>
+
+<form action="/rating/{{ quiz_id }}" method="POST">
+  <H3>Rate quiz</H3>
+  <div class="btn-group" role="group" aria-label="rate">
+    <input class="btn-check" type="radio" id="meh" name="rating" value="meh" required>
+    <label class="btn btn-outline-success disabled" for="meh">Meh</label>
+    <input class="btn-check" type="radio" id="nice" name="rating" value="nice">
+    <label class="btn btn-outline-success disabled"  for="nice">Nice</label>
+    <input class="btn-check" type="radio" id="diamond" name="rating" value="diamond">
+    <label class="btn btn-outline-success disabled" for="diamond">Diamond</label>
+  </div>
+  <p><button type="submit" class="btn btn-success disabled">Submit rating</button></p>
+</form>
+
+{% endif %}
 
 <p><a class="btn btn-primary" href="/" role="button">Play more quizzes</a></p>
 
