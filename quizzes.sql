@@ -3,7 +3,7 @@ INSERT INTO users (username, password, user_admin, gdpr) VALUES ('testuser2', 't
 INSERT INTO users (username, password, user_admin, gdpr) VALUES ('testadmin1', 'testitesti', 'admin', 'gdpr');
 INSERT INTO users (username, password, user_admin, gdpr) VALUES ('testadmin2', 'testitesti', 'admin', 'gdpr');
 
-INSERT INTO quizzes (quiz_label, created_by, published) VALUES ('Testquiz1', 'testadmin1', 'true');
+INSERT INTO quizzes (quiz_label, created_by, published, category) VALUES ('Testquiz1', 'testadmin1', 'true', 'Movies and Games');
 INSERT INTO questions (quiz_id, question_label) VALUES ('1', 'Testquestion1');
 INSERT INTO questions (quiz_id, question_label) VALUES ('1', 'Testquestion2');
 INSERT INTO questions (quiz_id, question_label) VALUES ('1', 'Testquestion3');
@@ -25,7 +25,7 @@ INSERT INTO options (question_id, option_label, correct_option) VALUES ('5', 'Te
 INSERT INTO options (question_id, option_label) VALUES ('5', 'Testoption2');
 INSERT INTO options (question_id, option_label) VALUES ('5', 'Testoption3');
 
-INSERT INTO quizzes (quiz_label, created_by, published) VALUES ('Testquiz2', 'testadmin2', 'true');
+INSERT INTO quizzes (quiz_label, created_by, published, category) VALUES ('Testquiz2', 'testadmin2', 'true', 'Popular Music');
 INSERT INTO questions (quiz_id, question_label) VALUES ('2', 'Testquestion1');
 INSERT INTO questions (quiz_id, question_label) VALUES ('2', 'Testquestion2');
 INSERT INTO questions (quiz_id, question_label) VALUES ('2', 'Testquestion3');

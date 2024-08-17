@@ -263,7 +263,7 @@ def publish_quiz(quiz_id, published):
     
 def show_published_quizzes():
     try:
-        sql = text("SELECT id, quiz_label, created_by FROM quizzes WHERE published=:published")
+        sql = text("SELECT id, quiz_label, created_by, category FROM quizzes WHERE published=:published")
         result = db.session.execute(sql, {"published":True})
         list_quizzes = result.fetchall()
         return list_quizzes

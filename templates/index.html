@@ -11,6 +11,7 @@
             
     <H3>{{ quiz.quiz_label }}</H3>
     <h6>Created by: {{ quiz.created_by }}</h6>
+    <h6>Category: {{ quiz.category }}</h6>
 
     {% if session.username == quiz.created_by %}
 

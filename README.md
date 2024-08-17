@@ -33,8 +33,8 @@ Music Quiz Platform offers users a fun place to refresh and test music related s
 - As a user or admin, log in and out
 - As a user, see the results and rankings of own finished quizzes
 - As a user, rate the quiz
-- As an admin, create new quizzes, edit and remove if not published
-- As an admin, create new tasks (text, audio?) in quizzes, edit and remove if not published
+- As an admin, create new quizzes, remove quizzes
+- As an admin, create new tasks in quizzes
 - As an admin, tag quizzes
 - As an admin, see a list of your own unpublished and published quizzes
 - As an admin, see the stats of your quizzes: how many users, results
@@ -61,7 +61,7 @@ Create a user account, log in and log out, remove account (WIP)
 * [x]users.py: [x]register user (username, password, admin or user, gdpr check, created at), [x]login, [x]logout, [x]session, [x]hash password, [x]remove account and userdata, [x]creating the ranking list, [x]showing the ranking list, [x]creating the user stats, [x]showing the user stats, [x]creating the admin stats, [x]showing the admin stats
 
 Create and play a quiz (WIP)
-* [x]quizzes.py: [x]saving quizzes, questions, answer options and correct answers, [x]showing quizzes on admin page, [x]checking correct answers when a quiz is played, [x]returning the quiz result after playing, [x]showing quizzes on the front page, []tagging quizzes, [x]rating quizzes, []searching quizzes
+* [x]quizzes.py: [x]saving quizzes, questions, answer options and correct answers, [x]showing quizzes on admin page, [x]checking correct answers when a quiz is played, [x]returning the quiz result after playing, [x]showing quizzes on the front page, [x]tagging quizzes, [x]rating quizzes, []searching quizzes
 
 Database
 * [x]db.py: database connection launch
