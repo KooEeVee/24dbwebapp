@@ -143,9 +143,17 @@ def user():
     message = f"You haven't played anything yet."
     return render_template("user.html", message=message, leaderboard=leaderboard, correct_answers=correct_answers, played_quizzes=played_quizzes)
 
-@app.route("/accountremoved")
+@app.route("/accountremoved", methods=["GET", "POST"])
 def accountremoved():
-    return render_template("accountremoved.html")
+    if request.method=="GET":
+        return render_template("accountremoved.html")
+    else:
+        username = session["username"]
+        remove_user = request.form["userremove"]
+        if remove_user:
+            users.remove_user(username)
+            del session["username"]
+            return render_template("accountremoved.html")
 
 @app.route("/quiz/<int:quiz_id>", methods=["GET", "POST"])
 def quiz(quiz_id):

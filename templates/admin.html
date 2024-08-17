@@ -41,9 +41,6 @@
 
 {% endif %}
 
-<a class="btn btn-danger" href="/accountremoved" role="button">Remove your account</a>
-
-
 {% else %}
 <p><a class="btn btn-primary" href="/login" role="button">Login</a></p>
 
@@ -137,4 +134,12 @@
 
 {% endif %}
 
+<H2>Settings</H2>
+
+<form action="/accountremoved" method="POST">
+    <input type="hidden" id="userremove", name="userremove", value="True">
+    <button type="submit" class="btn btn-danger">Remove your account</button>
+</form>
+
 {% endblock %}
+

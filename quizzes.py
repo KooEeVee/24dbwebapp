@@ -309,3 +309,13 @@ def save_answer(username, option_id, quiz_id):
     except Exception as e:
         print(f"An error occurred: {e}")
         return False
+    
+def remove_user(username):
+    try:
+        sql = text("DELETE FROM users WHERE username=:username")
+        db.session.execute(sql, {"username":username})
+        db.session.commit()
+        return True    
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return False

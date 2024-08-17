@@ -9,13 +9,13 @@ CREATE TABLE quizzes (
 
 CREATE TABLE questions (
     id SERIAL PRIMARY KEY,
-    quiz_id INTEGER REFERENCES quizzes,
+    quiz_id INTEGER REFERENCES quizzes ON DELETE CASCADE,
     question_label TEXT
 );
 
 CREATE TABLE options (
     id SERIAL PRIMARY KEY,
-    question_id INTEGER REFERENCES questions,
+    question_id INTEGER REFERENCES questions ON DELETE CASCADE,
     option_label TEXT,
     correct_option BOOLEAN DEFAULT FALSE
 );
@@ -31,9 +31,10 @@ CREATE TABLE users (
 
 CREATE TABLE answers (
     id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES options ON DELETE CASCADE,
     username TEXT,
-    option_id INTEGER REFERENCES options,
-    quiz_id INTEGER REFERENCES quizzes,
+    option_id INTEGER REFERENCES options ON DELETE CASCADE,
+    quiz_id INTEGER REFERENCES quizzes ON DELETE CASCADE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

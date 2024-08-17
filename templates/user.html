@@ -32,8 +32,7 @@
     Your all time played quizzes: {{ message }}
 </div>
 
-{% else %
-}
+{% else %}
 <H3>Played quizzes</H3>
 
 <div class="alert alert-primary" role="alert">
@@ -43,7 +42,6 @@
 {% endif %}
 
 <a class="btn btn-primary" href="/" role="button">Play quizzes</a>
-<a class="btn btn-danger" href="/accountremoved" role="button">Remove your account</a>
 
 {% else %}
 
@@ -72,6 +70,14 @@
       </tr>
       {% endfor %}
     </tbody>
-  </table>
+</table>
+
+<H2>Settings</H2>
+
+<form action="/accountremoved" method="POST">
+    <input type="hidden" id="userremove", name="userremove", value="True">
+    <button type="submit" class="btn btn-danger">Remove your account</button>
+</form>
+
 {% endblock %}
 
