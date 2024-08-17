@@ -157,6 +157,16 @@ def get_correctoption_label(question_id):
     except Exception as e:
         print(f"An error occurred: {e}")
         return False
+    
+def add_category(quiz_id, category):
+    try:
+        sql = text("UPDATE quizzes SET category=:category WHERE id=:quiz_id")
+        db.session.execute(sql, {"category":category, "quiz_id":quiz_id})
+        db.session.commit()
+        return True    
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return False
 
 def add_question(quizid, question):
     try:
@@ -200,7 +210,7 @@ def add_correctoption(optionid):
 
 def show_quizzes_toadmin(username):
     try:
-        sql = text("""SELECT quizzes.quiz_label, quizzes.published, quizzes.published_at, questions.quiz_id, questions.question_label, options.question_id, options.option_label, options.correct_option 
+        sql = text("""SELECT quizzes.quiz_label, quizzes.published, quizzes.published_at, quizzes.category, questions.quiz_id, questions.question_label, options.question_id, options.option_label, options.correct_option 
                    FROM quizzes 
                    LEFT JOIN questions ON quizzes.id=questions.quiz_id 
                    LEFT JOIN options ON questions.id=options.question_id 
@@ -218,6 +228,7 @@ def show_quizzes_toadmin(username):
                     "published": row.published,
                     "quiz_id": row.quiz_id,
                     "published_at": row.published_at,
+                    "category": row.category,
                     "questions": {}
                 }
             #print(dict_quizzes[quiz_label])

@@ -19,6 +19,7 @@
 
 {% for quiz_label, quiz in dict_quizzes.items() %}
     <h4>Name: {{ quiz_label }}</h4>
+    <h6>Category: {{ quiz.category }}</h6>
     <H6>Published: {{ quiz.published }}</h6>
     <h6>Published at: {{ quiz.published_at }}</h6>
 

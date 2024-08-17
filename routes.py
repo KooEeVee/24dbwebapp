@@ -81,6 +81,7 @@ def admin():
             return render_template("admin.html")
     else:
         quizname=request.form["quizname"]
+        category = request.form["category"]
         question1=request.form["question1"]
         option11=request.form["option11"]
         option12=request.form["option12"]
@@ -103,6 +104,7 @@ def admin():
         option53=request.form["option53"]
         #quizzes.create_quiz(quizname)
         quizid = quizzes.get_quizid(quizname)
+        quizzes.add_category(quizid, category)
         quizzes.add_question(quizid, question1)
         questionid = quizzes.get_questionid(question1)
         quizzes.add_options(questionid, option11)

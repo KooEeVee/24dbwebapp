@@ -4,7 +4,8 @@ CREATE TABLE quizzes (
     published BOOLEAN DEFAULT FALSE,
     created_by TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    published_at TIMESTAMP
+    published_at TIMESTAMP,
+    category TEXT
 );
 
 CREATE TABLE questions (

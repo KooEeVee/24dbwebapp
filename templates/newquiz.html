@@ -26,6 +26,17 @@
 
 <form action="/admin" method="POST">
   <input type="hidden" id="quizname", name="quizname", value="{{ quizname }}">
+  <H4>Category</H4>
+  <div class="form-group">
+    <label for="category">Choose category for your quiz:</label>
+    <select id="category" name="category">
+        <option value="Skills and Theory">Skills and Theory</option>
+        <option value="Popular music">Popular music</option>
+        <option value="Classical music">Classical music</option>
+        <option value="World music">World music</option>
+        <option value="Movies and Games">Movies and Games </option>
+    </select>
+  </div>
   <div class="form-group">
     <h4>Question1</H4>
     <label for="question1">Question name</label>
