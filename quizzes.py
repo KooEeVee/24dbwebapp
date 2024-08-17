@@ -310,9 +310,9 @@ def save_answer(username, option_id, quiz_id):
         print(f"An error occurred: {e}")
         return False
     
-def remove_user(username):
+def delete_answer(username):
     try:
-        sql = text("DELETE FROM users WHERE username=:username")
+        sql = text("DELETE FROM answers WHERE username=:username")
         db.session.execute(sql, {"username":username})
         db.session.commit()
         return True    

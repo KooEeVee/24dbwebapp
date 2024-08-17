@@ -31,10 +31,9 @@ CREATE TABLE users (
 
 CREATE TABLE answers (
     id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES options ON DELETE CASCADE,
     username TEXT,
-    option_id INTEGER REFERENCES options ON DELETE CASCADE,
-    quiz_id INTEGER REFERENCES quizzes ON DELETE CASCADE,
+    option_id INTEGER REFERENCES options,
+    quiz_id INTEGER REFERENCES quizzes,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

@@ -69,7 +69,7 @@ def admin():
             message = f"You don't have any quizzes yet."
             correct_answers = users.calculate_correctanswers(username)
             played_quizzes = users.calculate_playedquizzes(username)
-            message2 = f"You haven't played anything yet."
+            message2 = f"0"
             own_quizzes = users.calculate_playedquizzes_created(username)
             own_quizzes_canswers = users.calculate_correctanswers_created(username)
             own_quizzes_answers = users.calculate_allanswers_created(username)
@@ -140,7 +140,7 @@ def user():
     print(correct_answers)
     print(played_quizzes)
     print(leaderboard)
-    message = f"You haven't played anything yet."
+    message = f"0"
     return render_template("user.html", message=message, leaderboard=leaderboard, correct_answers=correct_answers, played_quizzes=played_quizzes)
 
 @app.route("/accountremoved", methods=["GET", "POST"])
@@ -152,6 +152,7 @@ def accountremoved():
         remove_user = request.form["userremove"]
         if remove_user:
             users.remove_user(username)
+            quizzes.delete_answer(username)
             del session["username"]
             return render_template("accountremoved.html")
 
