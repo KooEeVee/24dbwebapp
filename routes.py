@@ -71,9 +71,11 @@ def admin():
             played_quizzes = users.calculate_playedquizzes(username)
             message2 = f"You haven't played anything yet."
             own_quizzes = users.calculate_playedquizzes_created(username)
-            print(own_quizzes)
+            own_quizzes_canswers = users.calculate_correctanswers_created(username)
+            own_quizzes_answers = users.calculate_allanswers_created(username)
+            print(own_quizzes_answers)
             #print(dict_quizzes)
-            return render_template("admin.html", own_quizzes=own_quizzes, message2=message2, dict_quizzes=dict_quizzes, message=message, correct_answers=correct_answers, played_quizzes=played_quizzes)
+            return render_template("admin.html", own_quizzes_canswers=own_quizzes_canswers, own_quizzes_answers=own_quizzes_answers, own_quizzes=own_quizzes, message2=message2, dict_quizzes=dict_quizzes, message=message, correct_answers=correct_answers, played_quizzes=played_quizzes)
         else:
             return render_template("admin.html")
     else:

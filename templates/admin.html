@@ -41,9 +41,6 @@
 
 {% endif %}
 
-<H3>Stats of your quizzes: how many users, results</H3>
-Stats stats stats<br>
-
 <a class="btn btn-danger" href="/accountremoved" role="button">Remove your account</a>
 
 
@@ -58,7 +55,9 @@ Stats stats stats<br>
 
 {% block contentrow1col2 %}
 
-<h1>Your quizzes played</h1>
+<h1>Stats</h1>
+
+<H2>Your quizzes played</H2>
 <table class="table">
     <thead>
       <tr>
@@ -76,7 +75,33 @@ Stats stats stats<br>
     </tbody>
   </table>
 
+<H2>Your quizzes correct answers</H2>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Quiz name</th>
+        <th scope="col">Correct answers</th>
+        <th scope="col">All answers</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for row in own_quizzes_canswers %}
+    {% for row2 in own_quizzes_answers %}
+    <tr>
+        <td>{{ row.quiz_label }}</td>
+        <td>{{ row.correct_answer_count}}</td>
+        <td>{{ row2.all_answer_count}}</td>
+    </tr>
+    {% endfor %}
+    {% endfor %}
+    </tbody>
+</table>
+
+<H2>Quizzes played by you</H2>
+
 {% if not correct_answers %}
+
+
 
 <H3>Correct answers</H3>
 

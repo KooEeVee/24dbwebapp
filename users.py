@@ -127,4 +127,31 @@ def calculate_playedquizzes_created(username):
     except Exception as e:
         print(f"An error occurred: {e}")
         return False
+    
+def calculate_correctanswers_created(username):
+    try:
+        sql = text("""SELECT quizzes.created_by, quizzes.quiz_label, COUNT(answers.id) AS correct_answer_count FROM answers 
+                   LEFT JOIN options ON answers.option_id = options.id
+                   LEFT JOIN quizzes ON answers.quiz_id = quizzes.id
+                   WHERE quizzes.created_by=:username AND options.correct_option =:correct_option
+                   GROUP BY quizzes.created_by, quizzes.quiz_label""")
+        result = db.session.execute(sql, {"username":username, "correct_option":True})
+        stats = result.fetchall()
+        return stats
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return False
+    
+def calculate_allanswers_created(username):
+    try:
+        sql = text("""SELECT quizzes.created_by, quizzes.quiz_label, COUNT(*) AS all_answer_count FROM answers 
+                   LEFT JOIN quizzes ON answers.quiz_id = quizzes.id
+                   WHERE quizzes.created_by=:username
+                   GROUP BY quizzes.created_by, quizzes.quiz_label""")
+        result = db.session.execute(sql, {"username":username})
+        stats = result.fetchall()
+        return stats
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return False
 
