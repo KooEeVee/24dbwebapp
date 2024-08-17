@@ -88,9 +88,8 @@ def calculate_correctanswers(username):
     
 def calculate_playedquizzes(username):
     try:
-        sql = text("""SELECT answers.quiz_id, COUNT(DISTINCT quiz_id) AS played_quizzes_count FROM answers
-                   WHERE answers.username=:username
-                   GROUP BY answers.quiz_id""")
+        sql = text("""SELECT COUNT(DISTINCT answers.quiz_id) AS played_quizzes_count FROM answers
+                   WHERE answers.username=:username""")
         result = db.session.execute(sql, {"username":username})
         stats = result.fetchall()
         return stats

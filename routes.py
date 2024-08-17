@@ -35,7 +35,7 @@ def registersuccess():
         password=request.form["password"]
         admin=request.form["userradio"]
         gdpr=request.form["gdprcheck"]
-        print(users.register(username, password, admin, gdpr))
+        #print(users.register(username, password, admin, gdpr))
         return render_template("registersuccess.html", username=username)
 
 
@@ -73,7 +73,7 @@ def admin():
             own_quizzes = users.calculate_playedquizzes_created(username)
             own_quizzes_canswers = users.calculate_correctanswers_created(username)
             own_quizzes_answers = users.calculate_allanswers_created(username)
-            print(own_quizzes_answers)
+            #print(own_quizzes_answers)
             #print(dict_quizzes)
             return render_template("admin.html", own_quizzes_canswers=own_quizzes_canswers, own_quizzes_answers=own_quizzes_answers, own_quizzes=own_quizzes, message2=message2, dict_quizzes=dict_quizzes, message=message, correct_answers=correct_answers, played_quizzes=played_quizzes)
         else:
@@ -137,9 +137,7 @@ def user():
     correct_answers = users.calculate_correctanswers(username)
     played_quizzes = users.calculate_playedquizzes(username)
     leaderboard = users.calculate_leaderboard()
-    print(correct_answers)
     print(played_quizzes)
-    print(leaderboard)
     message = f"0"
     return render_template("user.html", message=message, leaderboard=leaderboard, correct_answers=correct_answers, played_quizzes=played_quizzes)
 
@@ -172,7 +170,8 @@ def quiz(quiz_id):
         options3 = quizzes.get_options(quiz_id, question3)
         options4 = quizzes.get_options(quiz_id, question4)
         options5 = quizzes.get_options(quiz_id, question5)
-        return render_template("quiz.html", quiz_id=quiz_id, quizname=quizname, options1=options1, options2=options2, options3=options3, options4=options4, options5=options5, questions=questions)
+        leaderboard = users.calculate_leaderboard()
+        return render_template("quiz.html", leaderboard=leaderboard, quiz_id=quiz_id, quizname=quizname, options1=options1, options2=options2, options3=options3, options4=options4, options5=options5, questions=questions)
     else:
         return redirect("/")
     
@@ -188,7 +187,7 @@ def quizresult():
         correct_answers = 0
         answers = []
         quiz_id = request.form["quiz_id"]
-        print(users.check_ifplayed(quiz_id, username))
+        #print(users.check_ifplayed(quiz_id, username))
         if users.check_ifplayed(quiz_id, username) == False:
             question1_answer = request.form["quizOptions1"]
             answers.append(quizzes.get_option(question1_answer))
@@ -225,7 +224,8 @@ def quizresult():
             correct_answer3 = quizzes.get_correctoption_label(question3_id)
             correct_answer4 = quizzes.get_correctoption_label(question4_id)
             correct_answer5 = quizzes.get_correctoption_label(question5_id)
-            return render_template("quizresult.html", answers=answers, correct_answers=correct_answers, correct_answer1=correct_answer1, correct_answer2=correct_answer2, correct_answer3=correct_answer3, correct_answer4=correct_answer4, correct_answer5=correct_answer5)
+            leaderboard = users.calculate_leaderboard()
+            return render_template("quizresult.html", leaderboard=leaderboard, answers=answers, correct_answers=correct_answers, correct_answer1=correct_answer1, correct_answer2=correct_answer2, correct_answer3=correct_answer3, correct_answer4=correct_answer4, correct_answer5=correct_answer5)
         else:
             question1_answer = request.form["quizOptions1"]
             answers.append(quizzes.get_option(question1_answer))
@@ -262,8 +262,9 @@ def quizresult():
             correct_answer3 = quizzes.get_correctoption_label(question3_id)
             correct_answer4 = quizzes.get_correctoption_label(question4_id)
             correct_answer5 = quizzes.get_correctoption_label(question5_id)
-            message = f"(You have already played this quiz, so the result wasn't saved. The first result remains.)"
-            return render_template("quizresult.html", message=message, answers=answers, correct_answers=correct_answers, correct_answer1=correct_answer1, correct_answer2=correct_answer2, correct_answer3=correct_answer3, correct_answer4=correct_answer4, correct_answer5=correct_answer5)
+            message = f"(You are either guest user or you have already played this quiz, so the result wasn't saved.)"
+            leaderboard = users.calculate_leaderboard()
+            return render_template("quizresult.html", leaderboard=leaderboard, message=message, answers=answers, correct_answers=correct_answers, correct_answer1=correct_answer1, correct_answer2=correct_answer2, correct_answer3=correct_answer3, correct_answer4=correct_answer4, correct_answer5=correct_answer5)
 
 @app.route("/newquiz", methods=["GET", "POST"])
 def newquiz():
