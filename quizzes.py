@@ -319,6 +319,23 @@ def save_rating(quiz_id, rating):
     except Exception as e:
         print(f"An error occurred: {e}")
         return False
+
+def calculate_ratings():
+    try:
+        sql = text("""SELECT ratings.quiz_id, quizzes.quiz_label,
+                   COUNT(CASE WHEN ratings.rating = 'meh' THEN 1 END) AS meh_count,
+                   COUNT(CASE WHEN ratings.rating = 'nice' THEN 1 END) AS nice_count,
+                   COUNT(CASE WHEN ratings.rating = 'diamond' THEN 1 END) AS diamond_count,
+                   COUNT(*) AS total_ratings_count
+                   FROM ratings
+                   LEFT JOIN quizzes ON ratings.quiz_id = quizzes.id
+                   GROUP BY ratings.quiz_id, quizzes.quiz_label""")
+        result = db.session.execute(sql)
+        stats = result.fetchall()
+        return stats
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return False
     
 def delete_answer(username):
     try:

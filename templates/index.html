@@ -46,7 +46,32 @@
       </tr>
       {% endfor %}
     </tbody>
-  </table>
+</table>
+
+<H1>Ratings</H1>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Quizname</th>
+        <th scope="col">Mehs</th>
+        <th scope="col">Nices</th>
+        <th scope="col">Diamonds</th>
+        <th scope="col">All ratings</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in ratings %}
+      <tr>
+        <td>{{ row.quiz_label }}</td>
+        <td>{{ row.meh_count }}</td>
+        <td>{{ row.nice_count }}</td>
+        <td>{{ row.diamond_count }}</td>
+        <td>{{ row.total_ratings_count }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
 
 {% block contentrow2col1 %}

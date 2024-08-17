@@ -10,7 +10,8 @@ from sqlalchemy import text
 def index():
     published_quizzes = quizzes.show_published_quizzes()
     leaderboard = users.calculate_leaderboard()
-    return render_template("index.html", published_quizzes=published_quizzes, leaderboard=leaderboard)
+    ratings = quizzes.calculate_ratings()
+    return render_template("index.html", ratings=ratings, published_quizzes=published_quizzes, leaderboard=leaderboard)
 
 @app.route("/register", methods=["GET","POST"])
 def register():
@@ -170,7 +171,8 @@ def quiz(quiz_id):
         options4 = quizzes.get_options(quiz_id, question4)
         options5 = quizzes.get_options(quiz_id, question5)
         leaderboard = users.calculate_leaderboard()
-        return render_template("quiz.html", leaderboard=leaderboard, quiz_id=quiz_id, quizname=quizname, options1=options1, options2=options2, options3=options3, options4=options4, options5=options5, questions=questions)
+        ratings = quizzes.calculate_ratings()
+        return render_template("quiz.html", ratings=ratings, leaderboard=leaderboard, quiz_id=quiz_id, quizname=quizname, options1=options1, options2=options2, options3=options3, options4=options4, options5=options5, questions=questions)
     else:
         return redirect("/")
     
@@ -224,7 +226,8 @@ def quizresult():
             correct_answer4 = quizzes.get_correctoption_label(question4_id)
             correct_answer5 = quizzes.get_correctoption_label(question5_id)
             leaderboard = users.calculate_leaderboard()
-            return render_template("quizresult.html", quiz_id=quiz_id, leaderboard=leaderboard, answers=answers, correct_answers=correct_answers, correct_answer1=correct_answer1, correct_answer2=correct_answer2, correct_answer3=correct_answer3, correct_answer4=correct_answer4, correct_answer5=correct_answer5)
+            ratings = quizzes.calculate_ratings()
+            return render_template("quizresult.html", ratings=ratings, quiz_id=quiz_id, leaderboard=leaderboard, answers=answers, correct_answers=correct_answers, correct_answer1=correct_answer1, correct_answer2=correct_answer2, correct_answer3=correct_answer3, correct_answer4=correct_answer4, correct_answer5=correct_answer5)
         else:
             question1_answer = request.form["quizOptions1"]
             answers.append(quizzes.get_option(question1_answer))
@@ -263,7 +266,8 @@ def quizresult():
             correct_answer5 = quizzes.get_correctoption_label(question5_id)
             message = f"(You are either guest user or you have already played this quiz, so the result wasn't saved.)"
             leaderboard = users.calculate_leaderboard()
-            return render_template("quizresult.html", quiz_id=quiz_id, leaderboard=leaderboard, message=message, answers=answers, correct_answers=correct_answers, correct_answer1=correct_answer1, correct_answer2=correct_answer2, correct_answer3=correct_answer3, correct_answer4=correct_answer4, correct_answer5=correct_answer5)
+            ratings = quizzes.calculate_ratings()
+            return render_template("quizresult.html", ratings=ratings, quiz_id=quiz_id, leaderboard=leaderboard, message=message, answers=answers, correct_answers=correct_answers, correct_answer1=correct_answer1, correct_answer2=correct_answer2, correct_answer3=correct_answer3, correct_answer4=correct_answer4, correct_answer5=correct_answer5)
 
 @app.route("/newquiz", methods=["GET", "POST"])
 def newquiz():
@@ -329,5 +333,8 @@ def rating(quiz_id):
         return render_template("rating.html")
     else:
         rating = request.form["rating"]
+        quizzes.save_rating(quiz_id, rating)
         message = f"Success!"
-        return render_template("rating.html", message=message)
+        ratings = quizzes.calculate_ratings()
+        leaderboard = users.calculate_leaderboard()
+        return render_template("rating.html", message=message, ratings=ratings, leaderboard=leaderboard)
