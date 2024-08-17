@@ -224,7 +224,7 @@ def quizresult():
             correct_answer4 = quizzes.get_correctoption_label(question4_id)
             correct_answer5 = quizzes.get_correctoption_label(question5_id)
             leaderboard = users.calculate_leaderboard()
-            return render_template("quizresult.html", leaderboard=leaderboard, answers=answers, correct_answers=correct_answers, correct_answer1=correct_answer1, correct_answer2=correct_answer2, correct_answer3=correct_answer3, correct_answer4=correct_answer4, correct_answer5=correct_answer5)
+            return render_template("quizresult.html", quiz_id=quiz_id, leaderboard=leaderboard, answers=answers, correct_answers=correct_answers, correct_answer1=correct_answer1, correct_answer2=correct_answer2, correct_answer3=correct_answer3, correct_answer4=correct_answer4, correct_answer5=correct_answer5)
         else:
             question1_answer = request.form["quizOptions1"]
             answers.append(quizzes.get_option(question1_answer))
@@ -263,7 +263,7 @@ def quizresult():
             correct_answer5 = quizzes.get_correctoption_label(question5_id)
             message = f"(You are either guest user or you have already played this quiz, so the result wasn't saved.)"
             leaderboard = users.calculate_leaderboard()
-            return render_template("quizresult.html", leaderboard=leaderboard, message=message, answers=answers, correct_answers=correct_answers, correct_answer1=correct_answer1, correct_answer2=correct_answer2, correct_answer3=correct_answer3, correct_answer4=correct_answer4, correct_answer5=correct_answer5)
+            return render_template("quizresult.html", quiz_id=quiz_id, leaderboard=leaderboard, message=message, answers=answers, correct_answers=correct_answers, correct_answer1=correct_answer1, correct_answer2=correct_answer2, correct_answer3=correct_answer3, correct_answer4=correct_answer4, correct_answer5=correct_answer5)
 
 @app.route("/newquiz", methods=["GET", "POST"])
 def newquiz():
@@ -322,3 +322,12 @@ def quizremoved():
         if remove_quiz:
             quizzes.delete_quiz_id(quizname)
             return render_template("quizremoved.html", quizname=quizname)
+        
+@app.route("/rating/<int:quiz_id>", methods=["GET", "POST"])
+def rating(quiz_id):
+    if request.method=="GET":
+        return render_template("rating.html")
+    else:
+        rating = request.form["rating"]
+        message = f"Success!"
+        return render_template("rating.html", message=message)

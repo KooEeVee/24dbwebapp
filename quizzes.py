@@ -310,6 +310,16 @@ def save_answer(username, option_id, quiz_id):
         print(f"An error occurred: {e}")
         return False
     
+def save_rating(quiz_id, rating):
+    try:
+        sql = text("INSERT INTO ratings (quiz_id, rating) VALUES (:quiz_id, :rating)")
+        db.session.execute(sql, {"quiz_id":quiz_id, "rating":rating})
+        db.session.commit()
+        return True    
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return False
+    
 def delete_answer(username):
     try:
         sql = text("DELETE FROM answers WHERE username=:username")
@@ -339,3 +349,4 @@ def delete_quiz_id(quizname):
     except Exception as e:
         print(f"An error occurred: {e}")
         return False
+    

@@ -61,7 +61,7 @@ Create a user account, log in and log out, remove account (WIP)
 * [x]users.py: [x]register user (username, password, admin or user, gdpr check, created at), [x]login, [x]logout, [x]session, [x]hash password, [x]remove account and userdata, [x]creating the ranking list, [x]showing the ranking list, [x]creating the user stats, [x]showing the user stats, [x]creating the admin stats, [x]showing the admin stats
 
 Create and play a quiz (WIP)
-* [x]quizzes.py: [x]saving quizzes, questions, answer options and correct answers, [x]showing quizzes on admin page, [x]checking correct answers when a quiz is played, [x]returning the quiz result after playing, [x]showing quizzes on the front page, []tagging and rating the quizzes, []searching quizzes
+* [x]quizzes.py: [x]saving quizzes, questions, answer options and correct answers, [x]showing quizzes on admin page, [x]checking correct answers when a quiz is played, [x]returning the quiz result after playing, [x]showing quizzes on the front page, []tagging quizzes, [x]rating quizzes, []searching quizzes
 
 Database
 * [x]db.py: database connection launch
