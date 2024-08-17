@@ -99,3 +99,5 @@ Misc tasks
 * [x]Message no quizzes yet on admin page
 * [x]Add your answers to quiz result page
 * [x]Messages according to the result on the result page
+* []Add leaderboard to result page
+* []Fix played quizzes counter
