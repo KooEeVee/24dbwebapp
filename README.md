@@ -88,8 +88,7 @@ Misc tasks
 * [x]Guide user after successful quiz name check
 * [x]Drop down menu or field check for correct options
 * [x]Add publish quiz time stamp when quiz is published
-* Add unpublish quiz button
-* Hide publish button if quiz is published
+* [x]Add remove quiz button
 * [x]List quizzes newest first on admin page
 * Fix question and option order when showing quizzes
 * [x]Internal Server Error when playing as not loggedin
@@ -102,3 +101,4 @@ Misc tasks
 * [x]Add leaderboard to quiz and result page
 * [x]Fix played quizzes counter
 * [x]Fix save message on the quest result page
+* [x]Fix admin answer stats

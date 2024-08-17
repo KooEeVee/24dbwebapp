@@ -329,3 +329,13 @@ def delete_quiz(username):
     except Exception as e:
         print(f"An error occurred: {e}")
         return False
+    
+def delete_quiz_id(quizname):
+    try:
+        sql = text("DELETE FROM quizzes WHERE quiz_label=:quizname")
+        db.session.execute(sql, {"quizname":quizname})
+        db.session.commit()
+        return True    
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return False

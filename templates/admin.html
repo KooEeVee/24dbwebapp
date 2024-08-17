@@ -34,7 +34,20 @@
         </ul>
 
     {% endfor %}
-    <p><a class="btn btn-primary" href="/adminquiz/{{ quiz.quiz_id }}" role="button">Set correct options and publish quiz</a></p>
+
+{% if quiz.published %}
+
+<form action="/quizremoved" method="POST">
+    <input type="hidden" id="quizremove", name="quizremove", value="True">
+    <input type="hidden" id="quiz_id" name="quiz_id" value="{{ quiz_label }}">
+    <button type="submit" class="btn btn-danger">Remove quiz</button>
+</form>
+
+{% else %}
+
+<p><a class="btn btn-primary" href="/adminquiz/{{ quiz.quiz_id }}" role="button">Set correct options and publish quiz</a></p>
+
+{% endif %}
     
 
 {% endfor %}
@@ -78,18 +91,33 @@
     <tr>
         <th scope="col">Quiz name</th>
         <th scope="col">Correct answers</th>
-        <th scope="col">All answers</th>
     </tr>
     </thead>
     <tbody>
     {% for row in own_quizzes_canswers %}
-    {% for row2 in own_quizzes_answers %}
+
     <tr>
         <td>{{ row.quiz_label }}</td>
         <td>{{ row.correct_answer_count}}</td>
-        <td>{{ row2.all_answer_count}}</td>
     </tr>
     {% endfor %}
+    </tbody>
+</table>
+
+<H2>Your quizzes all answers</H2>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Quiz name</th>
+        <th scope="col">All answers</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for row2 in own_quizzes_answers %}
+    <tr>
+        <td>{{ row2.quiz_label }}</td>
+        <td>{{ row2.all_answer_count}}</td>
+    </tr>
     {% endfor %}
     </tbody>
 </table>

@@ -137,7 +137,6 @@ def user():
     correct_answers = users.calculate_correctanswers(username)
     played_quizzes = users.calculate_playedquizzes(username)
     leaderboard = users.calculate_leaderboard()
-    print(played_quizzes)
     message = f"0"
     return render_template("user.html", message=message, leaderboard=leaderboard, correct_answers=correct_answers, played_quizzes=played_quizzes)
 
@@ -312,3 +311,14 @@ def adminquiz(quiz_id):
         correctoption5 = request.form["correctoption5"]
         quizzes.add_correctoption(correctoption5)
         return redirect("/admin")
+    
+@app.route("/quizremoved", methods=["GET", "POST"])
+def quizremoved():
+    if request.method=="GET":
+        return render_template("quizremoved.html")
+    else:
+        remove_quiz = request.form["quizremove"]
+        quizname = request.form["quiz_id"]
+        if remove_quiz:
+            quizzes.delete_quiz_id(quizname)
+            return render_template("quizremoved.html", quizname=quizname)
