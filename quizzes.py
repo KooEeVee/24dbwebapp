@@ -319,3 +319,13 @@ def delete_answer(username):
     except Exception as e:
         print(f"An error occurred: {e}")
         return False
+    
+def delete_quiz(username):
+    try:
+        sql = text("DELETE FROM quizzes WHERE created_by=:username")
+        db.session.execute(sql, {"username":username})
+        db.session.commit()
+        return True    
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return False
