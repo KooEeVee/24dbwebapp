@@ -341,3 +341,14 @@ def rating(quiz_id):
         ratings = quizzes.calculate_ratings()
         leaderboard = users.calculate_leaderboard()
         return render_template("rating.html", message=message, ratings=ratings, leaderboard=leaderboard)
+    
+@app.route("/search")
+def search():
+    if request.method=="GET":
+        category = request.args.get("category")
+        result = quizzes.show_published_quizzes_category(category)
+        leaderboard = users.calculate_leaderboard()
+        ratings = quizzes.calculate_ratings()
+        return render_template("search.html", result=result, category=category, leaderboard=leaderboard, ratings=ratings)
+    else:
+        return redirect("/")

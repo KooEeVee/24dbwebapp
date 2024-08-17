@@ -271,6 +271,16 @@ def show_published_quizzes():
         print(f"An error occurred: {e}")
         return False
     
+def show_published_quizzes_category(category):
+    try:
+        sql = text("SELECT id, quiz_label, created_by, category FROM quizzes WHERE published=:published AND category=:category")
+        result = db.session.execute(sql, {"published":True, "category":category})
+        list_quizzes = result.fetchall()
+        return list_quizzes
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return False
+    
 def show_quiz_tousers(quiz_id):
     try:
         sql = text("""SELECT quizzes.quiz_label, quizzes.published, questions.quiz_id, questions.question_label, options.question_id, options.option_label, options.correct_option 

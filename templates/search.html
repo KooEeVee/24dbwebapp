@@ -1,29 +1,21 @@
 {% extends "layout.html" %}
 
-{% block title %}Welcome!{% endblock %}
+{% block title %}Search{% endblock %}
 
 {% block contentloggedin%}You're logged in as {{ username }}{% endblock %}
 
 {% block contentrow1col1 %}
 <H1>Music Quizzes</H1>
 
-<h2>Search quizzes by categories</h2>
+<h2>Quizzes in category {{ category }}</h2>
 
-<form action="/search" method="GET">
-  <label for="category">Choose a category:</label>
-  <select id="category" name="category">
-    <option value="Skills and Theory">Skills and Theory</option>
-    <option value="Popular Music">Popular Music</option>
-    <option value="Classical Music">Classical Music</option>
-    <option value="World Music">World Music</option>
-    <option value="Movies and Games">Movies and Games </option>
-  </select>
-  <button type="submit" class="btn btn-primary">Search</button>
-</form>
+{% if not result %}
 
-<h2>All quizzes</h2>
+{{ message }}
 
-{% for quiz in published_quizzes %}
+{% else %}
+
+{% for quiz in result %}
             
     <H3>{{ quiz.quiz_label }}</H3>
     <h6>Created by: {{ quiz.created_by }}</h6>
@@ -41,7 +33,7 @@
             
 {% endfor %}
 
-
+{% endif %}
 {% endblock %}
 
 {% block contentrow1col2 %}
