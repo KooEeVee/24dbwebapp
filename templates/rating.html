@@ -2,16 +2,27 @@
 
 {% block title %}Rating success{% endblock %}
 
-{% block contentrow1col1 %}
-<H1>Rating  successful</H1>
+{% block leftcardheader1 %}
 
-{{ message }}
+<h1>Rating added</h1>
+
+{% endblock %}
+
+{% block contentrow1col1 %}
+
+<p>{{ message }}</p>
 
 <p><a class="btn btn-primary" href="/" role="button">Play more quizzes</a></p>
 {% endblock %}
 
+{% block rightcardheader1 %}
+
+<h1>Stats</h1>
+
+{% endblock %}
+
 {% block contentrow1col2 %}
-<h1>Leaderboard</h1>
+<h2>Leaderboard</h2>
 <table class="table">
     <thead>
       <tr>
@@ -31,7 +42,7 @@
     </tbody>
 </table>
 
-<H1>Ratings</H1>
+<h2>Ratings</h2>
 
 <table class="table">
     <thead>

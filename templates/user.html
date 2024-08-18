@@ -1,14 +1,20 @@
 {% extends "layout.html" %}
 
+{% block title %}User{% endblock %}
+
 {% block contentrow1col1 %}
 
 {% if session.username %}
 
-<H1>Welcome user {{ session.username }}!</H1>
+{% block leftcardheader1 %}
+
+<h1>Welcome {{ session.username }}!</h1>
+
+{% endblock %}
 
 {% if not correct_answers %}
 
-<H3>Correct answers</H3>
+<h2>Correct answers</h2>
 
 <div class="alert alert-primary" role="alert">
     Your all time correct answers: {{ message }}
@@ -16,7 +22,7 @@
 
 {% else %}
 
-<H3>Correct answers</H3>
+<h2>Correct answers</h2>
 
 <div class="alert alert-primary" role="alert">
     Your all time correct answers: {{ correct_answers[0][1] }}
@@ -26,14 +32,14 @@
 
 {% if not played_quizzes %}
 
-<H3>Played quizzes</H3>
+<h2>Played quizzes</h2>
 
 <div class="alert alert-primary" role="alert">
     Your all time played quizzes: {{ message }}
 </div>
 
 {% else %}
-<H3>Played quizzes</H3>
+<h2>Played quizzes</h2>
 
 <div class="alert alert-primary" role="alert">
     Your all time played quizzes: {{ played_quizzes[0][0] }}
@@ -51,8 +57,14 @@
 
 {% endblock %}
 
+{% block rightcardheader1 %}
+
+<h1>Stats</h1>
+
+{% endblock %}
+
 {% block contentrow1col2 %}
-<h1>Leaderboard</h1>
+<h2>Leaderboard</h2>
 <table class="table">
     <thead>
       <tr>
@@ -72,8 +84,8 @@
     </tbody>
 </table>
 
-<H2>Settings</H2>
-
+<h2>Settings</h2>
+<p>If you want to remove your account and all user data, click the button.</p>
 <form action="/accountremoved" method="POST">
     <input type="hidden" id="userremove", name="userremove", value="True">
     <button type="submit" class="btn btn-danger">Remove your account</button>

@@ -2,63 +2,65 @@
 
 {% block title %}Result{% endblock %}
 
+{% block leftcardheader1 %}
+
+<h1>Result</h1>
+
+{% endblock %}
+
 {% block contentrow1col1 %}
-<H1>Result</H1>
+
 
 {% if correct_answers == 0 %}
-<p>What just happened? Perhaps the questions just were bad. </p>
-<p>You got {{ correct_answers }} / 5 answers correct</p>
-<p>{{ message }}</p>
+<h6>What just happened? Perhaps the questions just were bad. </h6>
+<h6>{{ correct_answers }} / 5 answers correct</h6>
 {% endif %}
 
 {% if correct_answers == 1 %}
-<p>Did you skip your music lessons?</p>
-<p>You got {{ correct_answers }} / 5 answers correct</p>
-<p>{{ message }}</p>
+<h6>Did you skip your music lessons?</h6>
+<h6>{{ correct_answers }} / 5 answers correct</h6>
 {% endif %}
 
 {% if correct_answers == 2 %}
-<p>You need more practice, better start finding your recorder.</p>
-<p>You got {{ correct_answers }} / 5 answers correct</p>
-<p>{{ message }}</p>
+<h6>You need more practice, better start finding your recorder.</h6>
+<h6>{{ correct_answers }} / 5 answers correct</h6>
 {% endif %}
 
 {% if correct_answers == 3 %}
-<p>That's a nice result, you have read your Rolling Stones.</p>
-<p>You got {{ correct_answers }} / 5 answers correct</p>
-<p>{{ message }}</p>
+<h6>That's a nice result, you have read your magazines.</h6>
+<h6>{{ correct_answers }} / 5 answers correct</h6>
 {% endif %}
 
 {% if correct_answers == 4 %}
-<p>Fabulous! Almost a virtuoso.</p>
-<p>You got {{ correct_answers }} / 5 answers correct</p>
-<p>{{ message }}</p>
+<h6>Fabulous! Almost a virtuoso.</h6>
+<h6>{{ correct_answers }} / 5 answers correct</h6>
 {% endif %}
 
 {% if correct_answers == 5 %}
-<p>Amazing! You must be the composer of Eine kleine Nachtmusik.</p>
-<p>You got {{ correct_answers }} / 5 answers correct</p>
-<p>{{ message }}</p>
+<h6>Amazing! You must be the composer of Eine kleine Nachtmusik.</h6>
+<h6>{{ correct_answers }} / 5 answers correct</h6>
 {% endif %}
 
-<H3>Your answers</H3>
+<h2>Your answers</h2>
 <p>Question1: {{ answers[0] }}</p>
 <p>Question2: {{ answers[1] }}</p>
 <p>Question3: {{ answers[2] }}</p>
 <p>Question4: {{ answers[3] }}</p>
 <p>Question5: {{ answers[4] }}</p>
 
-<H3>Correct answers</H3>
+<h2>Correct answers</h2>
 <p>Question1: {{ correct_answer1 }}</p>
 <p>Question2: {{ correct_answer2 }}</p>
 <p>Question3: {{ correct_answer3 }}</p>
 <p>Question4: {{ correct_answer4 }}</p>
 <p>Question5: {{ correct_answer5 }}</p>
 
+<p>{{ message }}</p>
+
 {% if session.username %}
 
 <form action="/rating/{{ quiz_id }}" method="POST">
-  <H3>Rate quiz</H3>
+  <h2>Rate quiz</h2>
   <div class="btn-group" role="group" aria-label="rate">
     <input class="btn-check" type="radio" id="meh" name="rating" value="meh" required>
     <label class="btn btn-outline-success" for="meh">Meh</label>
@@ -72,10 +74,9 @@
 
 {% else %}
 
-<p>You need to log in to rate quizzes.</p>
-
 <form action="/rating/{{ quiz_id }}" method="POST">
-  <H3>Rate quiz</H3>
+  <h2>Rate quiz</h2>
+  <p>You need to be logged in to rate quizzes.</p>
   <div class="btn-group" role="group" aria-label="rate">
     <input class="btn-check" type="radio" id="meh" name="rating" value="meh" required>
     <label class="btn btn-outline-success disabled" for="meh">Meh</label>
@@ -93,8 +94,14 @@
 
 {% endblock %}
 
+{% block rightcardheader1 %}
+
+<h1>Stats</h1>
+
+{% endblock %}
+
 {% block contentrow1col2 %}
-<h1>Leaderboard</h1>
+<h2>Leaderboard</h2>
 <table class="table">
     <thead>
       <tr>
@@ -114,7 +121,7 @@
     </tbody>
 </table>
 
-<H1>Ratings</H1>
+<h2>Ratings</h2>
 
 <table class="table">
     <thead>

@@ -6,7 +6,11 @@
 
 {% if session.username and session.role == 'admin' %}
 
-<H1>Create new quiz</H1>
+{% block leftcardheader1 %}
+
+<h1>Create new quiz</h1>
+
+{% endblock %}
 
 <form action="/newquiz" method="POST">
     <div class="form-group">

@@ -1,10 +1,16 @@
 {% extends "layout.html" %}
 
+{% block title %}Admin{% endblock %}
+
 {% block contentrow1col1 %}
 
 {% if session.username and session.role == 'admin' %}
 
-<H1>Welcome admin!</H1>
+{% block leftcardheader1 %}
+
+<h1>Welcome {{ session.username }}!</h1>
+
+{% endblock %}
 
 <H2>Your quizzes</H2>
 
@@ -37,7 +43,7 @@
     {% endfor %}
 
 {% if quiz.published %}
-
+<p>If you want to remove this quiz, click the button.</p>
 <form action="/quizremoved" method="POST">
     <input type="hidden" id="quizremove", name="quizremove", value="True">
     <input type="hidden" id="quiz_id" name="quiz_id" value="{{ quiz_label }}">
@@ -64,9 +70,13 @@
 
 {% endblock %}
 
-{% block contentrow1col2 %}
+{% block rightcardheader1 %}
 
 <h1>Stats</h1>
+
+{% endblock %}
+
+{% block contentrow1col2 %}
 
 <H2>Your quizzes played</H2>
 <table class="table">
@@ -129,7 +139,7 @@
 
 
 
-<H3>Correct answers</H3>
+<H2>Correct answers</H2>
 
 <div class="alert alert-primary" role="alert">
     Your all time correct answers: {{ message2 }}
@@ -137,7 +147,7 @@
 
 {% else %}
 
-<H3>Correct answers</H3>
+<H2>Correct answers</H2>
 
 <div class="alert alert-primary" role="alert">
     Your all time correct answers: {{ correct_answers[0][1] }}
@@ -147,7 +157,7 @@
 
 {% if not played_quizzes %}
 
-<H3>Played quizzes</H3>
+<H2>Played quizzes</H2>
 
 <div class="alert alert-primary" role="alert">
     Your all time played quizzes: {{ message2 }}
@@ -155,7 +165,7 @@
 
 {% else %}
 
-<H3>Played quizzes</H3>
+<H2>Played quizzes</H2>
 
 <div class="alert alert-primary" role="alert">
     Your all time played quizzes: {{ played_quizzes[0][0] }}
@@ -164,6 +174,7 @@
 {% endif %}
 
 <H2>Settings</H2>
+<p>If you want to remove your account, quizzes and all user data, click the button.</p>
 
 <form action="/accountremoved" method="POST">
     <input type="hidden" id="userremove", name="userremove", value="True">

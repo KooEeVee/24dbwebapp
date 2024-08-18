@@ -12,31 +12,33 @@
 
 <h2>Quizzes in category {{ category }}</h2>
 
-    {% if not result %}
+  {% if not result %}
+    
+  <p>{{ message }}</p>  
 
-        {{ message }}
+  {% else %}
 
-    {% else %}
+    {% for quiz in result %}
+        
+    <h4>{{ quiz.quiz_label }}</h4>
+    <h6>Created by: {{ quiz.created_by }}</h6>
+    <h6>Category: {{ quiz.category }}</h6>
 
-        {% for quiz in result %}
-            
-        <H3>{{ quiz.quiz_label }}</H3>
-        <h6>Created by: {{ quiz.created_by }}</h6>
-        <h6>Category: {{ quiz.category }}</h6>
+      {% if session.username == quiz.created_by %}
 
-        {% if session.username == quiz.created_by %}
+      <p><a class="btn btn-primary disabled" href="/quiz/{{ quiz.id }}" role="button" aria-disabled="true">Play</a></p>
 
-        <p><a class="btn btn-primary disabled" href="/quiz/{{ quiz.id }}" role="button" aria-disabled="true">Play</a></p>
+      {% else %}
 
-        {% else %}
+      <p><a class="btn btn-primary" href="/quiz/{{ quiz.id }}" role="button">Play</a></p>
 
-        <p><a class="btn btn-primary" href="/quiz/{{ quiz.id }}" role="button">Play</a></p>
+      {% endif %}
+        
+    {% endfor %}
 
-        {% endif %}
-            
-        {% endfor %}
+  {% endif %}
 
-    {% endif %}
+  <p><a class="btn btn-primary" href="/" role="button">Go back</a></p>
 
 {% endblock %}
 
@@ -48,7 +50,7 @@
 
 {% block contentrow1col2 %}
 <h2>Leaderboard</h2>
-<table class="table table-borderless">
+<table class="table">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -69,7 +71,7 @@
 
 <h2>Ratings</h2>
 
-<table class="table table-borderless">
+<table class="table">
     <thead>
       <tr>
         <th scope="col">Quizname</th>

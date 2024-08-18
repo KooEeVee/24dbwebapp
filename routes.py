@@ -53,7 +53,7 @@ def login():
             else:
                 return redirect("/user")
         else:
-            error = {f"Username or password failed, try again"}
+            error = f"Username or password failed, please try again."
             return render_template("login.html", error=error)
 
 @app.route("/logout")
@@ -267,7 +267,7 @@ def quizresult():
             correct_answer3 = quizzes.get_correctoption_label(question3_id)
             correct_answer4 = quizzes.get_correctoption_label(question4_id)
             correct_answer5 = quizzes.get_correctoption_label(question5_id)
-            message = f"(You are either guest user or you have already played this quiz, so the result wasn't saved.)"
+            message = f"(The result wasn't saved. Are you a guest user? Or you have already played this quiz.)"
             leaderboard = users.calculate_leaderboard()
             ratings = quizzes.calculate_ratings()
             return render_template("quizresult.html", ratings=ratings, quiz_id=quiz_id, leaderboard=leaderboard, message=message, answers=answers, correct_answers=correct_answers, correct_answer1=correct_answer1, correct_answer2=correct_answer2, correct_answer3=correct_answer3, correct_answer4=correct_answer4, correct_answer5=correct_answer5)
@@ -349,6 +349,7 @@ def search():
         result = quizzes.show_published_quizzes_category(category)
         leaderboard = users.calculate_leaderboard()
         ratings = quizzes.calculate_ratings()
-        return render_template("search.html", result=result, category=category, leaderboard=leaderboard, ratings=ratings)
+        message = f"No search results in this category"
+        return render_template("search.html", message=message, result=result, category=category, leaderboard=leaderboard, ratings=ratings)
     else:
         return redirect("/")
