@@ -73,7 +73,7 @@ Other files (WIP)
 
 Layout and design (WIP)
 * [x]layout.html
-* Bootstrap
+* [x]Bootstrap design
 * Accessibility WIP
 
 Security and privacy

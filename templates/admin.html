@@ -10,15 +10,19 @@
         <h1>Welcome {{ session.username }}!</h1>
         {% endblock %}
 
-        <H2>Your quizzes</H2>
 
         {% if not dict_quizzes %}
+        
         <p>{{ message }}</p>
         <p><a class="btn btn-primary" href="/newquiz" role="button">Create new quiz</a></p>
+        <p><a class="btn btn-primary" href="/" role="button">Play quizzes</a></p>
+        <H2>Your quizzes</H2>
 
         {% else %}
-
+    
         <p><a class="btn btn-primary" href="/newquiz" role="button">Create new quiz</a></p>
+        <p><a class="btn btn-primary" href="/" role="button">Play quizzes</a></p>
+        <H2>Your quizzes</H2>
 
         {% for quiz_label, quiz in dict_quizzes.items() %}
         <h4>Name: {{ quiz_label }}</h4>
