@@ -4,71 +4,66 @@
 
 {% block contentrow1col1 %}
 
-{% if session.username and session.role == 'admin' %}
+    {% if session.username and session.role == 'admin' %}
 
-{% block leftcardheader1 %}
+        {% block leftcardheader1 %}
+        <h1>Welcome {{ session.username }}!</h1>
+        {% endblock %}
 
-<h1>Welcome {{ session.username }}!</h1>
+        <H2>Your quizzes</H2>
 
-{% endblock %}
+        {% if not dict_quizzes %}
+        <p>{{ message }}</p>
+        <p><a class="btn btn-primary" href="/newquiz" role="button">Create new quiz</a></p>
 
-<H2>Your quizzes</H2>
+        {% else %}
 
-{% if not dict_quizzes %}
+        <p><a class="btn btn-primary" href="/newquiz" role="button">Create new quiz</a></p>
 
-<p>{{ message }}</p>
-<p><a class="btn btn-primary" href="/newquiz" role="button">Create new quiz</a></p>
+        {% for quiz_label, quiz in dict_quizzes.items() %}
+        <h4>Name: {{ quiz_label }}</h4>
+        <h6>Category: {{ quiz.category }}</h6>
+        <H6>Published: {{ quiz.published }}</h6>
+        <h6>Published at: {{ quiz.published_at }}</h6>
 
-{% else %}
+            {% for question_label, question in quiz.questions.items() %}
+            <p>Question: {{ question_label }}</p>
 
-<p><a class="btn btn-primary" href="/newquiz" role="button">Create new quiz</a></p>
+            <ul>
+                {% for option in question.options %}
+                <li>
+                <p>Option: {{ option.option_label }} ({{ option.correct_option }})</p>
+                </li>
+                {% endfor %}
+            </ul>
 
-{% for quiz_label, quiz in dict_quizzes.items() %}
-    <h4>Name: {{ quiz_label }}</h4>
-    <h6>Category: {{ quiz.category }}</h6>
-    <H6>Published: {{ quiz.published }}</h6>
-    <h6>Published at: {{ quiz.published_at }}</h6>
+            {% endfor %}
 
-    {% for question_label, question in quiz.questions.items() %}
-        <p>Question: {{ question_label }}</p>
+            {% if quiz.published %}
+            <p>If you want to remove this quiz, click the button.</p>
+            <form action="/quizremoved" method="POST">
+            <input type="hidden" id="quizremove", name="quizremove", value="True">
+            <input type="hidden" id="quiz_id" name="quiz_id" value="{{ quiz_label }}">
+            <button type="submit" class="btn btn-danger">Remove quiz</button>
+            </form>
 
-        <ul>
-        {% for option in question.options %}
-            <li>
-            <p>Option: {{ option.option_label }} ({{ option.correct_option }})</p>
-            </li>
-        {% endfor %}
-        </ul>
+            {% else %}
+            <p><a class="btn btn-primary" href="/adminquiz/{{ quiz.quiz_id }}" role="button">Set correct options and publish quiz</a></p>
 
-    {% endfor %}
-
-{% if quiz.published %}
-<p>If you want to remove this quiz, click the button.</p>
-<form action="/quizremoved" method="POST">
-    <input type="hidden" id="quizremove", name="quizremove", value="True">
-    <input type="hidden" id="quiz_id" name="quiz_id" value="{{ quiz_label }}">
-    <button type="submit" class="btn btn-danger">Remove quiz</button>
-</form>
-
-{% else %}
-
-<p><a class="btn btn-primary" href="/adminquiz/{{ quiz.quiz_id }}" role="button">Set correct options and publish quiz</a></p>
-
-{% endif %}
+            {% endif %}
     
+        {% endfor %}
 
-{% endfor %}
+        {% endif %}
 
-{% endif %}
+    {% else %}
+    <p>You need to be an admin to see this page.</p>
+    <p><a class="btn btn-primary" href="/" role="button">Go to the front page</a></p>
 
-{% else %}
-<p><a class="btn btn-primary" href="/login" role="button">Login</a></p>
-
-
-{% endif %}
-
+    {% endif %}
 
 {% endblock %}
+
 
 {% block rightcardheader1 %}
 
@@ -78,108 +73,112 @@
 
 {% block contentrow1col2 %}
 
-<H2>Your quizzes played</H2>
-<table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Quiz name</th>
-        <th scope="col">Played</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for row in own_quizzes %}
-      <tr>
-        <td>{{ row.quiz_label }}</td>
-        <td>{{ row.played_quizzes_count / 5}}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+    {% if session.username and session.role == 'admin' %}
 
-<H2>Your quizzes correct answers</H2>
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">Quiz name</th>
-        <th scope="col">Correct answers</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for row in own_quizzes_canswers %}
+        <H2>Your quizzes played</H2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Quiz name</th>
+                <th scope="col">Played</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for row in own_quizzes %}
+            <tr>
+                <td>{{ row.quiz_label }}</td>
+                <td>{{ row.played_quizzes_count / 5}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <tr>
-        <td>{{ row.quiz_label }}</td>
-        <td>{{ row.correct_answer_count}}</td>
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
+        <H2>Your quizzes correct answers</H2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Quiz name</th>
+                <th scope="col">Correct answers</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for row in own_quizzes_canswers %}
 
-<H2>Your quizzes all answers</H2>
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">Quiz name</th>
-        <th scope="col">All answers</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for row2 in own_quizzes_answers %}
-    <tr>
-        <td>{{ row2.quiz_label }}</td>
-        <td>{{ row2.all_answer_count}}</td>
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
+            <tr>
+                <td>{{ row.quiz_label }}</td>
+                <td>{{ row.correct_answer_count}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-<H2>Quizzes played by you</H2>
+        <H2>Your quizzes all answers</H2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Quiz name</th>
+                <th scope="col">All answers</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for row2 in own_quizzes_answers %}
+            <tr>
+                <td>{{ row2.quiz_label }}</td>
+                <td>{{ row2.all_answer_count}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-{% if not correct_answers %}
+        <H2>Quizzes played by you</H2>
 
+            {% if not correct_answers %}
 
+            <H2>Correct answers</H2>
 
-<H2>Correct answers</H2>
+            <div class="alert alert-primary" role="alert">
+                Your all time correct answers: {{ message2 }}
+            </div>
 
-<div class="alert alert-primary" role="alert">
-    Your all time correct answers: {{ message2 }}
-</div>
+            {% else %}
 
-{% else %}
+            <H2>Correct answers</H2>
 
-<H2>Correct answers</H2>
+            <div class="alert alert-primary" role="alert">
+                Your all time correct answers: {{ correct_answers[0][1] }}
+            </div>
 
-<div class="alert alert-primary" role="alert">
-    Your all time correct answers: {{ correct_answers[0][1] }}
-</div>
+            {% endif %}
 
-{% endif %}
+        {% if not played_quizzes %}
 
-{% if not played_quizzes %}
+        <H2>Played quizzes</H2>
 
-<H2>Played quizzes</H2>
+        <div class="alert alert-primary" role="alert">
+            Your all time played quizzes: {{ message2 }}
+        </div>
 
-<div class="alert alert-primary" role="alert">
-    Your all time played quizzes: {{ message2 }}
-</div>
+        {% else %}
 
-{% else %}
+        <H2>Played quizzes</H2>
 
-<H2>Played quizzes</H2>
+        <div class="alert alert-primary" role="alert">
+            Your all time played quizzes: {{ played_quizzes[0][0] }}
+        </div>
 
-<div class="alert alert-primary" role="alert">
-    Your all time played quizzes: {{ played_quizzes[0][0] }}
-</div>
+        {% endif %}
 
-{% endif %}
+        <H2>Settings</H2>
+        <p>If you want to remove your account, quizzes and all user data, click the button.</p>
 
-<H2>Settings</H2>
-<p>If you want to remove your account, quizzes and all user data, click the button.</p>
+        <form action="/accountremoved" method="POST">
+            <input type="hidden" id="userremove", name="userremove", value="True">
+            <button type="submit" class="btn btn-danger">Remove your account</button>
+        </form>
 
-<form action="/accountremoved" method="POST">
-    <input type="hidden" id="userremove", name="userremove", value="True">
-    <button type="submit" class="btn btn-danger">Remove your account</button>
-</form>
+    {% else %}
+
+    {% endif %}
 
 {% endblock %}
 

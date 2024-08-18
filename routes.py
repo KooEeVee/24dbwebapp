@@ -36,7 +36,7 @@ def registersuccess():
         password=request.form["password"]
         admin=request.form["userradio"]
         gdpr=request.form["gdprcheck"]
-        #print(users.register(username, password, admin, gdpr))
+        users.register(username, password, admin, gdpr)
         return render_template("registersuccess.html", username=username)
 
 
@@ -137,12 +137,15 @@ def admin():
 
 @app.route("/user")
 def user():
-    username = session["username"]
-    correct_answers = users.calculate_correctanswers(username)
-    played_quizzes = users.calculate_playedquizzes(username)
-    leaderboard = users.calculate_leaderboard()
-    message = f"0"
-    return render_template("user.html", message=message, leaderboard=leaderboard, correct_answers=correct_answers, played_quizzes=played_quizzes)
+    if "username" in session:
+        username = session["username"]
+        correct_answers = users.calculate_correctanswers(username)
+        played_quizzes = users.calculate_playedquizzes(username)
+        leaderboard = users.calculate_leaderboard()
+        message = f"0"
+        return render_template("user.html", message=message, leaderboard=leaderboard, correct_answers=correct_answers, played_quizzes=played_quizzes)
+    else:
+        return render_template("user.html")
 
 @app.route("/accountremoved", methods=["GET", "POST"])
 def accountremoved():

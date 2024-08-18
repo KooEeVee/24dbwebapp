@@ -4,56 +4,55 @@
 
 {% block contentrow1col1 %}
 
-{% if session.username %}
+  {% if session.username and session.role == 'user' %}
 
-{% block leftcardheader1 %}
+    {% block leftcardheader1 %}
+    <h1>Welcome {{ session.username }}!</h1>
+    {% endblock %}
 
-<h1>Welcome {{ session.username }}!</h1>
+    {% if not correct_answers %}
 
-{% endblock %}
+    <h2>Correct answers</h2>
 
-{% if not correct_answers %}
+    <div class="alert alert-primary" role="alert">
+        Your all time correct answers: {{ message }}
+    </div>
 
-<h2>Correct answers</h2>
+    {% else %}
 
-<div class="alert alert-primary" role="alert">
-    Your all time correct answers: {{ message }}
-</div>
+    <h2>Correct answers</h2>
 
-{% else %}
+    <div class="alert alert-primary" role="alert">
+        Your all time correct answers: {{ correct_answers[0][1] }}
+    </div>
 
-<h2>Correct answers</h2>
+    {% endif %}
 
-<div class="alert alert-primary" role="alert">
-    Your all time correct answers: {{ correct_answers[0][1] }}
-</div>
+    {% if not played_quizzes %}
 
-{% endif %}
+    <h2>Played quizzes</h2>
 
-{% if not played_quizzes %}
+    <div class="alert alert-primary" role="alert">
+        Your all time played quizzes: {{ message }}
+    </div>
 
-<h2>Played quizzes</h2>
+    {% else %}
+    <h2>Played quizzes</h2>
 
-<div class="alert alert-primary" role="alert">
-    Your all time played quizzes: {{ message }}
-</div>
+    <div class="alert alert-primary" role="alert">
+        Your all time played quizzes: {{ played_quizzes[0][0] }}
+    </div>
 
-{% else %}
-<h2>Played quizzes</h2>
+    {% endif %}
 
-<div class="alert alert-primary" role="alert">
-    Your all time played quizzes: {{ played_quizzes[0][0] }}
-</div>
+    <a class="btn btn-primary" href="/" role="button">Play quizzes</a>
 
-{% endif %}
+  {% else %}
 
-<a class="btn btn-primary" href="/" role="button">Play quizzes</a>
+  <p>You need to be a user to see this page.</p>
+  <a class="btn btn-primary" href="/" role="button">Go to the front page</a>
 
-{% else %}
-
-<a class="btn btn-primary" href="/login" role="button">Login</a>
-
-{% endif %}
+  {% endif %}
 
 {% endblock %}
 
@@ -64,32 +63,39 @@
 {% endblock %}
 
 {% block contentrow1col2 %}
-<h2>Leaderboard</h2>
-<table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Username</th>
-        <th scope="col">Correct answers</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for row in leaderboard %}
-      <tr>
-        <th scope="row">{{ row.rank }}</th>
-        <td>{{ row.username }}</td>
-        <td>{{ row.correct_answer_count }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-</table>
 
-<h2>Settings</h2>
-<p>If you want to remove your account and all user data, click the button.</p>
-<form action="/accountremoved" method="POST">
-    <input type="hidden" id="userremove", name="userremove", value="True">
-    <button type="submit" class="btn btn-danger">Remove your account</button>
-</form>
+  {% if session.username and session.role == 'user' %}
+
+  <h2>Leaderboard</h2>
+  <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Username</th>
+          <th scope="col">Correct answers</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in leaderboard %}
+        <tr>
+          <th scope="row">{{ row.rank }}</th>
+          <td>{{ row.username }}</td>
+          <td>{{ row.correct_answer_count }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+  </table>
+
+  <h2>Settings</h2>
+  <p>If you want to remove your account and all user data, click the button.</p>
+  <form action="/accountremoved" method="POST">
+      <input type="hidden" id="userremove", name="userremove", value="True">
+      <button type="submit" class="btn btn-danger">Remove your account</button>
+  </form>
+
+  {% else %}
+
+  {% endif %}
 
 {% endblock %}
 
