@@ -1,11 +1,14 @@
 {% extends "layout.html" %}
 
-{% block title %}Welcome!{% endblock %}
+{% block title %}Quizzes{% endblock %}
 
-{% block contentloggedin%}You're logged in as {{ username }}{% endblock %}
+{% block leftcardheader1 %}
+
+<h1>Music Quizzes</h1>
+
+{% endblock %}
 
 {% block contentrow1col1 %}
-<H1>Music Quizzes</H1>
 
 <h2>Search quizzes by categories</h2>
 
@@ -18,14 +21,14 @@
     <option value="World Music">World Music</option>
     <option value="Movies and Games">Movies and Games </option>
   </select>
-  <button type="submit" class="btn btn-primary">Search</button>
+  <p><button type="submit" class="btn btn-primary">Search</button></p>
 </form>
 
 <h2>All quizzes</h2>
 
-{% for quiz in published_quizzes %}
+  {% for quiz in published_quizzes %}
             
-    <H3>{{ quiz.quiz_label }}</H3>
+    <h4>{{ quiz.quiz_label }}</h4>
     <h6>Created by: {{ quiz.created_by }}</h6>
     <h6>Category: {{ quiz.category }}</h6>
 
@@ -39,14 +42,19 @@
 
     {% endif %}
             
-{% endfor %}
+  {% endfor %}
 
+{% endblock %}
+
+{% block rightcardheader1 %}
+
+<h1>Stats</h1>
 
 {% endblock %}
 
 {% block contentrow1col2 %}
-<h1>Leaderboard</h1>
-<table class="table">
+<h2>Leaderboard</h2>
+<table class="table table-borderless">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -65,9 +73,9 @@
     </tbody>
 </table>
 
-<H1>Ratings</H1>
+<h2>Ratings</h2>
 
-<table class="table">
+<table class="table table-borderless">
     <thead>
       <tr>
         <th scope="col">Quizname</th>
@@ -89,12 +97,4 @@
       {% endfor %}
     </tbody>
 </table>
-{% endblock %}
-
-{% block contentrow2col1 %}
-Music2 music2 music2
-{% endblock %}
-
-{% block contentrow2col2 %}
-Stats2 stats2 stats2
 {% endblock %}

@@ -2,8 +2,13 @@
 
 {% block title %}Quiz{% endblock %}
 
+{% block leftcardheader1 %}
+
+<h1>{{ quizname }}</h1>
+
+{% endblock %}
+
 {% block contentrow1col1 %}
-<H1>{{ quizname }}</H1>
 
 {{ message }}
 
@@ -141,9 +146,15 @@
 
 {% endblock %}
 
+{% block rightcardheader1 %}
+
+<h1>Stats</h1>
+
+{% endblock %}
+
 {% block contentrow1col2 %}
-<h1>Leaderboard</h1>
-<table class="table">
+<h2>Leaderboard</h2>
+<table class="table table-borderless">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -162,9 +173,9 @@
     </tbody>
 </table>
 
-<H1>Ratings</H1>
+<h2>Ratings</h2>
 
-<table class="table">
+<table class="table table-borderless">
     <thead>
       <tr>
         <th scope="col">Quizname</th>

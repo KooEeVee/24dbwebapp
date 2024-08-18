@@ -2,43 +2,53 @@
 
 {% block title %}Search{% endblock %}
 
-{% block contentloggedin%}You're logged in as {{ username }}{% endblock %}
+{% block leftcardheader1 %}
+
+<h1>Music Quizzes</h1>
+
+{% endblock %}
 
 {% block contentrow1col1 %}
-<H1>Music Quizzes</H1>
 
 <h2>Quizzes in category {{ category }}</h2>
 
-{% if not result %}
+    {% if not result %}
 
-{{ message }}
-
-{% else %}
-
-{% for quiz in result %}
-            
-    <H3>{{ quiz.quiz_label }}</H3>
-    <h6>Created by: {{ quiz.created_by }}</h6>
-    <h6>Category: {{ quiz.category }}</h6>
-
-    {% if session.username == quiz.created_by %}
-
-    <p><a class="btn btn-primary disabled" href="/quiz/{{ quiz.id }}" role="button" aria-disabled="true">Play</a></p>
+        {{ message }}
 
     {% else %}
 
-    <p><a class="btn btn-primary" href="/quiz/{{ quiz.id }}" role="button">Play</a></p>
+        {% for quiz in result %}
+            
+        <H3>{{ quiz.quiz_label }}</H3>
+        <h6>Created by: {{ quiz.created_by }}</h6>
+        <h6>Category: {{ quiz.category }}</h6>
+
+        {% if session.username == quiz.created_by %}
+
+        <p><a class="btn btn-primary disabled" href="/quiz/{{ quiz.id }}" role="button" aria-disabled="true">Play</a></p>
+
+        {% else %}
+
+        <p><a class="btn btn-primary" href="/quiz/{{ quiz.id }}" role="button">Play</a></p>
+
+        {% endif %}
+            
+        {% endfor %}
 
     {% endif %}
-            
-{% endfor %}
 
-{% endif %}
+{% endblock %}
+
+{% block rightcardheader1 %}
+
+<h1>Stats</h1>
+
 {% endblock %}
 
 {% block contentrow1col2 %}
-<h1>Leaderboard</h1>
-<table class="table">
+<h2>Leaderboard</h2>
+<table class="table table-borderless">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -57,9 +67,9 @@
     </tbody>
 </table>
 
-<H1>Ratings</H1>
+<h2>Ratings</h2>
 
-<table class="table">
+<table class="table table-borderless">
     <thead>
       <tr>
         <th scope="col">Quizname</th>
@@ -81,12 +91,4 @@
       {% endfor %}
     </tbody>
 </table>
-{% endblock %}
-
-{% block contentrow2col1 %}
-Music2 music2 music2
-{% endblock %}
-
-{% block contentrow2col2 %}
-Stats2 stats2 stats2
 {% endblock %}

@@ -25,8 +25,7 @@ Music Quiz Platform offers users a fun place to refresh and test music related s
 ## Features
 
 - As anyone, see a list of available quizzes and their ratings
-- As anyone, see lists of available quizzes sorted by their ratings and tags
-- As anyone, search a quiz by tags
+- As anyone, see lists of available quizzes sorted by their tags
 - As anyone, take a quiz and solve tasks (text, audio?)
 - As anyone, see the ranking lists of registered users
 - As a user or admin, create or remove an account
