@@ -58,8 +58,11 @@ def login():
 
 @app.route("/logout")
 def logout():
-    del session["username"]
-    return render_template("logout.html")
+    if "username" in session:
+        del session["username"]
+        return render_template("logout.html")
+    else:
+        return redirect("/")
 
 @app.route("/admin", methods=["GET", "POST"])
 def admin():
