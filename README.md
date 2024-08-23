@@ -14,7 +14,7 @@ How to test the app locally:
     $ pip install -r ./requirements.txt
 4. Create tables
     $ psql < schema.sql
-5. OPTIONAL: Test data is available in quizzes.sql file. 4 test users and 2 test quizzes are provided, if you wish to use them. Note! Login password check is disabled, so that the test data login works. Final version will have password check enabled. 
+5. OPTIONAL: Test data is available in quizzes.sql file. 4 test users and 2 test quizzes are provided, if you wish to use them. Note! Login password check is disabled, so that the test data login works. Final version will have password check enabled.
     $ psql < quizzes.sql
 6. Run the app
     $ flask run
@@ -101,4 +101,12 @@ Security and privacy
 * WIP
 
 Misc tasks
-* Fix question and option order when showing quizzes
+* []Fix question and option order when showing quizzes
+* [x]Fix quiz answer validation
+* []If user input is invalid, load the prefilled form
+* []Show all relevant validation errors at the same time
+* [x]Show only relevant navi items
+* []Fix CSRF vulnerability
+* []Fix double headers on user and admin pages
+* []Fix quiz creation number of characters
+* []Don't save the quiz, if questions and options are not set

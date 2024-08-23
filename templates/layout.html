@@ -52,18 +52,30 @@
                         <li class="nav-item active">
                             <a class="nav-link" href="/register">Register</a>
                         </li>
+                        {% if not session.username %}
                         <li class="nav-item active">
                             <a class="nav-link" href="/login">Login</a>
                         </li>
+                        {% else %}
+                        {% endif %}
+                        {% if session.username %}
                         <li class="nav-item active">
                             <a class="nav-link" href="/logout">Logout</a>
                         </li>
+                        {% else %}
+                        {% endif %}
+                        {% if session.username and session.role == 'user'%}
                         <li class="nav-item active">
                             <a class="nav-link" href="/user">User</a>
                         </li>
+                        {% else %}
+                        {% endif %}
+                        {% if session.username and session.role == 'admin'%}
                         <li class="nav-item active">
                             <a class="nav-link" href="/admin">Admin</a>
                         </li>
+                        {% else %}
+                        {% endif %}
                         <li class="nav-item navbar-text">
                             {% if session.username %}                    
                             You're logged in as {{ session.username }}</a>
