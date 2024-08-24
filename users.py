@@ -1,3 +1,4 @@
+import secrets
 from flask import session
 from sqlalchemy import text
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -11,7 +12,7 @@ def create_user(username):
 def check_username(username):
     sql = text("SELECT EXISTS(SELECT 1 FROM users WHERE username=:username)")
     result = db.session.execute(sql, {"username":username})
-    exists = result.fetchone()[0]
+    exists = result.fetchone()
     return exists
 
 def register(username, password, admin, gdpr):
@@ -22,19 +23,22 @@ def register(username, password, admin, gdpr):
     db.session.commit()
 
 def login(username, password):
-    sql = text("SELECT * FROM users WHERE username=:username")
+    sql = text("SELECT id, username, password, user_admin FROM users WHERE username=:username")
     result = db.session.execute(sql, {"username":username})
     user = result.fetchone()
-    role = user[3]
-    if check_password_hash(user[2], password):
-        session["username"] = username
-        session["role"] = role
-        return True
-    else:
-        return False
+    print(user)
+    if user is not None:
+        role = user[3]
+        if check_password_hash(user[2], password):
+            session["username"] = username
+            session["role"] = role
+            session["csrf_token"] = secrets.token_hex(16)
+            return True
+        else:
+            return False
 
 def check_ifadmin(username):
-    sql = text("SELECT * FROM users WHERE username=:username")
+    sql = text("SELECT id, username, password, user_admin FROM users WHERE username=:username")
     result = db.session.execute(sql, {"username":username})
     user = result.fetchone()
     if user[3] == "admin":
@@ -120,4 +124,3 @@ def remove_user(username):
     sql = text("DELETE FROM users WHERE username=:username")
     db.session.execute(sql, {"username":username})
     db.session.commit()
-    

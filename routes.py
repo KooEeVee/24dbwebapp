@@ -1,4 +1,3 @@
-import secrets
 from flask import render_template, request, redirect, session, abort
 from app import app
 import quizzes
@@ -47,15 +46,14 @@ def login():
     else:
         username = request.form["username"]
         password = request.form["password"]
-        if users.login(username, password):
-            session["csrf_token"] = secrets.token_hex(16)
+        if not users.login(username, password):
+            error = f"Username or password failed, please try again."
+            return render_template("login.html", error=error)
+        else:
             if users.check_ifadmin(username):
                 return redirect("/admin")
             else:
                 return redirect("/user")
-        else:
-            error = f"Username or password failed, please try again."
-            return render_template("login.html", error=error)
 
 @app.route("/logout")
 def logout():
