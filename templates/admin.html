@@ -48,6 +48,7 @@
             <form action="/quizremoved" method="POST">
             <input type="hidden" id="quizremove", name="quizremove", value="True">
             <input type="hidden" id="quiz_id" name="quiz_id" value="{{ quiz_label }}">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
             <button type="submit" class="btn btn-danger">Remove quiz</button>
             </form>
 
@@ -177,6 +178,7 @@
 
         <form action="/accountremoved" method="POST">
             <input type="hidden" id="userremove", name="userremove", value="True">
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
             <button type="submit" class="btn btn-danger">Remove your account</button>
         </form>
 

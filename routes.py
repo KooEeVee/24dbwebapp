@@ -2,8 +2,8 @@ from app import app
 from db import db
 import quizzes
 import users
-from flask import render_template, request, redirect, session
-from sqlalchemy import text
+from flask import render_template, request, redirect, session, abort
+import secrets
 
 
 @app.route("/")
@@ -48,6 +48,7 @@ def login():
         username = request.form["username"]
         password = request.form["password"]
         if users.login(username, password):
+            session["csrf_token"] = secrets.token_hex(16)
             if users.check_ifadmin(username):
                 return redirect("/admin")
             else:
@@ -84,59 +85,62 @@ def admin():
         else:
             return render_template("admin.html")
     else:
-        quizname=request.form["quizname"]
-        category = request.form["category"]
-        question1=request.form["question1"]
-        option11=request.form["option11"]
-        option12=request.form["option12"]
-        option13=request.form["option13"]
-        question2=request.form["question2"]
-        option21=request.form["option21"]
-        option22=request.form["option22"]
-        option23=request.form["option23"]
-        question3=request.form["question3"]
-        option31=request.form["option31"]
-        option32=request.form["option32"]
-        option33=request.form["option33"]
-        question4=request.form["question4"]
-        option41=request.form["option41"]
-        option42=request.form["option42"]
-        option43=request.form["option43"]
-        question5=request.form["question5"]
-        option51=request.form["option51"]
-        option52=request.form["option52"]
-        option53=request.form["option53"]
-        #quizzes.create_quiz(quizname)
-        quizid = quizzes.get_quizid(quizname)
-        quizzes.add_category(quizid, category)
-        quizzes.add_question(quizid, question1)
-        questionid = quizzes.get_questionid(question1)
-        quizzes.add_options(questionid, option11)
-        quizzes.add_options(questionid, option12)
-        quizzes.add_options(questionid, option13)
-        quizzes.add_question(quizid, question2)
-        questionid = quizzes.get_questionid(question2)
-        quizzes.add_options(questionid, option21)
-        quizzes.add_options(questionid, option22)
-        quizzes.add_options(questionid, option23)
-        quizzes.add_question(quizid, question3)
-        questionid = quizzes.get_questionid(question3)
-        quizzes.add_options(questionid, option31)
-        quizzes.add_options(questionid, option32)
-        quizzes.add_options(questionid, option33)
-        quizzes.add_question(quizid, question4)
-        questionid = quizzes.get_questionid(question4)
-        quizzes.add_options(questionid, option41)
-        quizzes.add_options(questionid, option42)
-        quizzes.add_options(questionid, option43)
-        quizzes.add_question(quizid, question5)
-        questionid = quizzes.get_questionid(question5)
-        quizzes.add_options(questionid, option51)
-        quizzes.add_options(questionid, option52)
-        quizzes.add_options(questionid, option53)
-        username = session["username"]
-        dict_quizzes = quizzes.show_quizzes_toadmin(username)
-        return render_template("admin.html", dict_quizzes=dict_quizzes)
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
+        else:
+            quizname=request.form["quizname"]
+            category = request.form["category"]
+            question1=request.form["question1"]
+            option11=request.form["option11"]
+            option12=request.form["option12"]
+            option13=request.form["option13"]
+            question2=request.form["question2"]
+            option21=request.form["option21"]
+            option22=request.form["option22"]
+            option23=request.form["option23"]
+            question3=request.form["question3"]
+            option31=request.form["option31"]
+            option32=request.form["option32"]
+            option33=request.form["option33"]
+            question4=request.form["question4"]
+            option41=request.form["option41"]
+            option42=request.form["option42"]
+            option43=request.form["option43"]
+            question5=request.form["question5"]
+            option51=request.form["option51"]
+            option52=request.form["option52"]
+            option53=request.form["option53"]
+            #quizzes.create_quiz(quizname)
+            quizid = quizzes.get_quizid(quizname)
+            quizzes.add_category(quizid, category)
+            quizzes.add_question(quizid, question1)
+            questionid = quizzes.get_questionid(question1)
+            quizzes.add_options(questionid, option11)
+            quizzes.add_options(questionid, option12)
+            quizzes.add_options(questionid, option13)
+            quizzes.add_question(quizid, question2)
+            questionid = quizzes.get_questionid(question2)
+            quizzes.add_options(questionid, option21)
+            quizzes.add_options(questionid, option22)
+            quizzes.add_options(questionid, option23)
+            quizzes.add_question(quizid, question3)
+            questionid = quizzes.get_questionid(question3)
+            quizzes.add_options(questionid, option31)
+            quizzes.add_options(questionid, option32)
+            quizzes.add_options(questionid, option33)
+            quizzes.add_question(quizid, question4)
+            questionid = quizzes.get_questionid(question4)
+            quizzes.add_options(questionid, option41)
+            quizzes.add_options(questionid, option42)
+            quizzes.add_options(questionid, option43)
+            quizzes.add_question(quizid, question5)
+            questionid = quizzes.get_questionid(question5)
+            quizzes.add_options(questionid, option51)
+            quizzes.add_options(questionid, option52)
+            quizzes.add_options(questionid, option53)
+            username = session["username"]
+            dict_quizzes = quizzes.show_quizzes_toadmin(username)
+            return render_template("admin.html", dict_quizzes=dict_quizzes)
 
 @app.route("/user")
 def user():
@@ -157,12 +161,15 @@ def accountremoved():
     else:
         username = session["username"]
         remove_user = request.form["userremove"]
-        if remove_user:
-            users.remove_user(username)
-            quizzes.delete_answer(username)
-            quizzes.delete_quiz(username)
-            del session["username"]
-            return render_template("accountremoved.html")
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
+        else:
+            if remove_user:
+                users.remove_user(username)
+                quizzes.delete_answer(username)
+                quizzes.delete_quiz(username)
+                del session["username"]
+                return render_template("accountremoved.html")
 
 @app.route("/quiz/<int:quiz_id>", methods=["GET", "POST"])
 def quiz(quiz_id):
@@ -199,44 +206,47 @@ def quizresult():
         quiz_id = request.form["quiz_id"]
         #print(users.check_ifplayed(quiz_id, username))
         if users.check_ifplayed(quiz_id, username) == False:
-            question1_answer = request.form["quizOptions1"]
-            answers.append(quizzes.get_option(question1_answer))
-            quizzes.save_answer(username, question1_answer, quiz_id)
-            if quizzes.check_ifcorrectoption(question1_answer):
-                correct_answers +=1
-            question2_answer = request.form["quizOptions2"]
-            answers.append(quizzes.get_option(question2_answer))
-            quizzes.save_answer(username, question2_answer, quiz_id)
-            if quizzes.check_ifcorrectoption(question2_answer):
-                correct_answers +=1
-            question3_answer = request.form["quizOptions3"]
-            answers.append(quizzes.get_option(question3_answer))
-            quizzes.save_answer(username, question3_answer, quiz_id)
-            if quizzes.check_ifcorrectoption(question3_answer):
-                correct_answers +=1        
-            question4_answer = request.form["quizOptions4"]
-            answers.append(quizzes.get_option(question4_answer))
-            quizzes.save_answer(username, question4_answer, quiz_id)
-            if quizzes.check_ifcorrectoption(question4_answer):
-                correct_answers +=1
-            question5_answer = request.form["quizOptions5"]
-            answers.append(quizzes.get_option(question5_answer))
-            quizzes.save_answer(username, question5_answer, quiz_id)
-            if quizzes.check_ifcorrectoption(question5_answer):
-                correct_answers +=1
-            question1_id = quizzes.get_questionid_option(question1_answer)
-            question2_id = quizzes.get_questionid_option(question2_answer)
-            question3_id = quizzes.get_questionid_option(question3_answer)
-            question4_id = quizzes.get_questionid_option(question4_answer)
-            question5_id = quizzes.get_questionid_option(question5_answer)
-            correct_answer1 = quizzes.get_correctoption_label(question1_id)
-            correct_answer2 = quizzes.get_correctoption_label(question2_id)
-            correct_answer3 = quizzes.get_correctoption_label(question3_id)
-            correct_answer4 = quizzes.get_correctoption_label(question4_id)
-            correct_answer5 = quizzes.get_correctoption_label(question5_id)
-            leaderboard = users.calculate_leaderboard()
-            ratings = quizzes.calculate_ratings()
-            return render_template("quizresult.html", ratings=ratings, quiz_id=quiz_id, leaderboard=leaderboard, answers=answers, correct_answers=correct_answers, correct_answer1=correct_answer1, correct_answer2=correct_answer2, correct_answer3=correct_answer3, correct_answer4=correct_answer4, correct_answer5=correct_answer5)
+            if session["csrf_token"] != request.form["csrf_token"]:
+                abort(403) 
+            else: 
+                question1_answer = request.form["quizOptions1"]
+                answers.append(quizzes.get_option(question1_answer))
+                quizzes.save_answer(username, question1_answer, quiz_id)
+                if quizzes.check_ifcorrectoption(question1_answer):
+                    correct_answers +=1
+                question2_answer = request.form["quizOptions2"]
+                answers.append(quizzes.get_option(question2_answer))
+                quizzes.save_answer(username, question2_answer, quiz_id)
+                if quizzes.check_ifcorrectoption(question2_answer):
+                    correct_answers +=1
+                question3_answer = request.form["quizOptions3"]
+                answers.append(quizzes.get_option(question3_answer))
+                quizzes.save_answer(username, question3_answer, quiz_id)
+                if quizzes.check_ifcorrectoption(question3_answer):
+                    correct_answers +=1        
+                question4_answer = request.form["quizOptions4"]
+                answers.append(quizzes.get_option(question4_answer))
+                quizzes.save_answer(username, question4_answer, quiz_id)
+                if quizzes.check_ifcorrectoption(question4_answer):
+                    correct_answers +=1
+                question5_answer = request.form["quizOptions5"]
+                answers.append(quizzes.get_option(question5_answer))
+                quizzes.save_answer(username, question5_answer, quiz_id)
+                if quizzes.check_ifcorrectoption(question5_answer):
+                    correct_answers +=1
+                question1_id = quizzes.get_questionid_option(question1_answer)
+                question2_id = quizzes.get_questionid_option(question2_answer)
+                question3_id = quizzes.get_questionid_option(question3_answer)
+                question4_id = quizzes.get_questionid_option(question4_answer)
+                question5_id = quizzes.get_questionid_option(question5_answer)
+                correct_answer1 = quizzes.get_correctoption_label(question1_id)
+                correct_answer2 = quizzes.get_correctoption_label(question2_id)
+                correct_answer3 = quizzes.get_correctoption_label(question3_id)
+                correct_answer4 = quizzes.get_correctoption_label(question4_id)
+                correct_answer5 = quizzes.get_correctoption_label(question5_id)
+                leaderboard = users.calculate_leaderboard()
+                ratings = quizzes.calculate_ratings()
+                return render_template("quizresult.html", ratings=ratings, quiz_id=quiz_id, leaderboard=leaderboard, answers=answers, correct_answers=correct_answers, correct_answer1=correct_answer1, correct_answer2=correct_answer2, correct_answer3=correct_answer3, correct_answer4=correct_answer4, correct_answer5=correct_answer5)
         else:
             question1_answer = request.form["quizOptions1"]
             answers.append(quizzes.get_option(question1_answer))
@@ -285,13 +295,16 @@ def newquiz():
     else:
         quizname = request.form["quizname"]
         username = session["username"]
-        if quizzes.check_quizname(quizname)==True:
-            message = (f"Quiz name {quizname} already exists. Please choose a different one.")
-            return render_template("newquiz.html", message=message)
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
         else:
-            message = (f"Success! Please continue to set questions and options. Submit all questions and options at once, you can't edit them later.")
-            quizzes.create_quiz(quizname, username)
-            return render_template("newquiz.html", quizname=quizname, message=message)
+            if quizzes.check_quizname(quizname)==True:
+                message = (f"Quiz name {quizname} already exists. Please choose a different one.")
+                return render_template("newquiz.html", message=message)
+            else:
+                message = (f"Success! Please continue to set questions and options. Submit all questions and options at once, you can't edit them later.")
+                quizzes.create_quiz(quizname, username)
+                return render_template("newquiz.html", quizname=quizname, message=message)
         
 @app.route("/adminquiz/<int:quiz_id>", methods=["GET", "POST"])
 def adminquiz(quiz_id):
@@ -311,19 +324,22 @@ def adminquiz(quiz_id):
         options5 = quizzes.get_options(quiz_id, question5)
         return render_template("adminquiz.html", quiz_id=quiz_id, quizname=quizname, published=status, options1=options1, options2=options2, options3=options3, options4=options4, options5=options5, questions=questions)
     else:
-        published = request.form["published"]
-        quizzes.publish_quiz(quiz_id, published)
-        correctoption1 = request.form["correctoption1"]
-        quizzes.add_correctoption(correctoption1)
-        correctoption2 = request.form["correctoption2"]
-        quizzes.add_correctoption(correctoption2)
-        correctoption3 = request.form["correctoption3"]
-        quizzes.add_correctoption(correctoption3)
-        correctoption4 = request.form["correctoption4"]
-        quizzes.add_correctoption(correctoption4)
-        correctoption5 = request.form["correctoption5"]
-        quizzes.add_correctoption(correctoption5)
-        return redirect("/admin")
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
+        else:
+            published = request.form["published"]
+            quizzes.publish_quiz(quiz_id, published)
+            correctoption1 = request.form["correctoption1"]
+            quizzes.add_correctoption(correctoption1)
+            correctoption2 = request.form["correctoption2"]
+            quizzes.add_correctoption(correctoption2)
+            correctoption3 = request.form["correctoption3"]
+            quizzes.add_correctoption(correctoption3)
+            correctoption4 = request.form["correctoption4"]
+            quizzes.add_correctoption(correctoption4)
+            correctoption5 = request.form["correctoption5"]
+            quizzes.add_correctoption(correctoption5)
+            return redirect("/admin")
     
 @app.route("/quizremoved", methods=["GET", "POST"])
 def quizremoved():
@@ -332,21 +348,27 @@ def quizremoved():
     else:
         remove_quiz = request.form["quizremove"]
         quizname = request.form["quiz_id"]
-        if remove_quiz:
-            quizzes.delete_quiz_id(quizname)
-            return render_template("quizremoved.html", quizname=quizname)
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
+        else:
+            if remove_quiz:
+                quizzes.delete_quiz_id(quizname)
+                return render_template("quizremoved.html", quizname=quizname)
         
 @app.route("/rating/<int:quiz_id>", methods=["GET", "POST"])
 def rating(quiz_id):
     if request.method=="GET":
         return render_template("rating.html")
     else:
-        rating = request.form["rating"]
-        quizzes.save_rating(quiz_id, rating)
-        message = f"Success!"
-        ratings = quizzes.calculate_ratings()
-        leaderboard = users.calculate_leaderboard()
-        return render_template("rating.html", message=message, ratings=ratings, leaderboard=leaderboard)
+        if session["csrf_token"] != request.form["csrf_token"]:
+            abort(403)
+        else:
+            rating = request.form["rating"]
+            quizzes.save_rating(quiz_id, rating)
+            message = f"Success!"
+            ratings = quizzes.calculate_ratings()
+            leaderboard = users.calculate_leaderboard()
+            return render_template("rating.html", message=message, ratings=ratings, leaderboard=leaderboard)
     
 @app.route("/search")
 def search():

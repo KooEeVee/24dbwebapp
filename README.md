@@ -101,12 +101,14 @@ Security and privacy
 * WIP
 
 Misc tasks
-* []Fix question and option order when showing quizzes
 * [x]Fix quiz answer validation
 * []If user input is invalid, load the prefilled form
 * []Show all relevant validation errors at the same time
 * [x]Show only relevant navi items
-* []Fix CSRF vulnerability
+* [x]Fix CSRF vulnerability
 * []Fix double headers on user and admin pages
 * []Fix quiz creation number of characters
 * []Don't save the quiz, if questions and options are not set
+* []Pylint
+* []Fix user account remove
+* []Fix published date

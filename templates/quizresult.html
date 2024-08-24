@@ -69,6 +69,7 @@
     <input class="btn-check" type="radio" id="diamond" name="rating" value="diamond">
     <label class="btn btn-outline-success" for="diamond">Diamond</label>
   </div>
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
   <p><button type="submit" class="btn btn-success">Submit rating</button></p>
 </form>
 
@@ -85,6 +86,7 @@
     <input class="btn-check" type="radio" id="diamond" name="rating" value="diamond">
     <label class="btn btn-outline-success" disabled for="diamond">Diamond</label>
   </div>
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
   <p><button type="submit" class="btn btn-success" disabled>Submit rating</button></p>
 </form>
 

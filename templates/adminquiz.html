@@ -63,6 +63,7 @@
     </select>
   </div>
   <input type="hidden" id="published", name="published", value="True">
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
   <p><button type="submit" class="btn btn-primary">Publish</button></p>
 </form>
 
