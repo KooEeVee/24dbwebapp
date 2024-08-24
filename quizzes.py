@@ -34,7 +34,7 @@ def get_quizid(quizname):
     
 def get_quizid_option(option_id):
     try:
-        sql = text("SELECT questions.quiz_id FROM questions LEFT JOIN options ON questions.id = options.questionn_id WHERE options.id=:option_id")
+        sql = text("SELECT questions.quiz_id FROM questions LEFT JOIN options ON questions.id = options.question_id WHERE options.id=:option_id")
         result = db.session.execute(sql, {"option_id":option_id})
         quiz_id = result.fetchone()[0]
         return quiz_id
@@ -85,10 +85,10 @@ def get_questions(quiz_id):
         print(f"An error occurred: {e}")
         return False
     
-def get_questionid(question):
+def get_questionid(question, quiz_id):
     try:
-        sql = text("SELECT id FROM questions WHERE question_label=:question")
-        result = db.session.execute(sql, {"question":question})
+        sql = text("SELECT id FROM questions WHERE question_label=:question AND quiz_id=:quiz_id")
+        result = db.session.execute(sql, {"question":question, "quiz_id":quiz_id})
         questionid = result.fetchone()[0]
         return questionid
     except Exception as e:

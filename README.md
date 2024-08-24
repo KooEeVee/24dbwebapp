@@ -102,7 +102,7 @@ Security and privacy
 
 Misc tasks
 * [x]Fix quiz answer validation
-* []If user input is invalid, load the prefilled form
+* [x]If user input is invalid, load the prefilled form
 * []Show all relevant validation errors at the same time
 * [x]Show only relevant navi items
 * [x]Fix CSRF vulnerability
@@ -115,3 +115,4 @@ Misc tasks
 * [x]Fix published date
 * [x]Questions must be unique in a quiz, validation needed
 * []Eanble password check
+* []List the played quizzes for users
