@@ -97,6 +97,18 @@ def calculate_playedquizzes(username):
         print(f"An error occurred: {e}")
         return False
     
+def show_playedquizzes(username):
+    try:
+        sql = text("""SELECT DISTINCT quiz_label FROM quizzes 
+                   LEFT JOIN answers ON quizzes.id = answers.quiz_id 
+                   WHERE answers.username=:username""")
+        result = db.session.execute(sql, {"username":username})
+        quizzes = result.fetchall()
+        return quizzes
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return False
+    
 def calculate_leaderboard():
     try:
         sql = text("""SELECT users.username, COUNT(answers.id) AS correct_answer_count, DENSE_RANK() OVER (ORDER BY COUNT(answers.id) DESC) AS rank

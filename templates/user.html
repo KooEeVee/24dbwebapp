@@ -33,9 +33,18 @@
       {% else %}
         <h2>Played quizzes</h2>
         <div class="alert alert-primary" role="alert">
-            Your all time played quizzes: {{ played_quizzes[0][0] }}
+            <p>Your all time played quizzes: {{ played_quizzes[0][0] }}</p>
+            {% for row in played_quiznames %}
+            <ul>
+              <li>
+                {{ row.quiz_label }}
+              </li>
+            </ul>
+            {% endfor %} 
         </div>
       {% endif %}
+
+
 
     <a class="btn btn-primary" href="/" role="button">Play quizzes</a>
 

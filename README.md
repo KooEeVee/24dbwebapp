@@ -115,4 +115,4 @@ Misc tasks
 * [x]Fix published date
 * [x]Questions must be unique in a quiz, validation needed
 * []Eanble password check
-* []List the played quizzes for users
+* [x]List the played quizzes for users

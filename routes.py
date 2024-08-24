@@ -75,6 +75,7 @@ def admin():
             message = f"You don't have any quizzes yet."
             correct_answers = users.calculate_correctanswers(username)
             played_quizzes = users.calculate_playedquizzes(username)
+            played_quiznames = users.show_playedquizzes(username)
             message2 = f"0"
             own_quizzes = users.calculate_playedquizzes_created(username)
             own_quizzes_canswers = users.calculate_correctanswers_created(username)
@@ -82,7 +83,7 @@ def admin():
             #print(own_quizzes_answers)
             #print(dict_quizzes)
             print(played_quizzes)
-            return render_template("admin.html", own_quizzes_canswers=own_quizzes_canswers, own_quizzes_answers=own_quizzes_answers, own_quizzes=own_quizzes, message2=message2, dict_quizzes=dict_quizzes, message=message, correct_answers=correct_answers, played_quizzes=played_quizzes)
+            return render_template("admin.html", own_quizzes_canswers=own_quizzes_canswers, own_quizzes_answers=own_quizzes_answers, own_quizzes=own_quizzes, message2=message2, dict_quizzes=dict_quizzes, message=message, correct_answers=correct_answers, played_quizzes=played_quizzes, played_quiznames=played_quiznames)
         else:
             return render_template("admin.html")
     else:
@@ -161,9 +162,10 @@ def user():
         username = session["username"]
         correct_answers = users.calculate_correctanswers(username)
         played_quizzes = users.calculate_playedquizzes(username)
+        played_quiznames = users.show_playedquizzes(username)
         leaderboard = users.calculate_leaderboard()
         message = f"0"
-        return render_template("user.html", message=message, leaderboard=leaderboard, correct_answers=correct_answers, played_quizzes=played_quizzes)
+        return render_template("user.html", message=message, leaderboard=leaderboard, correct_answers=correct_answers, played_quizzes=played_quizzes, played_quiznames=played_quiznames)
     else:
         return render_template("user.html")
 
