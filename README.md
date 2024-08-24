@@ -107,7 +107,7 @@ Misc tasks
 * [x]Show only relevant navi items
 * [x]Fix CSRF vulnerability
 * [x]Fix double headers on user and admin pages
-* []Fix quiz creation number of characters
+* [x]Fix quiz creation number of characters
 * []Don't save the quiz, if questions and options are not set
 * []Pylint
 * [x]Fix user account remove
