@@ -108,7 +108,9 @@ Misc tasks
 * [x]Fix CSRF vulnerability
 * [x]Fix double headers on user and admin pages
 * [x]Fix quiz creation number of characters
-* []Don't save the quiz, if questions and options are not set
+* [x]Don't save the quiz, if questions and options are not set
+* [x]Don't save the user, if password and admin/user are not set
 * []Pylint
 * [x]Fix user account remove
 * [x]Fix published date
+* []Dont's show quizzes by names but ids

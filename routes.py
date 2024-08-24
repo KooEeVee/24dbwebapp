@@ -24,7 +24,7 @@ def register():
             return render_template("register.html", message=message)
         else:
             message = (f"Success! Please continue to set your password.")
-            users.create_user(username)
+            #users.create_user(username)
             return render_template("register.html", username=username, message=message)
         
 @app.route("/registersuccess", methods=["GET","POST"])
@@ -36,6 +36,7 @@ def registersuccess():
         password=request.form["password"]
         admin=request.form["userradio"]
         gdpr=request.form["gdprcheck"]
+        users.create_user(username)
         users.register(username, password, admin, gdpr)
         return render_template("registersuccess.html", username=username)
 
@@ -88,7 +89,8 @@ def admin():
         if session["csrf_token"] != request.form["csrf_token"]:
             abort(403)
         else:
-            quizname=request.form["quizname"]
+            username = request.form["username"]
+            quizname = request.form["quizname"]
             category = request.form["category"]
             question1=request.form["question1"]
             option11=request.form["option11"]
@@ -110,7 +112,7 @@ def admin():
             option51=request.form["option51"]
             option52=request.form["option52"]
             option53=request.form["option53"]
-            #quizzes.create_quiz(quizname)
+            quizzes.create_quiz(quizname, username)
             quizid = quizzes.get_quizid(quizname)
             quizzes.add_category(quizid, category)
             quizzes.add_question(quizid, question1)
@@ -138,7 +140,7 @@ def admin():
             quizzes.add_options(questionid, option51)
             quizzes.add_options(questionid, option52)
             quizzes.add_options(questionid, option53)
-            username = session["username"]
+            #username = session["username"]
             dict_quizzes = quizzes.show_quizzes_toadmin(username)
             return render_template("admin.html", dict_quizzes=dict_quizzes)
 
@@ -309,8 +311,8 @@ def newquiz():
                 return render_template("newquiz.html", message=message)
             else:
                 message = (f"Success! Please continue to set questions and options. Submit all questions and options at once, you can't edit them later.")
-                quizzes.create_quiz(quizname, username)
-                return render_template("newquiz.html", quizname=quizname, message=message)
+                #quizzes.create_quiz(quizname, username)
+                return render_template("newquiz.html", quizname=quizname, username=username, message=message)
         
 @app.route("/adminquiz/<int:quiz_id>", methods=["GET", "POST"])
 def adminquiz(quiz_id):
