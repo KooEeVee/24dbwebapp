@@ -2,72 +2,71 @@
 
 {% block title %}Admin{% endblock %}
 
-{% block contentrow1col1 %}
-
+{% block leftcardheader1 %}
     {% if session.username and session.role == 'admin' %}
-
-        {% block leftcardheader1 %}
         <h1>Welcome {{ session.username }}!</h1>
-        {% endblock %}
+    {% else %}
+        <h1>Admin</h1>
+    {% endif %}
+{% endblock %}
 
-
+{% block contentrow1col1 %}
+    {% if session.username and session.role == 'admin' %}
         {% if not dict_quizzes %}
-        
-        <p>{{ message }}</p>
-        <p><a class="btn btn-primary" href="/newquiz" role="button">Create new quiz</a></p>
-        <p><a class="btn btn-primary" href="/" role="button">Play quizzes</a></p>
-        <H2>Your quizzes</H2>
+            <p>{{ message }}</p>
+            <p><a class="btn btn-primary" href="/newquiz" role="button">Create new quiz</a></p>
+            <p><a class="btn btn-primary" href="/" role="button">Play quizzes</a></p>
+            <H2>Your quizzes</H2>
 
         {% else %}
-    
-        <p><a class="btn btn-primary" href="/newquiz" role="button">Create new quiz</a></p>
-        <p><a class="btn btn-primary" href="/" role="button">Play quizzes</a></p>
-        <H2>Your quizzes</H2>
+            <p><a class="btn btn-primary" href="/newquiz" role="button">Create new quiz</a></p>
+            <p><a class="btn btn-primary" href="/" role="button">Play quizzes</a></p>
+            <H2>Your quizzes</H2>
 
-        {% for quiz_label, quiz in dict_quizzes.items() %}
-        <h4>Name: {{ quiz_label }}</h4>
-        <h6>Category: {{ quiz.category }}</h6>
-        <H6>Published: {{ quiz.published }}</h6>
-        {% if quiz.published_at %}
-            <h6>Published at: {{ quiz.published_at.strftime("%d-%m-%Y %H:%M") }}</h6>
-        {% else %}
-            <h6>Published at: {{ quiz.published_at }}</h6>
-        {% endif %}
+            {% for quiz_label, quiz in dict_quizzes.items() %}
+                <h4>Name: {{ quiz_label }}</h4>
+                <h6>Category: {{ quiz.category }}</h6>
+                <H6>Published: {{ quiz.published }}</h6>
+                    {% if quiz.published_at %}
+                        <h6>Published at: {{ quiz.published_at.strftime("%d-%m-%Y %H:%M") }}</h6>
+                    {% else %}
+                        <h6>Published at: {{ quiz.published_at }}</h6>
+                    {% endif %}
 
-            {% for question_label, question in quiz.questions.items() %}
-            <p>Question: {{ question_label }}</p>
+                {% for question_label, question in quiz.questions.items() %}
+                    <p>Question: {{ question_label }}</p>
 
-            <ul>
-                {% for option in question.options %}
-                <li>
-                <p>Option: {{ option.option_label }} ({{ option.correct_option }})</p>
-                </li>
+                    <ul>
+                        {% for option in question.options %}
+                        <li>
+                        <p>Option: {{ option.option_label }} ({{ option.correct_option }})</p>
+                        </li>
+                        {% endfor %}
+                    </ul>
+
                 {% endfor %}
-            </ul>
 
-            {% endfor %}
+                {% if quiz.published %}
+                    <p>If you want to remove this quiz, click the button.</p>
+                    <form action="/quizremoved" method="POST">
+                    <input type="hidden" id="quizremove", name="quizremove", value="True">
+                    <input type="hidden" id="quiz_id" name="quiz_id" value="{{ quiz_label }}">
+                    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+                    <button type="submit" class="btn btn-danger">Remove quiz</button>
+                    </form>
 
-            {% if quiz.published %}
-            <p>If you want to remove this quiz, click the button.</p>
-            <form action="/quizremoved" method="POST">
-            <input type="hidden" id="quizremove", name="quizremove", value="True">
-            <input type="hidden" id="quiz_id" name="quiz_id" value="{{ quiz_label }}">
-            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-            <button type="submit" class="btn btn-danger">Remove quiz</button>
-            </form>
+                {% else %}
+                    <p><a class="btn btn-primary" href="/adminquiz/{{ quiz.quiz_id }}" role="button">Set correct options and publish quiz</a></p>
 
-            {% else %}
-            <p><a class="btn btn-primary" href="/adminquiz/{{ quiz.quiz_id }}" role="button">Set correct options and publish quiz</a></p>
-
-            {% endif %}
+                {% endif %}
     
-        {% endfor %}
+            {% endfor %}
 
         {% endif %}
 
     {% else %}
-    <p>You need to be an admin to see this page.</p>
-    <p><a class="btn btn-primary" href="/" role="button">Go to the front page</a></p>
+        <p>You need to be an admin to see this page.</p>
+        <p><a class="btn btn-primary" href="/" role="button">Go to the front page</a></p>
 
     {% endif %}
 

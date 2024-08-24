@@ -106,7 +106,7 @@ Misc tasks
 * []Show all relevant validation errors at the same time
 * [x]Show only relevant navi items
 * [x]Fix CSRF vulnerability
-* []Fix double headers on user and admin pages
+* [x]Fix double headers on user and admin pages
 * []Fix quiz creation number of characters
 * []Don't save the quiz, if questions and options are not set
 * []Pylint
