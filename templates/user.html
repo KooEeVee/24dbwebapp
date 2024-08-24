@@ -90,6 +90,7 @@
   <p>If you want to remove your account and all user data, click the button.</p>
   <form action="/accountremoved" method="POST">
       <input type="hidden" id="userremove", name="userremove", value="True">
+      <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
       <button type="submit" class="btn btn-danger">Remove your account</button>
   </form>
 

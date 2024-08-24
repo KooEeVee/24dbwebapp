@@ -28,7 +28,11 @@
         <h4>Name: {{ quiz_label }}</h4>
         <h6>Category: {{ quiz.category }}</h6>
         <H6>Published: {{ quiz.published }}</h6>
-        <h6>Published at: {{ quiz.published_at }}</h6>
+        {% if quiz.published_at %}
+            <h6>Published at: {{ quiz.published_at.strftime("%d-%m-%Y %H:%M") }}</h6>
+        {% else %}
+            <h6>Published at: {{ quiz.published_at }}</h6>
+        {% endif %}
 
             {% for question_label, question in quiz.questions.items() %}
             <p>Question: {{ question_label }}</p>

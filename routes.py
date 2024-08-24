@@ -165,11 +165,17 @@ def accountremoved():
             abort(403)
         else:
             if remove_user:
-                users.remove_user(username)
-                quizzes.delete_answer(username)
-                quizzes.delete_quiz(username)
-                del session["username"]
-                return render_template("accountremoved.html")
+                if users.check_ifadmin(username):
+                    users.remove_user(username)
+                    quizzes.delete_answer(username)
+                    quizzes.delete_quiz(username)
+                    del session["username"]
+                    return render_template("accountremoved.html")
+                else:
+                    users.remove_user(username)
+                    quizzes.delete_answer(username)
+                    del session["username"]
+                    return render_template("accountremoved.html")
 
 @app.route("/quiz/<int:quiz_id>", methods=["GET", "POST"])
 def quiz(quiz_id):

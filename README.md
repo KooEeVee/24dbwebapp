@@ -110,5 +110,5 @@ Misc tasks
 * []Fix quiz creation number of characters
 * []Don't save the quiz, if questions and options are not set
 * []Pylint
-* []Fix user account remove
-* []Fix published date
+* [x]Fix user account remove
+* [x]Fix published date
