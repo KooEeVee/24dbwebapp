@@ -3,54 +3,35 @@
 {% block title %}Search{% endblock %}
 
 {% block leftcardheader1 %}
-
-<h1>Music Quizzes</h1>
-
+  <h1>Music Quizzes</h1>
 {% endblock %}
 
 {% block contentrow1col1 %}
-
-<h2>Quizzes in category {{ category }}</h2>
-
+  <h2>Quizzes in category {{ category }}</h2>
   {% if not result %}
-    
-  <p>{{ message }}</p>  
-
+    <p>{{ message }}</p>
   {% else %}
-
     {% for quiz in result %}
-        
-    <h4>{{ quiz.quiz_label }}</h4>
-    <h6>Created by: {{ quiz.created_by }}</h6>
-    <h6>Category: {{ quiz.category }}</h6>
-
+      <h4>{{ quiz.quiz_label }}</h4>
+      <h6>Created by: {{ quiz.created_by }}</h6>
+      <h6>Category: {{ quiz.category }}</h6>
       {% if session.username == quiz.created_by %}
-
-      <p><a class="btn btn-primary disabled" href="/quiz/{{ quiz.id }}" role="button" aria-disabled="true">Play</a></p>
-
+        <p><a class="btn btn-primary disabled" href="/quiz/{{ quiz.id }}" role="button" aria-disabled="true">Play</a></p>
       {% else %}
-
-      <p><a class="btn btn-primary" href="/quiz/{{ quiz.id }}" role="button">Play</a></p>
-
+        <p><a class="btn btn-primary" href="/quiz/{{ quiz.id }}" role="button">Play</a></p>
       {% endif %}
-        
     {% endfor %}
-
   {% endif %}
-
-  <p><a class="btn btn-primary" href="/" role="button">Go back</a></p>
-
+    <p><a class="btn btn-primary" href="/" role="button">Go back</a></p>
 {% endblock %}
 
 {% block rightcardheader1 %}
-
-<h1>Stats</h1>
-
+  <h1>Stats</h1>
 {% endblock %}
 
 {% block contentrow1col2 %}
-<h2>Leaderboard</h2>
-<table class="table">
+  <h2>Leaderboard</h2>
+  <table class="table table-bordered">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -59,19 +40,17 @@
       </tr>
     </thead>
     <tbody>
-      {% for row in leaderboard %}
+    {% for row in leaderboard %}
       <tr>
         <th scope="row">{{ row.rank }}</th>
         <td>{{ row.username }}</td>
         <td>{{ row.correct_answer_count }}</td>
       </tr>
-      {% endfor %}
+    {% endfor %}
     </tbody>
-</table>
-
-<h2>Ratings</h2>
-
-<table class="table">
+  </table>
+  <h2>Ratings</h2>
+  <table class="table table-bordered">
     <thead>
       <tr>
         <th scope="col">Quizname</th>
@@ -82,7 +61,7 @@
       </tr>
     </thead>
     <tbody>
-      {% for row in ratings %}
+    {% for row in ratings %}
       <tr>
         <td>{{ row.quiz_label }}</td>
         <td>{{ row.meh_count }}</td>
@@ -90,7 +69,11 @@
         <td>{{ row.diamond_count }}</td>
         <td>{{ row.total_ratings_count }}</td>
       </tr>
-      {% endfor %}
+    {% endfor %}
     </tbody>
-</table>
+  </table>
+{% endblock %}
+
+{% block rightcardheader1 %}
+  <h1>:)</h1>
 {% endblock %}

@@ -110,9 +110,10 @@ Misc tasks
 * [x]Fix quiz creation number of characters
 * [x]Don't save the quiz, if questions and options are not set
 * [x]Don't save the user, if password and admin/user are not set
-* []Pylint
+* [x]Pylint
 * [x]Fix user account remove
 * [x]Fix published date
 * [x]Questions must be unique in a quiz, validation needed
-* []Eanble password check
+* [x]Eanble password check
 * [x]List the played quizzes for users
+* []Fix login with wrong username

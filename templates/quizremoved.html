@@ -3,14 +3,14 @@
 {% block title %}Quiz removed{% endblock %}
 
 {% block leftcardheader1 %}
-
-<h1>Quiz removed</h1>
-
+    <h1>Quiz removed</h1>
 {% endblock %}
 
 {% block contentrow1col1 %}
+    <p>Your quiz {{ quiznam }} has been successfully removed.</p>
+    <a class="btn btn-primary" href="/admin" role="button">Back to admin page</a>
+{% endblock %}
 
-<p>Your quiz {{ quiznam }} has been successfully removed.</p>
-
-<a class="btn btn-primary" href="/admin" role="button">Back to admin page</a>
+{% block rightcardheader1 %}
+  <h1>:)</h1>
 {% endblock %}

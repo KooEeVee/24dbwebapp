@@ -1,7 +1,6 @@
 {% extends "layout.html" %}
 
 {% block title %}User{% endblock %}
-
   
 {% block leftcardheader1 %}
   {% if session.username and session.role == 'user' %}
@@ -13,58 +12,50 @@
 
 {% block contentrow1col1 %}
   {% if session.username and session.role == 'user' %}
-      {% if not correct_answers %}
-        <h2>Correct answers</h2>
-        <div class="alert alert-primary" role="alert">
-            Your all time correct answers: {{ message }}
-        </div>
-      {% else %}
-        <h2>Correct answers</h2>
-        <div class="alert alert-primary" role="alert">
-            Your all time correct answers: {{ correct_answers[0][1] }}
-        </div>
-      {% endif %}
-
-      {% if not played_quizzes %}
-        <h2>Played quizzes</h2>
-        <div class="alert alert-primary" role="alert">
-            Your all time played quizzes: {{ message }}
-        </div>
-      {% else %}
-        <h2>Played quizzes</h2>
-        <div class="alert alert-primary" role="alert">
-            <p>Your all time played quizzes: {{ played_quizzes[0][0] }}</p>
-            {% for row in played_quiznames %}
-            <ul>
-              <li>
-                {{ row.quiz_label }}
-              </li>
-            </ul>
-            {% endfor %} 
-        </div>
-      {% endif %}
-
-
-
-    <a class="btn btn-primary" href="/" role="button">Play quizzes</a>
-
+    {% if not correct_answers %}
+      <h2>Correct answers</h2>
+      <div class="alert alert-primary" role="alert">
+          Your all time correct answers: {{ message }}
+      </div>
+    {% else %}
+      <h2>Correct answers</h2>
+      <div class="alert alert-primary" role="alert">
+          Your all time correct answers: {{ correct_answers[0][1] }}
+      </div>
+    {% endif %}
+    {% if not played_quizzes %}
+      <h2>Played quizzes</h2>
+      <div class="alert alert-primary" role="alert">
+          Your all time played quizzes: {{ message }}
+      </div>
+    {% else %}
+      <h2>Played quizzes</h2>
+      <div class="alert alert-primary" role="alert">
+        <p>Your all time played quizzes: {{ played_quizzes[0][0] }}</p>
+        {% for row in played_quiznames %}
+          <ul>
+            <li>
+              {{ row.quiz_label }}
+            </li>
+          </ul>
+        {% endfor %} 
+      </div>
+    {% endif %}
+      <a class="btn btn-primary" href="/" role="button">Play quizzes</a>
   {% else %}
-
     <p>You need to be a user to see this page.</p>
     <a class="btn btn-primary" href="/" role="button">Go to the front page</a>
-
   {% endif %}
 {% endblock %}
 
 {% block rightcardheader1 %}
-<h1>Stats</h1>
+  <h1>Stats</h1>
 {% endblock %}
 
 {% block contentrow1col2 %}
   {% if session.username and session.role == 'user' %}
-
   <h2>Leaderboard</h2>
-  <table class="table">
+    <table class="table table-bordered">
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -73,16 +64,15 @@
         </tr>
       </thead>
       <tbody>
-        {% for row in leaderboard %}
+      {% for row in leaderboard %}
         <tr>
           <th scope="row">{{ row.rank }}</th>
           <td>{{ row.username }}</td>
           <td>{{ row.correct_answer_count }}</td>
         </tr>
-        {% endfor %}
+      {% endfor %}
       </tbody>
   </table>
-
   <h2>Settings</h2>
   <p>If you want to remove your account and all user data, click the button.</p>
   <form action="/accountremoved" method="POST">
@@ -90,10 +80,7 @@
       <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
       <button type="submit" class="btn btn-danger">Remove your account</button>
   </form>
-
   {% else %}
-
   {% endif %}
-
 {% endblock %}
 

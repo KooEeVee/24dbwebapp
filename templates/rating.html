@@ -3,27 +3,21 @@
 {% block title %}Rating success{% endblock %}
 
 {% block leftcardheader1 %}
-
-<h1>Rating added</h1>
-
+  <h1>Rating added</h1>
 {% endblock %}
 
 {% block contentrow1col1 %}
-
-<p>{{ message }}</p>
-
-<p><a class="btn btn-primary" href="/" role="button">Play more quizzes</a></p>
+  <p>{{ message }}</p>
+  <p><a class="btn btn-primary" href="/" role="button">Play more quizzes</a></p>
 {% endblock %}
 
 {% block rightcardheader1 %}
-
-<h1>Stats</h1>
-
+  <h1>Stats</h1>
 {% endblock %}
 
 {% block contentrow1col2 %}
-<h2>Leaderboard</h2>
-<table class="table">
+  <h2>Leaderboard</h2>
+  <table class="table table-bordered">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -32,19 +26,17 @@
       </tr>
     </thead>
     <tbody>
-      {% for row in leaderboard %}
+    {% for row in leaderboard %}
       <tr>
         <th scope="row">{{ row.rank }}</th>
         <td>{{ row.username }}</td>
         <td>{{ row.correct_answer_count }}</td>
       </tr>
-      {% endfor %}
+    {% endfor %}
     </tbody>
-</table>
-
-<h2>Ratings</h2>
-
-<table class="table">
+  </table>
+  <h2>Ratings</h2>
+  <table class="table table-bordered">
     <thead>
       <tr>
         <th scope="col">Quizname</th>
@@ -55,7 +47,7 @@
       </tr>
     </thead>
     <tbody>
-      {% for row in ratings %}
+    {% for row in ratings %}
       <tr>
         <td>{{ row.quiz_label }}</td>
         <td>{{ row.meh_count }}</td>
@@ -63,7 +55,7 @@
         <td>{{ row.diamond_count }}</td>
         <td>{{ row.total_ratings_count }}</td>
       </tr>
-      {% endfor %}
+    {% endfor %}
     </tbody>
-</table>
+  </table>
 {% endblock %}

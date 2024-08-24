@@ -3,108 +3,87 @@
 {% block title %}Result{% endblock %}
 
 {% block leftcardheader1 %}
-
-<h1>Result</h1>
-
+  <h1>Result</h1>
 {% endblock %}
 
 {% block contentrow1col1 %}
-
-
-{% if correct_answers == 0 %}
-<h6>What just happened? Perhaps the questions just were bad. </h6>
-<h6>{{ correct_answers }} / 5 answers correct</h6>
-{% endif %}
-
-{% if correct_answers == 1 %}
-<h6>Did you skip your music lessons?</h6>
-<h6>{{ correct_answers }} / 5 answers correct</h6>
-{% endif %}
-
-{% if correct_answers == 2 %}
-<h6>You need more practice, better start finding your recorder.</h6>
-<h6>{{ correct_answers }} / 5 answers correct</h6>
-{% endif %}
-
-{% if correct_answers == 3 %}
-<h6>That's a nice result, you have read your magazines.</h6>
-<h6>{{ correct_answers }} / 5 answers correct</h6>
-{% endif %}
-
-{% if correct_answers == 4 %}
-<h6>Fabulous! Almost a virtuoso.</h6>
-<h6>{{ correct_answers }} / 5 answers correct</h6>
-{% endif %}
-
-{% if correct_answers == 5 %}
-<h6>Amazing! You must be the composer of Eine Kleine Nachtmusik.</h6>
-<h6>{{ correct_answers }} / 5 answers correct</h6>
-{% endif %}
-
-<h2>Your answers</h2>
-<p>Question1: {{ answers[0] }}</p>
-<p>Question2: {{ answers[1] }}</p>
-<p>Question3: {{ answers[2] }}</p>
-<p>Question4: {{ answers[3] }}</p>
-<p>Question5: {{ answers[4] }}</p>
-
-<h2>Correct answers</h2>
-<p>Question1: {{ correct_answer1 }}</p>
-<p>Question2: {{ correct_answer2 }}</p>
-<p>Question3: {{ correct_answer3 }}</p>
-<p>Question4: {{ correct_answer4 }}</p>
-<p>Question5: {{ correct_answer5 }}</p>
-
-<p>{{ message }}</p>
-
-{% if session.username %}
-
-<form action="/rating/{{ quiz_id }}" method="POST">
-  <h2>Rate quiz</h2>
-  <div class="btn-group" role="group" aria-label="rate">
-    <input class="btn-check" type="radio" id="meh" name="rating" value="meh" required>
-    <label class="btn btn-outline-success" for="meh">Meh</label>
-    <input class="btn-check" type="radio" id="nice" name="rating" value="nice">
-    <label class="btn btn-outline-success" for="nice">Nice</label>
-    <input class="btn-check" type="radio" id="diamond" name="rating" value="diamond">
-    <label class="btn btn-outline-success" for="diamond">Diamond</label>
-  </div>
-  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-  <p><button type="submit" class="btn btn-success">Submit rating</button></p>
-</form>
-
-{% else %}
-
-<form action="/rating/{{ quiz_id }}" method="POST">
-  <h2>Rate quiz</h2>
-  <p>You need to be logged in to rate quizzes.</p>
-  <div class="btn-group" role="group" aria-label="rate">
-    <input class="btn-check" type="radio" id="meh" name="rating" value="meh">
-    <label class="btn btn-outline-success" disabled for="meh">Meh</label>
-    <input class="btn-check" type="radio" id="nice" name="rating" value="nice">
-    <label class="btn btn-outline-success" disabled  for="nice">Nice</label>
-    <input class="btn-check" type="radio" id="diamond" name="rating" value="diamond">
-    <label class="btn btn-outline-success" disabled for="diamond">Diamond</label>
-  </div>
-  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-  <p><button type="submit" class="btn btn-success" disabled>Submit rating</button></p>
-</form>
-
-{% endif %}
-
-<p><a class="btn btn-primary" href="/" role="button">Play more quizzes</a></p>
-
-{% endblock %}
+  {% if correct_answers == 0 %}
+    <h6>What just happened? Perhaps the questions just were bad. </h6>
+    <h6>{{ correct_answers }} / 5 answers correct</h6>
+  {% endif %}
+  {% if correct_answers == 1 %}
+    <h6>Did you skip your music lessons?</h6>
+    <h6>{{ correct_answers }} / 5 answers correct</h6>
+  {% endif %}
+  {% if correct_answers == 2 %}
+    <h6>You need more practice, better start finding your recorder.</h6>
+    <h6>{{ correct_answers }} / 5 answers correct</h6>
+  {% endif %}
+  {% if correct_answers == 3 %}
+    <h6>That's a nice result, you have read your magazines.</h6>
+    <h6>{{ correct_answers }} / 5 answers correct</h6>
+  {% endif %}
+  {% if correct_answers == 4 %}
+    <h6>Fabulous! Almost a virtuoso.</h6>
+    <h6>{{ correct_answers }} / 5 answers correct</h6>
+  {% endif %}
+  {% if correct_answers == 5 %}
+    <h6>Amazing! You must be the composer of Eine Kleine Nachtmusik.</h6>
+    <h6>{{ correct_answers }} / 5 answers correct</h6>
+  {% endif %}
+  <h2>Your answers</h2>
+  <p>Question1: {{ answers[0] }}</p>
+  <p>Question2: {{ answers[1] }}</p>
+  <p>Question3: {{ answers[2] }}</p>
+  <p>Question4: {{ answers[3] }}</p>
+  <p>Question5: {{ answers[4] }}</p>
+  <h2>Correct answers</h2>
+  <p>Question1: {{ correct_answer1 }}</p>
+  <p>Question2: {{ correct_answer2 }}</p>
+  <p>Question3: {{ correct_answer3 }}</p>
+  <p>Question4: {{ correct_answer4 }}</p>
+  <p>Question5: {{ correct_answer5 }}</p>
+  <p>{{ message }}</p>
+  {% if session.username %}
+    <form action="/rating/{{ quiz_id }}" method="POST">
+      <h2>Rate quiz</h2>
+      <div class="btn-group" role="group" aria-label="rate">
+        <input class="btn-check" type="radio" id="meh" name="rating" value="meh" required>
+        <label class="btn btn-outline-success" for="meh">Meh</label>
+        <input class="btn-check" type="radio" id="nice" name="rating" value="nice">
+        <label class="btn btn-outline-success" for="nice">Nice</label>
+        <input class="btn-check" type="radio" id="diamond" name="rating" value="diamond">
+        <label class="btn btn-outline-success" for="diamond">Diamond</label>
+      </div>
+      <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+      <p><button type="submit" class="btn btn-success">Submit rating</button></p>
+    </form>
+  {% else %}
+    <form action="/rating/{{ quiz_id }}" method="POST">
+      <h2>Rate quiz</h2>
+      <p>You need to be logged in to rate quizzes.</p>
+      <div class="btn-group" role="group" aria-label="rate">
+        <input class="btn-check" type="radio" id="meh" name="rating" value="meh">
+        <label class="btn btn-outline-success" disabled for="meh">Meh</label>
+        <input class="btn-check" type="radio" id="nice" name="rating" value="nice">
+        <label class="btn btn-outline-success" disabled  for="nice">Nice</label>
+        <input class="btn-check" type="radio" id="diamond" name="rating" value="diamond">
+        <label class="btn btn-outline-success" disabled for="diamond">Diamond</label>
+      </div>
+      <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+      <p><button type="submit" class="btn btn-success" disabled>Submit rating</button></p>
+    </form>
+  {% endif %}
+    <p><a class="btn btn-primary" href="/" role="button">Play more quizzes</a></p>
+  {% endblock %}
 
 {% block rightcardheader1 %}
-
-<h1>Stats</h1>
-
+  <h1>Stats</h1>
 {% endblock %}
 
 {% block contentrow1col2 %}
-<h2>Leaderboard</h2>
-<table class="table">
+  <h2>Leaderboard</h2>
+  <table class="table table-bordered">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -113,19 +92,17 @@
       </tr>
     </thead>
     <tbody>
-      {% for row in leaderboard %}
+    {% for row in leaderboard %}
       <tr>
         <th scope="row">{{ row.rank }}</th>
         <td>{{ row.username }}</td>
         <td>{{ row.correct_answer_count }}</td>
       </tr>
-      {% endfor %}
+    {% endfor %}
     </tbody>
-</table>
-
-<h2>Ratings</h2>
-
-<table class="table">
+  </table>
+  <h2>Ratings</h2>
+  <table class="table table-bordered">
     <thead>
       <tr>
         <th scope="col">Quizname</th>
@@ -136,7 +113,7 @@
       </tr>
     </thead>
     <tbody>
-      {% for row in ratings %}
+    {% for row in ratings %}
       <tr>
         <td>{{ row.quiz_label }}</td>
         <td>{{ row.meh_count }}</td>
@@ -144,7 +121,7 @@
         <td>{{ row.diamond_count }}</td>
         <td>{{ row.total_ratings_count }}</td>
       </tr>
-      {% endfor %}
+    {% endfor %}
     </tbody>
-</table>
+  </table>
 {% endblock %}

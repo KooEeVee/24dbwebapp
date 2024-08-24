@@ -3,58 +3,43 @@
 {% block title %}Quizzes{% endblock %}
 
 {% block leftcardheader1 %}
-
-<h1>Music Quizzes</h1>
-
+  <h1>Music Quizzes</h1>
 {% endblock %}
 
 {% block contentrow1col1 %}
-
-<h2>Search quizzes by categories</h2>
-
-<form action="/search" method="GET">
-  <label for="category">Choose a category:</label>
-  <select id="category" name="category">
-    <option value="Skills and Theory">Skills and Theory</option>
-    <option value="Popular Music">Popular Music</option>
-    <option value="Classical Music">Classical Music</option>
-    <option value="World Music">World Music</option>
-    <option value="Movies and Games">Movies and Games </option>
-  </select>
-  <p><button type="submit" class="btn btn-primary">Search</button></p>
-</form>
-
-<h2>All quizzes</h2>
-
+  <h2>Search quizzes by categories</h2>
+  <form action="/search" method="GET">
+    <label for="category">Choose a category:</label>
+    <select id="category" name="category">
+      <option value="Skills and Theory">Skills and Theory</option>
+      <option value="Popular Music">Popular Music</option>
+      <option value="Classical Music">Classical Music</option>
+      <option value="World Music">World Music</option>
+      <option value="Movies and Games">Movies and Games </option>
+    </select>
+    <p><button type="submit" class="btn btn-primary">Search</button></p>
+  </form>
+  <hr>
+  <h2>All quizzes</h2>
   {% for quiz in published_quizzes %}
-            
     <h4>{{ quiz.quiz_label }}</h4>
     <h6>Created by: {{ quiz.created_by }}</h6>
     <h6>Category: {{ quiz.category }}</h6>
-
     {% if session.username == quiz.created_by %}
-
-    <p><a class="btn btn-primary disabled" href="/quiz/{{ quiz.id }}" role="button" aria-disabled="true">Play</a></p>
-
+      <p><a class="btn btn-primary disabled" href="/quiz/{{ quiz.id }}" role="button" aria-disabled="true">Play</a></p>
     {% else %}
-
-    <p><a class="btn btn-primary" href="/quiz/{{ quiz.id }}" role="button">Play</a></p>
-
-    {% endif %}
-            
+      <p><a class="btn btn-primary" href="/quiz/{{ quiz.id }}" role="button">Play</a></p>
+    {% endif %}      
   {% endfor %}
-
 {% endblock %}
 
 {% block rightcardheader1 %}
-
-<h1>Stats</h1>
-
+  <h1>Stats</h1>
 {% endblock %}
 
 {% block contentrow1col2 %}
 <h2>Leaderboard</h2>
-<table class="table">
+<table class="table table-bordered">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -72,10 +57,8 @@
       {% endfor %}
     </tbody>
 </table>
-
 <h2>Ratings</h2>
-
-<table class="table">
+<table class="table table-bordered">
     <thead>
       <tr>
         <th scope="col">Quizname</th>

@@ -3,38 +3,32 @@
 {% block title %}Register{% endblock %}
 
 {% block leftcardheader1 %}
-
-<h1>Register</h1>
-
+  <h1>Register</h1>
 {% endblock %}
 
 {% block contentrow1col1 %}
-
-Choose your username and password.
-
-<form action="/register" method="POST">
-  <div class="form-group">
-    <h4>Username</H4>
-    <label for="username">Username (unique)</label>
-    <input type="text" class="form-control" id="username", name="username", minlength="3", maxlength="20", required="True" aria-describedby="usernameHelp">
-    <small id="usernameHelp" class="form-text text-muted">Min 3, max 20 characters. Username must be unique.</small>
+  <p>Choose your username and password.</p>
+  <form action="/register" method="POST">
+    <div class="form-group">
+      <h4>Username</H4>
+      <label for="username">Username (unique)</label>
+      <input type="text" class="form-control" id="username", name="username", minlength="3", maxlength="20", required="True" aria-describedby="usernameHelp">
+      <small id="usernameHelp" class="form-text text-muted">Min 3, max 20 characters. Username must be unique.</small>
+    </div>
+    <button type="submit" class="btn btn-primary">Check Username</button>
+  </form>
+  <br>
+  <div class="alert alert-primary" role="alert">
+    {{ message }}
   </div>
-  <button type="submit" class="btn btn-primary">Check Username</button>
-</form>
-
-<br>
-<div class="alert alert-primary" role="alert">
-  {{ message }}
-</div>
-<H3>{{ username }}</H3>
-
-<form action="/registersuccess" method="POST">
-  <input type="hidden" id="username", name="username", value="{{ username }}">
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" class="form-control" id="password" name="password", minlength="8", maxlength="15", required="True", aria-describedby="passwordHelp">
-    <small id="passwordHelp" class="form-text text-muted">Min 8, max 15 characters.</small>
-  </div>
+  <H3>{{ username }}</H3>
+  <form action="/registersuccess" method="POST">
+    <input type="hidden" id="username", name="username", value="{{ username }}">
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" name="password", minlength="8", maxlength="15", required="True", aria-describedby="passwordHelp">
+      <small id="passwordHelp" class="form-text text-muted">Min 8, max 15 characters.</small>
+    </div>
     <div class="form-check">
       <input class="form-check-input" type="radio" name="userradio" id="userradio1" value="user" checked="True">
       <label class="form-check-label" for="userradio1">User</label>
@@ -50,4 +44,8 @@ Choose your username and password.
     <button type="submit" class="btn btn-primary">Submit</button>
     <a class="btn btn-primary" href="/" role="button">Cancel</a>
   </form>
+{% endblock %}
+
+{% block rightcardheader1 %}
+  <h1>:)</h1>
 {% endblock %}

@@ -3,158 +3,155 @@
 {% block title %}Quiz{% endblock %}
 
 {% block leftcardheader1 %}
-
-<h1>{{ quizname }}</h1>
-
+  <h1>{{ quizname }}</h1>
 {% endblock %}
 
 {% block contentrow1col1 %}
-
-{{ message }}
-
-<form action="/quizresult" method="POST">
-  <input type="hidden" id="quiz_id", name="quiz_id", value="{{ quiz_id }}">
+  {{ message }}
+  <form action="/quizresult" method="POST">
+    <input type="hidden" id="quiz_id", name="quiz_id", value="{{ quiz_id }}">
     <fieldset class="form-group">
-        <div class="row">
-          <legend class="col-form-label">{{ questions[0][0] }}</legend>
-          <div class="col-auto">
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="quizOptions1" id="quizOptions11" value="{{ options1[0][1] }}" required>
-              <label class="form-check-label" for="quizOptions11">
-                {{ options1[0][0] }}
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="quizOptions1" id="quizOptions12" value="{{ options1[1][1] }}">
-              <label class="form-check-label" for="quizOptions12">
-                {{ options1[1][0] }}
-              </label>
-            </div>
-            <div class="form-check disabled">
-              <input class="form-check-input" type="radio" name="quizOptions1" id="quizOptions13" value="{{ options1[2][1] }}">
-              <label class="form-check-label" for="quizOptions13">
-                {{ options1[2][0] }}
-              </label>
-            </div>
+      <div class="row">
+        <legend class="col-form-label font-weight-bold">{{ questions[0][0] }}</legend>
+        <div class="col-auto">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="quizOptions1" id="quizOptions11" value="{{ options1[0][1] }}" required>
+            <label class="form-check-label" for="quizOptions11">
+              {{ options1[0][0] }}
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="quizOptions1" id="quizOptions12" value="{{ options1[1][1] }}">
+            <label class="form-check-label" for="quizOptions12">
+              {{ options1[1][0] }}
+            </label>
+          </div>
+          <div class="form-check disabled">
+            <input class="form-check-input" type="radio" name="quizOptions1" id="quizOptions13" value="{{ options1[2][1] }}">
+            <label class="form-check-label" for="quizOptions13">
+              {{ options1[2][0] }}
+            </label>
           </div>
         </div>
+      </div>
     </fieldset>
+    <hr>
     <fieldset class="form-group">
-        <div class="row">
-          <legend class="col-form-label">{{ questions[1][0] }}</legend>
-          <div class="col-auto">
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="quizOptions2" id="quizOptions21" value="{{ options2[0][1] }}" required>
-              <label class="form-check-label" for="quizOptions21">
-                {{ options2[0][0] }}
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="quizOptions2" id="quizOptions22" value="{{ options2[1][1] }}">
-              <label class="form-check-label" for="quizOptions22">
-                {{ options2[1][0] }}
-              </label>
-            </div>
-            <div class="form-check disabled">
-              <input class="form-check-input" type="radio" name="quizOptions2" id="quizOptions23" value="{{ options2[2][1] }}">
-              <label class="form-check-label" for="quizOptions23">
-                {{ options2[2][0] }}
-              </label>
-            </div>
+      <div class="row">
+        <legend class="col-form-label font-weight-bold">{{ questions[1][0] }}</legend>
+        <div class="col-auto">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="quizOptions2" id="quizOptions21" value="{{ options2[0][1] }}" required>
+            <label class="form-check-label" for="quizOptions21">
+              {{ options2[0][0] }}
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="quizOptions2" id="quizOptions22" value="{{ options2[1][1] }}">
+            <label class="form-check-label" for="quizOptions22">
+              {{ options2[1][0] }}
+            </label>
+          </div>
+          <div class="form-check disabled">
+            <input class="form-check-input" type="radio" name="quizOptions2" id="quizOptions23" value="{{ options2[2][1] }}">
+            <label class="form-check-label" for="quizOptions23">
+              {{ options2[2][0] }}
+            </label>
           </div>
         </div>
+      </div>
     </fieldset>
+    <hr>
     <fieldset class="form-group">
-        <div class="row">
-          <legend class="col-form-label">{{ questions[2][0] }}</legend>
-          <div class="col-auto">
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="quizOptions3" id="quizOptions31" value="{{ options3[0][1] }}" required>
-              <label class="form-check-label" for="quizOptions31">
-                {{ options3[0][0] }}
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="quizOptions3" id="quizOptions32" value="{{ options3[1][1] }}">
-              <label class="form-check-label" for="quizOptions32">
-                {{ options3[1][0] }}
-              </label>
-            </div>
-            <div class="form-check disabled">
-              <input class="form-check-input" type="radio" name="quizOptions3" id="quizOptions33" value="{{ options3[2][1] }}">
-              <label class="form-check-label" for="quizOptions33">
-                {{ options3[2][0] }}
-              </label>
-            </div>
+      <div class="row">
+        <legend class="col-form-label font-weight-bold">{{ questions[2][0] }}</legend>
+        <div class="col-auto">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="quizOptions3" id="quizOptions31" value="{{ options3[0][1] }}" required>
+            <label class="form-check-label" for="quizOptions31">
+              {{ options3[0][0] }}
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="quizOptions3" id="quizOptions32" value="{{ options3[1][1] }}">
+            <label class="form-check-label" for="quizOptions32">
+              {{ options3[1][0] }}
+            </label>
+          </div>
+          <div class="form-check disabled">
+            <input class="form-check-input" type="radio" name="quizOptions3" id="quizOptions33" value="{{ options3[2][1] }}">
+            <label class="form-check-label" for="quizOptions33">
+              {{ options3[2][0] }}
+            </label>
           </div>
         </div>
+      </div>
     </fieldset>
+    <hr>
     <fieldset class="form-group">
-        <div class="row">
-          <legend class="col-form-label">{{ questions[3][0] }}</legend>
-          <div class="col-auto">
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="quizOptions4" id="quizOptions41" value="{{ options4[0][1] }}" required>
-              <label class="form-check-label" for="quizOptions41">
-                {{ options4[0][0] }}
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="quizOptions4" id="quizOptions42" value="{{ options4[1][1] }}">
-              <label class="form-check-label" for="quizOptions42">
-                {{ options4[1][0] }}
-              </label>
-            </div>
-            <div class="form-check disabled">
-              <input class="form-check-input" type="radio" name="quizOptions4" id="quizOptions43" value="{{ options4[2][1] }}">
-              <label class="form-check-label" for="quizOptions43">
-                {{ options4[2][0] }}
-              </label>
-            </div>
+      <div class="row">
+        <legend class="col-form-label font-weight-bold">{{ questions[3][0] }}</legend>
+        <div class="col-auto">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="quizOptions4" id="quizOptions41" value="{{ options4[0][1] }}" required>
+            <label class="form-check-label" for="quizOptions41">
+              {{ options4[0][0] }}
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="quizOptions4" id="quizOptions42" value="{{ options4[1][1] }}">
+            <label class="form-check-label" for="quizOptions42">
+              {{ options4[1][0] }}
+            </label>
+          </div>
+          <div class="form-check disabled">
+            <input class="form-check-input" type="radio" name="quizOptions4" id="quizOptions43" value="{{ options4[2][1] }}">
+            <label class="form-check-label" for="quizOptions43">
+              {{ options4[2][0] }}
+            </label>
           </div>
         </div>
+      </div>
     </fieldset>
+    <hr>
     <fieldset class="form-group">
-        <div class="row">
-          <legend class="col-form-label">{{ questions[4][0] }}</legend>
-          <div class="col-auto">
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="quizOptions5" id="quizOptions51" value="{{ options5[0][1] }}" required>
-              <label class="form-check-label" for="quizOptions51">
-                {{ options5[0][0] }}
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="quizOptions5" id="quizOptions52" value="{{ options5[1][1] }}">
-              <label class="form-check-label" for="quizOptions52">
-                {{ options5[1][0] }}
-              </label>
-            </div>
-            <div class="form-check disabled">
-              <input class="form-check-input" type="radio" name="quizOptions5" id="quizOptions53" value="{{ options5[2][1] }}">
-              <label class="form-check-label" for="quizOptions53">
-                {{ options5[2][0] }}
-              </label>
-            </div>
+      <div class="row">
+        <legend class="col-form-label font-weight-bold">{{ questions[4][0] }}</legend>
+        <div class="col-auto">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="quizOptions5" id="quizOptions51" value="{{ options5[0][1] }}" required>
+            <label class="form-check-label" for="quizOptions51">
+              {{ options5[0][0] }}
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="quizOptions5" id="quizOptions52" value="{{ options5[1][1] }}">
+            <label class="form-check-label" for="quizOptions52">
+              {{ options5[1][0] }}
+            </label>
+          </div>
+          <div class="form-check disabled">
+            <input class="form-check-input" type="radio" name="quizOptions5" id="quizOptions53" value="{{ options5[2][1] }}">
+            <label class="form-check-label" for="quizOptions53">
+              {{ options5[2][0] }}
+            </label>
           </div>
         </div>
+      </div>
     </fieldset>
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     <button type="submit" class="btn btn-primary">Submit</button>
     <a class="btn btn-primary" href="/" role="button">Cancel</a>
   </form>
-
 {% endblock %}
 
 {% block rightcardheader1 %}
-
-<h1>Stats</h1>
-
+  <h1>Stats</h1>
 {% endblock %}
 
 {% block contentrow1col2 %}
-<h2>Leaderboard</h2>
-<table class="table">
+  <h2>Leaderboard</h2>
+  <table class="table table-bordered">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -163,19 +160,17 @@
       </tr>
     </thead>
     <tbody>
-      {% for row in leaderboard %}
+    {% for row in leaderboard %}
       <tr>
         <th scope="row">{{ row.rank }}</th>
         <td>{{ row.username }}</td>
         <td>{{ row.correct_answer_count }}</td>
       </tr>
-      {% endfor %}
+    {% endfor %}
     </tbody>
-</table>
-
-<h2>Ratings</h2>
-
-<table class="table">
+  </table>
+  <h2>Ratings</h2>
+  <table class="table table-bordered">
     <thead>
       <tr>
         <th scope="col">Quizname</th>
@@ -186,7 +181,7 @@
       </tr>
     </thead>
     <tbody>
-      {% for row in ratings %}
+    {% for row in ratings %}
       <tr>
         <td>{{ row.quiz_label }}</td>
         <td>{{ row.meh_count }}</td>
@@ -194,7 +189,7 @@
         <td>{{ row.diamond_count }}</td>
         <td>{{ row.total_ratings_count }}</td>
       </tr>
-      {% endfor %}
+    {% endfor %}
     </tbody>
-</table>
+  </table>
 {% endblock %}

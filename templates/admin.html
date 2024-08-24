@@ -17,12 +17,10 @@
             <p><a class="btn btn-primary" href="/newquiz" role="button">Create new quiz</a></p>
             <p><a class="btn btn-primary" href="/" role="button">Play quizzes</a></p>
             <H2>Your quizzes</H2>
-
         {% else %}
             <p><a class="btn btn-primary" href="/newquiz" role="button">Create new quiz</a></p>
             <p><a class="btn btn-primary" href="/" role="button">Play quizzes</a></p>
             <H2>Your quizzes</H2>
-
             {% for quiz_label, quiz in dict_quizzes.items() %}
                 <h4>Name: {{ quiz_label }}</h4>
                 <h6>Category: {{ quiz.category }}</h6>
@@ -32,10 +30,8 @@
                     {% else %}
                         <h6>Published at: {{ quiz.published_at }}</h6>
                     {% endif %}
-
                 {% for question_label, question in quiz.questions.items() %}
                     <p>Question: {{ question_label }}</p>
-
                     <ul>
                         {% for option in question.options %}
                         <li>
@@ -43,9 +39,7 @@
                         </li>
                         {% endfor %}
                     </ul>
-
                 {% endfor %}
-
                 {% if quiz.published %}
                     <p>If you want to remove this quiz, click the button.</p>
                     <form action="/quizremoved" method="POST">
@@ -54,37 +48,26 @@
                     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
                     <button type="submit" class="btn btn-danger">Remove quiz</button>
                     </form>
-
                 {% else %}
                     <p><a class="btn btn-primary" href="/adminquiz/{{ quiz.quiz_id }}" role="button">Set correct options and publish quiz</a></p>
-
                 {% endif %}
-    
+                <hr>
             {% endfor %}
-
         {% endif %}
-
     {% else %}
         <p>You need to be an admin to see this page.</p>
         <p><a class="btn btn-primary" href="/" role="button">Go to the front page</a></p>
-
     {% endif %}
-
 {% endblock %}
 
-
 {% block rightcardheader1 %}
-
-<h1>Stats</h1>
-
+    <h1>Stats</h1>
 {% endblock %}
 
 {% block contentrow1col2 %}
-
     {% if session.username and session.role == 'admin' %}
-
         <H2>Your quizzes played</H2>
-        <table class="table">
+        <table class="table table-bordered">
             <thead>
             <tr>
                 <th scope="col">Quiz name</th>
@@ -93,16 +76,15 @@
             </thead>
             <tbody>
             {% for row in own_quizzes %}
-            <tr>
-                <td>{{ row.quiz_label }}</td>
-                <td>{{ row.played_quizzes_count }}</td>
-            </tr>
+                <tr>
+                    <td>{{ row.quiz_label }}</td>
+                    <td>{{ row.played_quizzes_count }}</td>
+                </tr>
             {% endfor %}
             </tbody>
         </table>
-
         <H2>Your quizzes correct answers</H2>
-        <table class="table">
+        <table class="table table-bordered">
             <thead>
             <tr>
                 <th scope="col">Quiz name</th>
@@ -111,7 +93,6 @@
             </thead>
             <tbody>
             {% for row in own_quizzes_canswers %}
-
             <tr>
                 <td>{{ row.quiz_label }}</td>
                 <td>{{ row.correct_answer_count}}</td>
@@ -119,9 +100,8 @@
             {% endfor %}
             </tbody>
         </table>
-
         <H2>Your quizzes all answers</H2>
-        <table class="table">
+        <table class="table table-bordered">
             <thead>
             <tr>
                 <th scope="col">Quiz name</th>
@@ -130,71 +110,53 @@
             </thead>
             <tbody>
             {% for row2 in own_quizzes_answers %}
-            <tr>
-                <td>{{ row2.quiz_label }}</td>
-                <td>{{ row2.all_answer_count}}</td>
-            </tr>
+                <tr>
+                    <td>{{ row2.quiz_label }}</td>
+                    <td>{{ row2.all_answer_count}}</td>
+                </tr>
             {% endfor %}
             </tbody>
         </table>
-
+        <hr>
         <H2>Quizzes played by you</H2>
-
             {% if not correct_answers %}
-
-            <H2>Correct answers</H2>
-
-            <div class="alert alert-primary" role="alert">
-                Your all time correct answers: {{ message2 }}
-            </div>
-
+                <H2>Correct answers</H2>
+                <div class="alert alert-primary" role="alert">
+                    Your all time correct answers: {{ message2 }}
+                </div>
             {% else %}
-
-            <H2>Correct answers</H2>
-
-            <div class="alert alert-primary" role="alert">
-                Your all time correct answers: {{ correct_answers[0][1] }}
-            </div>
-
+                <H2>Correct answers</H2>
+                <div class="alert alert-primary" role="alert">
+                    Your all time correct answers: {{ correct_answers[0][1] }}
+                </div>
             {% endif %}
-
         {% if not played_quizzes %}
-
-        <H2>Played quizzes</H2>
-
-        <div class="alert alert-primary" role="alert">
-            Your all time played quizzes: {{ message2 }}
-        </div>
-
+            <H2>Played quizzes</H2>
+            <div class="alert alert-primary" role="alert">
+                Your all time played quizzes: {{ message2 }}
+            </div>
         {% else %}
-
-        <H2>Played quizzes</H2>
-
-        <div class="alert alert-primary" role="alert">
-            <p>Your all time played quizzes: {{ played_quizzes[0][0] }}</p>
-            {% for row in played_quiznames %}
-            <ul>
-              <li>
-                {{ row.quiz_label }}
-              </li>
-            </ul>
-            {% endfor %} 
-        </div>
-
+            <H2>Played quizzes</H2>
+            <div class="alert alert-primary" role="alert">
+                <p>Your all time played quizzes: {{ played_quizzes[0][0] }}</p>
+                {% for row in played_quiznames %}
+                <ul>
+                    <li>
+                        {{ row.quiz_label }}
+                    </li>
+                </ul>
+                {% endfor %} 
+            </div>
         {% endif %}
-
+        <hr>
         <H2>Settings</H2>
         <p>If you want to remove your account, quizzes and all user data, click the button.</p>
-
         <form action="/accountremoved" method="POST">
             <input type="hidden" id="userremove", name="userremove", value="True">
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
             <button type="submit" class="btn btn-danger">Remove your account</button>
         </form>
-
     {% else %}
-
     {% endif %}
-
 {% endblock %}
 
