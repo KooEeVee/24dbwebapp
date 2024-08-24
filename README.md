@@ -113,4 +113,5 @@ Misc tasks
 * []Pylint
 * [x]Fix user account remove
 * [x]Fix published date
-* []Dont's show quizzes by names but ids
+* [x]Questions must be unique in a quiz, validation needed
+* []Eanble password check
