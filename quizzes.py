@@ -126,12 +126,14 @@ def show_quizzes_toadmin(username):
     sql = text("""SELECT quizzes.quiz_label, quizzes.published,
                quizzes.published_at, quizzes.category,
                questions.quiz_id, questions.question_label, 
-               options.question_id, options.option_label, options.correct_option 
+               options.question_id, options.option_label, options.correct_option,
+               options.id
                FROM quizzes 
                LEFT JOIN questions ON quizzes.id=questions.quiz_id 
                LEFT JOIN options ON questions.id=options.question_id 
                WHERE quizzes.created_by=:username
-               ORDER BY quizzes.published_at DESC""")
+               ORDER BY quizzes.published_at DESC, options.question_id ASC,
+               options.id ASC""")
     result = db.session.execute(sql, {"username":username})
     list_quizzes = result.fetchall()
     #print(list_quizzes)
