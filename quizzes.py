@@ -45,9 +45,10 @@ def get_published_at(quiz_id):
     return published_at
 
 def get_questions(quiz_id):
-    sql = text("""SELECT questions.question_label FROM quizzes
+    sql = text("""SELECT questions.question_label, questions.id FROM quizzes
                LEFT JOIN questions ON quizzes.id=questions.quiz_id
-               WHERE quizzes.id=:quiz_id""")
+               WHERE quizzes.id=:quiz_id
+               ORDER BY questions.id ASC""")
     result = db.session.execute(sql, {"quiz_id":quiz_id})
     questions = result.fetchall()
     return questions
@@ -68,7 +69,8 @@ def get_options(quiz_id, questionname):
     sql = text("""SELECT options.option_label, options.id FROM quizzes
                LEFT JOIN questions ON quizzes.id=questions.quiz_id 
                LEFT JOIN options ON questions.id=options.question_id
-               WHERE quizzes.id=:quiz_id AND questions.question_label=:questionname""")
+               WHERE quizzes.id=:quiz_id AND questions.question_label=:questionname
+               ORDER BY options.id ASC""")
     result = db.session.execute(sql, {"quiz_id":quiz_id, "questionname":questionname})
     options = result.fetchall()
     return options

@@ -49,11 +49,11 @@
       <h2>Rate quiz</h2>
       <div class="btn-group" role="group" aria-label="rate">
         <input class="btn-check" type="radio" id="meh" name="rating" value="meh" required>
-        <label class="btn btn-outline-success" for="meh">Meh</label>
+        <label class="btn btn-outline-success" for="meh">*</label>
         <input class="btn-check" type="radio" id="nice" name="rating" value="nice">
-        <label class="btn btn-outline-success" for="nice">Nice</label>
+        <label class="btn btn-outline-success" for="nice">**</label>
         <input class="btn-check" type="radio" id="diamond" name="rating" value="diamond">
-        <label class="btn btn-outline-success" for="diamond">Diamond</label>
+        <label class="btn btn-outline-success" for="diamond">***</label>
       </div>
       <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
       <p><button type="submit" class="btn btn-success">Submit rating</button></p>
@@ -64,11 +64,11 @@
       <p>You need to be logged in to rate quizzes.</p>
       <div class="btn-group" role="group" aria-label="rate">
         <input class="btn-check" type="radio" id="meh" name="rating" value="meh">
-        <label class="btn btn-outline-success" disabled for="meh">Meh</label>
+        <label class="btn btn-outline-success" disabled for="meh">*</label>
         <input class="btn-check" type="radio" id="nice" name="rating" value="nice">
-        <label class="btn btn-outline-success" disabled  for="nice">Nice</label>
+        <label class="btn btn-outline-success" disabled  for="nice">**</label>
         <input class="btn-check" type="radio" id="diamond" name="rating" value="diamond">
-        <label class="btn btn-outline-success" disabled for="diamond">Diamond</label>
+        <label class="btn btn-outline-success" disabled for="diamond">***</label>
       </div>
       <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
       <p><button type="submit" class="btn btn-success" disabled>Submit rating</button></p>
@@ -106,9 +106,9 @@
     <thead>
       <tr>
         <th scope="col">Quizname</th>
-        <th scope="col">Mehs</th>
-        <th scope="col">Nices</th>
-        <th scope="col">Diamonds</th>
+        <th scope="col">*</th>
+        <th scope="col">**</th>
+        <th scope="col">***</th>
         <th scope="col">All ratings</th>
       </tr>
     </thead>

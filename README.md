@@ -116,4 +116,4 @@ Misc tasks
 * [x]Questions must be unique in a quiz, validation needed
 * [x]Eanble password check
 * [x]List the played quizzes for users
-* []Fix login with wrong username
+* [x]Fix login with wrong username

@@ -12,7 +12,7 @@ def create_user(username):
 def check_username(username):
     sql = text("SELECT EXISTS(SELECT 1 FROM users WHERE username=:username)")
     result = db.session.execute(sql, {"username":username})
-    exists = result.fetchone()
+    exists = result.fetchone()[0]
     return exists
 
 def register(username, password, admin, gdpr):
