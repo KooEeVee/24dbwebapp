@@ -240,7 +240,6 @@ def quizresult():
         correct_answers = 0
         answers = []
         quiz_id = request.form["quiz_id"]
-        #print(users.check_ifplayed(quiz_id, username))
         if not users.check_ifplayed(quiz_id, username):
             if session["csrf_token"] != request.form["csrf_token"]:
                 abort(403)
@@ -414,13 +413,25 @@ def rating(quiz_id):
         if session["csrf_token"] != request.form["csrf_token"]:
             abort(403)
         else:
-            rating = request.form["rating"]
-            quizzes.save_rating(quiz_id, rating)
-            message = f"Success!"
-            ratings = quizzes.calculate_ratings()
-            leaderboard = users.calculate_leaderboard()
-            return render_template("rating.html", message=message, ratings=ratings,
-                                   leaderboard=leaderboard)
+            username = session["username"]
+            if not users.check_ifrated(quiz_id, username):
+                rating = request.form["rating"]
+                username = request.form["username"]
+                print(username)
+                quizzes.save_rating(quiz_id, rating, username)
+                message = f"Success!"
+                added = f" added"
+                ratings = quizzes.calculate_ratings()
+                leaderboard = users.calculate_leaderboard()
+                return render_template("rating.html", added=added, message=message, ratings=ratings,
+                                    leaderboard=leaderboard)
+            else:
+                error = f"You have already rated this quiz."
+                not_added = f" not added"
+                ratings = quizzes.calculate_ratings()
+                leaderboard = users.calculate_leaderboard()
+                return render_template("rating.html", not_added=not_added, error=error, ratings=ratings,
+                                    leaderboard=leaderboard)
 
 @app.route("/search")
 def search():

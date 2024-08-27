@@ -40,6 +40,7 @@ CREATE TABLE answers (
 
 CREATE TABLE ratings (
     id SERIAL PRIMARY KEY,
+    username TEXT,
     quiz_id INTEGER REFERENCES quizzes ON DELETE CASCADE,
     rating TEXT
 );

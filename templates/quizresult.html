@@ -20,7 +20,7 @@
     <h6>{{ correct_answers }} / 5 answers correct</h6>
   {% endif %}
   {% if correct_answers == 3 %}
-    <h6>That's a nice result, you have read your magazines.</h6>
+    <h6>That's a nice result, you have read your music magazines.</h6>
     <h6>{{ correct_answers }} / 5 answers correct</h6>
   {% endif %}
   {% if correct_answers == 4 %}
@@ -28,9 +28,10 @@
     <h6>{{ correct_answers }} / 5 answers correct</h6>
   {% endif %}
   {% if correct_answers == 5 %}
-    <h6>Amazing! You must be the composer of Eine Kleine Nachtmusik.</h6>
+    <h6>Amazing! Did you compose the Eine Kleine Nachtmusik?</h6>
     <h6>{{ correct_answers }} / 5 answers correct</h6>
   {% endif %}
+  <p>{{ message }}</p>
   <h2>Your answers</h2>
   <p>Question1: {{ answers[0] }}</p>
   <p>Question2: {{ answers[1] }}</p>
@@ -43,7 +44,6 @@
   <p>Question3: {{ correct_answer3 }}</p>
   <p>Question4: {{ correct_answer4 }}</p>
   <p>Question5: {{ correct_answer5 }}</p>
-  <p>{{ message }}</p>
   {% if session.username %}
     <form action="/rating/{{ quiz_id }}" method="POST">
       <h2>Rate quiz</h2>
@@ -55,6 +55,7 @@
         <input class="btn-check" type="radio" id="diamond" name="rating" value="diamond">
         <label class="btn btn-outline-success" for="diamond">***</label>
       </div>
+      <input type="hidden" name="username" value="{{ session.username }}">
       <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
       <p><button type="submit" class="btn btn-success">Submit rating</button></p>
     </form>
@@ -70,6 +71,7 @@
         <input class="btn-check" type="radio" id="diamond" name="rating" value="diamond">
         <label class="btn btn-outline-success" disabled for="diamond">***</label>
       </div>
+      <input type="hidden" name="username" value="{{ session.username }}">
       <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
       <p><button type="submit" class="btn btn-success" disabled>Submit rating</button></p>
     </form>

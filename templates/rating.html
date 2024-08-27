@@ -3,11 +3,12 @@
 {% block title %}Rating success{% endblock %}
 
 {% block leftcardheader1 %}
-  <h1>Rating added</h1>
+  <h1>Rating {{ added }}{{ not_added }}</h1>
 {% endblock %}
 
 {% block contentrow1col1 %}
   <p>{{ message }}</p>
+  <p>{{ error }}</p>
   <p><a class="btn btn-primary" href="/" role="button">Play more quizzes</a></p>
 {% endblock %}
 

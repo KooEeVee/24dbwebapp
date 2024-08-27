@@ -230,9 +230,9 @@ def save_answer(username, option_id, quiz_id):
     db.session.execute(sql, {"username":username, "option_id":option_id, "quiz_id":quiz_id})
     db.session.commit()
 
-def save_rating(quiz_id, rating):
-    sql = text("INSERT INTO ratings (quiz_id, rating) VALUES (:quiz_id, :rating)")
-    db.session.execute(sql, {"quiz_id":quiz_id, "rating":rating})
+def save_rating(quiz_id, rating, username):
+    sql = text("INSERT INTO ratings (quiz_id, rating, username) VALUES (:quiz_id, :rating, :username)")
+    db.session.execute(sql, {"quiz_id":quiz_id, "rating":rating, "username":username})
     db.session.commit()
 
 def calculate_ratings():

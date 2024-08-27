@@ -117,5 +117,5 @@ Misc tasks
 * [x]Eanble password check
 * [x]List the played quizzes for users
 * [x]Fix login with wrong username
-* []User can rate a quiz only once
+* [x]User can rate a quiz only once
 * []Hide the username / quiz name if success
