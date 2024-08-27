@@ -23,7 +23,6 @@ def register():
             return render_template("register.html", message=message)
         else:
             message = f"Success! Please continue to set your password."
-            #users.create_user(username)
             return render_template("register.html", username=username, message=message)
 
 @app.route("/registersuccess", methods=["GET", "POST"])
@@ -77,9 +76,6 @@ def admin():
             own_quizzes = users.calculate_playedquizzes_created(username)
             own_quizzes_canswers = users.calculate_correctanswers_created(username)
             own_quizzes_answers = users.calculate_allanswers_created(username)
-            #print(own_quizzes_answers)
-            #print(dict_quizzes)
-            #print(played_quizzes)
             return render_template("admin.html", own_quizzes_canswers=own_quizzes_canswers,
                                    own_quizzes_answers=own_quizzes_answers, own_quizzes=own_quizzes,
                                    message2=message2, dict_quizzes=dict_quizzes, message=message,
@@ -130,39 +126,32 @@ def admin():
             else:
                 quizzes.create_quiz(quizname, username)
                 quizid = quizzes.get_quizid(quizname)
-                #print(quizid)
                 quizzes.add_category(quizid, category)
                 quizzes.add_question(quizid, question1)
                 questionid = quizzes.get_questionid(question1, quizid)
-                #print(questionid)
                 quizzes.add_options(questionid, option11)
                 quizzes.add_options(questionid, option12)
                 quizzes.add_options(questionid, option13)
                 quizzes.add_question(quizid, question2)
                 questionid = quizzes.get_questionid(question2, quizid)
-                #print(questionid)
                 quizzes.add_options(questionid, option21)
                 quizzes.add_options(questionid, option22)
                 quizzes.add_options(questionid, option23)
                 quizzes.add_question(quizid, question3)
                 questionid = quizzes.get_questionid(question3, quizid)
-                #print(questionid)
                 quizzes.add_options(questionid, option31)
                 quizzes.add_options(questionid, option32)
                 quizzes.add_options(questionid, option33)
                 quizzes.add_question(quizid, question4)
                 questionid = quizzes.get_questionid(question4, quizid)
-                #print(questionid)
                 quizzes.add_options(questionid, option41)
                 quizzes.add_options(questionid, option42)
                 quizzes.add_options(questionid, option43)
                 quizzes.add_question(quizid, question5)
                 questionid = quizzes.get_questionid(question5, quizid)
-                #print(questionid)
                 quizzes.add_options(questionid, option51)
                 quizzes.add_options(questionid, option52)
                 quizzes.add_options(questionid, option53)
-                #username = session["username"]
                 dict_quizzes = quizzes.show_quizzes_toadmin(username)
                 return render_template("admin.html", dict_quizzes=dict_quizzes)
 
@@ -289,27 +278,22 @@ def quizresult():
         else:
             question1_answer = request.form["quizOptions1"]
             answers.append(quizzes.get_option(question1_answer))
-            #quizzes.save_answer(username, question1_answer, quiz_id)
             if quizzes.check_ifcorrectoption(question1_answer):
                 correct_answers += 1
             question2_answer = request.form["quizOptions2"]
             answers.append(quizzes.get_option(question2_answer))
-            #quizzes.save_answer(username, question2_answer, quiz_id)
             if quizzes.check_ifcorrectoption(question2_answer):
                 correct_answers += 1
             question3_answer = request.form["quizOptions3"]
             answers.append(quizzes.get_option(question3_answer))
-            #quizzes.save_answer(username, question3_answer, quiz_id)
             if quizzes.check_ifcorrectoption(question3_answer):
                 correct_answers += 1
             question4_answer = request.form["quizOptions4"]
             answers.append(quizzes.get_option(question4_answer))
-            #quizzes.save_answer(username, question4_answer, quiz_id)
             if quizzes.check_ifcorrectoption(question4_answer):
                 correct_answers += 1
             question5_answer = request.form["quizOptions5"]
             answers.append(quizzes.get_option(question5_answer))
-            #quizzes.save_answer(username, question5_answer, quiz_id)
             if quizzes.check_ifcorrectoption(question5_answer):
                 correct_answers += 1
             question1_id = quizzes.get_questionid_option(question1_answer)
@@ -349,7 +333,6 @@ def newquiz():
                 message = (f"""Success! Please continue to choose a category and set questions and options.
                            Submit all questions and options at once, you can't edit them later. 
                            All fields are required and questions must be unique.""")
-                #quizzes.create_quiz(quizname, username)
                 return render_template("newquiz.html", quizname=quizname, username=username,
                                        message=message)
 
@@ -424,14 +407,14 @@ def rating(quiz_id):
                 ratings = quizzes.calculate_ratings()
                 leaderboard = users.calculate_leaderboard()
                 return render_template("rating.html", added=added, message=message, ratings=ratings,
-                                    leaderboard=leaderboard)
+                                       leaderboard=leaderboard)
             else:
                 error = f"You have already rated this quiz."
                 not_added = f" not added"
                 ratings = quizzes.calculate_ratings()
                 leaderboard = users.calculate_leaderboard()
                 return render_template("rating.html", not_added=not_added, error=error, ratings=ratings,
-                                    leaderboard=leaderboard)
+                                       leaderboard=leaderboard)
 
 @app.route("/search")
 def search():

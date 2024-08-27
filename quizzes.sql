@@ -1,5 +1,3 @@
-INSERT INTO users (username, password, user_admin, gdpr) VALUES ('user666', 'testitesti', 'user', 'gdpr');
-INSERT INTO users (username, password, user_admin, gdpr) VALUES ('fiddler_on_the_roof', 'testitesti', 'user', 'gdpr');
 INSERT INTO users (username, password, user_admin, gdpr) VALUES ('King of Rock', 'testitesti', 'admin', 'gdpr');
 INSERT INTO users (username, password, user_admin, gdpr) VALUES ('Mozart', 'testitesti', 'admin', 'gdpr');
 

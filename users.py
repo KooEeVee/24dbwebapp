@@ -45,7 +45,7 @@ def check_ifadmin(username):
         return True
     else:
         return False
-    
+
 def check_ifrated(quiz_id, username):
     sql = text("SELECT EXISTS(SELECT 1 FROM ratings WHERE username=:username AND quiz_id=:quiz_id)")
     result = db.session.execute(sql, {"username":username, "quiz_id":quiz_id})

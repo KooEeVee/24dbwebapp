@@ -44,4 +44,3 @@ CREATE TABLE ratings (
     quiz_id INTEGER REFERENCES quizzes ON DELETE CASCADE,
     rating TEXT
 );
-

@@ -136,11 +136,9 @@ def show_quizzes_toadmin(username):
                options.id ASC""")
     result = db.session.execute(sql, {"username":username})
     list_quizzes = result.fetchall()
-    #print(list_quizzes)
     dict_quizzes = {}
     for row in list_quizzes:
         quiz_label = row.quiz_label
-        #print(quiz_label)
         if quiz_label not in dict_quizzes:
             dict_quizzes[quiz_label] = {
                 "published": row.published,
@@ -149,21 +147,17 @@ def show_quizzes_toadmin(username):
                 "category": row.category,
                 "questions": {}
             }
-        #print(dict_quizzes[quiz_label])
         question_label = row.question_label
-        #print(question_label)
         if question_label not in dict_quizzes[quiz_label]["questions"]:
             dict_quizzes[quiz_label]["questions"][question_label] = {
                 "question_id": row.question_id,
                 "options": []
             }
-        #print(dict_quizzes[quiz_label]["questions"][question_label])
         optionlist = {
             "option_label": row.option_label,
             "correct_option": row.correct_option
         }
         dict_quizzes[quiz_label]["questions"][question_label]["options"].append(optionlist)
-        #print(dict_quizzes)
     return dict_quizzes
 
 def publish_quiz(quiz_id, published):
@@ -196,32 +190,26 @@ def show_quiz_tousers(quiz_id):
                WHERE quizzes.id=:quiz_id""")
     result = db.session.execute(sql, {"quiz_id":quiz_id})
     list_quizzes = result.fetchall()
-    #print(list_quizzes)
     dict_quizzes = {}
     for row in list_quizzes:
         quiz_label = row.quiz_label
-        #print(quiz_label)
         if quiz_label not in dict_quizzes:
             dict_quizzes[quiz_label] = {
                 "published": row.published,
                 "quiz_id": row.quiz_id,
                 "questions": {}
             }
-        #print(dict_quizzes[quiz_label])
         question_label = row.question_label
-        #print(question_label)
         if question_label not in dict_quizzes[quiz_label]["questions"]:
             dict_quizzes[quiz_label]["questions"][question_label] = {
                 "question_id": row.question_id,
                 "options": []
             }
-        #print(dict_quizzes[quiz_label]["questions"][question_label])
         optionlist = {
             "option_label": row.option_label,
             "correct_option": row.correct_option
         }
         dict_quizzes[quiz_label]["questions"][question_label]["options"].append(optionlist)
-        #print(dict_quizzes)
     return dict_quizzes
 
 def save_answer(username, option_id, quiz_id):
