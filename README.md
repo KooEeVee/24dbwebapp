@@ -118,4 +118,5 @@ Misc tasks
 * [x]List the played quizzes for users
 * [x]Fix login with wrong username
 * [x]User can rate a quiz only once
-* []Hide the username / quiz name if success
+* [x]Hide the username / quiz name if success
+* []First quest user answers problem

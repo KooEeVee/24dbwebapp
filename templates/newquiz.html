@@ -8,276 +8,279 @@
 
 {% block contentrow1col1 %}
   {% if session.username and session.role == 'admin' %}
-    <form action="/newquiz" method="POST">
-        <div class="form-group">
-          <h4>Quiz Name</H4>
-          <label for="quizname">Quiz name (unique)</label>
-          <input type="text" class="form-control" id="quizname", name="quizname", minlength="3", maxlength="100", required="True" aria-describedby="quiznameHelp">
-          <small id="quiznameHelp" class="form-text text-muted">Min 3, max 100 characters. Quiz name must be unique.</small>
-        </div>
-        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-        <button type="submit" class="btn btn-primary">Check Quiz Name</button>
-    </form>
-    <br>
-    {% if message %}
-      <div class="alert alert-primary" role="alert">
-        {{ message }}
-     </div>
-    {% else %}
-    {% endif %}
-    {% if not error %}
-      <H3>{{ quizname }}</H3>
-      <form action="/admin" method="POST">
-        <input type="hidden" id="quizname", name="quizname", value="{{ quizname }}">
-        <input type="hidden" id="username", name="username", value="{{ username }}">
-        <H4>Category</H4>
-        <div class="form-group">
-          <label for="category">Choose category for your quiz:</label>
-          <select id="category" name="category">
-              <option value="Skills and Theory">Skills and Theory</option>
-              <option value="Popular Music">Popular Music</option>
-              <option value="Classical Music">Classical Music</option>
-              <option value="World Music">World Music</option>
-              <option value="Movies and Games">Movies and Games </option>
-          </select>
-        </div>
-        <div class="form-group">
-          <h4>Question1</H4>
-          <label for="question1">Question name</label>
-          <input type="text" class="form-control" id="question1", name="question1", minlength="3", maxlength="200", required="True" aria-describedby="questionHelp">
-          <small id="questionHelp" class="form-text text-muted">Min 3, max 200 characters. Must be unique.</small>
-        </div>
-        <div class="form-group">
-          <label for="option11">Option1</label>
-          <input type="text" class="form-control" id="option11", name="option11", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp">
-          <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
-        </div>
-        <div class="form-group">
-          <label for="option12">Option2</label>
-          <input type="text" class="form-control" id="option12", name="option12", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp">
-          <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
-        </div>
-        <div class="form-group">
-          <label for="option13">Option3</label>
-          <input type="text" class="form-control" id="option13", name="option13", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp">
-          <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
-        </div>
-        <div class="form-group">
-          <h4>Question2</H4>
-          <label for="question2">Question name</label>
-          <input type="text" class="form-control" id="question2", name="question2", minlength="3", maxlength="200", required="True" aria-describedby="questionHelp">
-          <small id="questionHelp" class="form-text text-muted">Min 3, max 200 characters. Must be unique.</small>
-        </div>
-        <div class="form-group">
-          <label for="option21">Option1</label>
-          <input type="text" class="form-control" id="option21", name="option21", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp">
-          <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
-        </div>
-        <div class="form-group">
-          <label for="option22">Option2</label>
-          <input type="text" class="form-control" id="option22", name="option22", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp">
-          <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
-        </div>
-        <div class="form-group">
-          <label for="option23">Option3</label>
-          <input type="text" class="form-control" id="option23", name="option23", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp">
-          <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
-        </div>
-        <div class="form-group">
-          <h4>Question3</H4>
-          <label for="question3">Question name</label>
-          <input type="text" class="form-control" id="question3", name="question3", minlength="3", maxlength="200", required="True" aria-describedby="questionHelp">
-          <small id="questionHelp" class="form-text text-muted">Min 3, max 200 characters. Must be unique.</small>
-        </div>
-        <div class="form-group">
-          <label for="option31">Option1</label>
-          <input type="text" class="form-control" id="option31", name="option31", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp">
-          <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
-        </div>
-        <div class="form-group">
-          <label for="option32">Option2</label>
-          <input type="text" class="form-control" id="option32", name="option32", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp">
-          <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
-        </div>
-        <div class="form-group">
-          <label for="option33">Option3</label>
-          <input type="text" class="form-control" id="option33", name="option33", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp">
-          <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
-        </div>
-        <div class="form-group">
-          <h4>Question4</H4>
-          <label for="question4">Question name</label>
-          <input type="text" class="form-control" id="question4", name="question4", minlength="3", maxlength="200", required="True" aria-describedby="questionHelp">
-          <small id="questionHelp" class="form-text text-muted">Min 3, max 200 characters. Must be unique.</small>
-        </div>
-        <div class="form-group">
-          <label for="option41">Option1</label>
-          <input type="text" class="form-control" id="option41", name="option41", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp">
-          <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
-        </div>
-        <div class="form-group">
-          <label for="option42">Option2</label>
-          <input type="text" class="form-control" id="option42", name="option42", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp">
-          <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
-        </div>
-        <div class="form-group">
-          <label for="option43">Option3</label>
-          <input type="text" class="form-control" id="option43", name="option43", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp">
-          <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
-        </div>
-        <div class="form-group">
-          <h4>Question5</H4>
-          <label for="question5">Question name</label>
-          <input type="text" class="form-control" id="question5", name="question5", minlength="3", maxlength="200", required="True" aria-describedby="questionHelp">
-          <small id="questionHelp" class="form-text text-muted">Min 3, max 200 characters. Must be unique.</small>
-        </div>
-        <div class="form-group">
-          <label for="option51">Option1</label>
-          <input type="text" class="form-control" id="option51", name="option51", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp">
-          <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
-        </div>
-        <div class="form-group">
-          <label for="option52">Option2</label>
-          <input type="text" class="form-control" id="option52", name="option52", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp">
-          <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
-        </div>
-        <div class="form-group">
-          <label for="option53">Option3</label>
-          <input type="text" class="form-control" id="option53", name="option53", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp">
-          <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
-        </div>
-        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <a class="btn btn-primary" href="/admin" role="button">Cancel</a>
+    {% if not quizname %}
+      <form action="/newquiz" method="POST">
+          <div class="form-group">
+            <h4>Quiz Name</H4>
+            <label for="quizname">Quiz name (unique)</label>
+            <input type="text" class="form-control" id="quizname", name="quizname", minlength="3", maxlength="100", required="True" aria-describedby="quiznameHelp">
+            <small id="quiznameHelp" class="form-text text-muted">Min 3, max 100 characters. Quiz name must be unique.</small>
+          </div>
+          <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+          <button type="submit" class="btn btn-primary">Check Quiz Name</button>
       </form>
-    {% else %}
-      <div class="alert alert-warning" role="alert">
-        {{ error }}
+      <br>
+      {% if message %}
+        <div class="alert alert-primary" role="alert">
+          {{ message }}
       </div>
-      <H3>{{ quizname }}</H3>
-      <form action="/admin" method="POST">
-        <input type="hidden" id="quizname", name="quizname", value="{{ quizname }}">
-        <input type="hidden" id="username", name="username", value="{{ username }}">
-        <H4>Category</H4>
-        <div class="form-group">
-          <label for="category">Choose category for your quiz:</label>
-          <select id="category" name="category">
-              <option value="Skills and Theory">Skills and Theory</option>
-              <option value="Popular Music">Popular Music</option>
-              <option value="Classical Music">Classical Music</option>
-              <option value="World Music">World Music</option>
-              <option value="Movies and Games">Movies and Games </option>
-          </select>
+      {% else %}
+      {% endif %}
+    {% else %}
+      {% if not error %}
+        <H3>{{ quizname }}</H3>
+        <form action="/admin" method="POST">
+          <input type="hidden" id="quizname", name="quizname", value="{{ quizname }}">
+          <input type="hidden" id="username", name="username", value="{{ username }}">
+          <H4>Category</H4>
+          <div class="form-group">
+            <label for="category">Choose category for your quiz:</label>
+            <select id="category" name="category">
+                <option value="Skills and Theory">Skills and Theory</option>
+                <option value="Popular Music">Popular Music</option>
+                <option value="Classical Music">Classical Music</option>
+                <option value="World Music">World Music</option>
+                <option value="Movies and Games">Movies and Games </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <h4>Question1</H4>
+            <label for="question1">Question name</label>
+            <input type="text" class="form-control" id="question1", name="question1", minlength="3", maxlength="200", required="True" aria-describedby="questionHelp">
+            <small id="questionHelp" class="form-text text-muted">Min 3, max 200 characters. Must be unique.</small>
+          </div>
+          <div class="form-group">
+            <label for="option11">Option1</label>
+            <input type="text" class="form-control" id="option11", name="option11", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp">
+            <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
+          </div>
+          <div class="form-group">
+            <label for="option12">Option2</label>
+            <input type="text" class="form-control" id="option12", name="option12", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp">
+            <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
+          </div>
+          <div class="form-group">
+            <label for="option13">Option3</label>
+            <input type="text" class="form-control" id="option13", name="option13", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp">
+            <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
+          </div>
+          <div class="form-group">
+            <h4>Question2</H4>
+            <label for="question2">Question name</label>
+            <input type="text" class="form-control" id="question2", name="question2", minlength="3", maxlength="200", required="True" aria-describedby="questionHelp">
+            <small id="questionHelp" class="form-text text-muted">Min 3, max 200 characters. Must be unique.</small>
+          </div>
+          <div class="form-group">
+            <label for="option21">Option1</label>
+            <input type="text" class="form-control" id="option21", name="option21", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp">
+            <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
+          </div>
+          <div class="form-group">
+            <label for="option22">Option2</label>
+            <input type="text" class="form-control" id="option22", name="option22", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp">
+            <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
+          </div>
+          <div class="form-group">
+            <label for="option23">Option3</label>
+            <input type="text" class="form-control" id="option23", name="option23", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp">
+            <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
+          </div>
+          <div class="form-group">
+            <h4>Question3</H4>
+            <label for="question3">Question name</label>
+            <input type="text" class="form-control" id="question3", name="question3", minlength="3", maxlength="200", required="True" aria-describedby="questionHelp">
+            <small id="questionHelp" class="form-text text-muted">Min 3, max 200 characters. Must be unique.</small>
+          </div>
+          <div class="form-group">
+            <label for="option31">Option1</label>
+            <input type="text" class="form-control" id="option31", name="option31", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp">
+            <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
+          </div>
+          <div class="form-group">
+            <label for="option32">Option2</label>
+            <input type="text" class="form-control" id="option32", name="option32", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp">
+            <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
+          </div>
+          <div class="form-group">
+            <label for="option33">Option3</label>
+            <input type="text" class="form-control" id="option33", name="option33", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp">
+            <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
+          </div>
+          <div class="form-group">
+            <h4>Question4</H4>
+            <label for="question4">Question name</label>
+            <input type="text" class="form-control" id="question4", name="question4", minlength="3", maxlength="200", required="True" aria-describedby="questionHelp">
+            <small id="questionHelp" class="form-text text-muted">Min 3, max 200 characters. Must be unique.</small>
+          </div>
+          <div class="form-group">
+            <label for="option41">Option1</label>
+            <input type="text" class="form-control" id="option41", name="option41", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp">
+            <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
+          </div>
+          <div class="form-group">
+            <label for="option42">Option2</label>
+            <input type="text" class="form-control" id="option42", name="option42", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp">
+            <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
+          </div>
+          <div class="form-group">
+            <label for="option43">Option3</label>
+            <input type="text" class="form-control" id="option43", name="option43", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp">
+            <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
+          </div>
+          <div class="form-group">
+            <h4>Question5</H4>
+            <label for="question5">Question name</label>
+            <input type="text" class="form-control" id="question5", name="question5", minlength="3", maxlength="200", required="True" aria-describedby="questionHelp">
+            <small id="questionHelp" class="form-text text-muted">Min 3, max 200 characters. Must be unique.</small>
+          </div>
+          <div class="form-group">
+            <label for="option51">Option1</label>
+            <input type="text" class="form-control" id="option51", name="option51", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp">
+            <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
+          </div>
+          <div class="form-group">
+            <label for="option52">Option2</label>
+            <input type="text" class="form-control" id="option52", name="option52", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp">
+            <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
+          </div>
+          <div class="form-group">
+            <label for="option53">Option3</label>
+            <input type="text" class="form-control" id="option53", name="option53", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp">
+            <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
+          </div>
+          <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <a class="btn btn-primary" href="/admin" role="button">Cancel</a>
+        </form>
+      {% else %}
+        <div class="alert alert-warning" role="alert">
+          {{ error }}
         </div>
-        <div class="form-group">
-          <h4>Question1</H4>
-          <label for="question1">Question name</label>
-          <input type="text" class="form-control" id="question1", name="question1", minlength="3", maxlength="200", required="True" aria-describedby="questionHelp" value="{{ question1 }}">
-          <small id="questionHelp" class="form-text text-muted">Min 3, max 200 characters. Must be unique.</small>
-        </div>
-        <div class="form-group">
-          <label for="option11">Option1</label>
-          <input type="text" class="form-control" id="option11", name="option11", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp" value="{{ option11 }}">
-          <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
-        </div>
-        <div class="form-group">
-          <label for="option12">Option2</label>
-          <input type="text" class="form-control" id="option12", name="option12", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp" value="{{ option12 }}">
-          <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
-        </div>
-        <div class="form-group">
-          <label for="option13">Option3</label>
-          <input type="text" class="form-control" id="option13", name="option13", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp" value="{{ option13 }}">
-          <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
-        </div>
-        <div class="form-group">
-          <h4>Question2</H4>
-          <label for="question2">Question name</label>
-          <input type="text" class="form-control" id="question2", name="question2", minlength="3", maxlength="200", required="True" aria-describedby="questionHelp" value="{{ question2 }}">
-          <small id="questionHelp" class="form-text text-muted">Min 3, max 200 characters. Must be unique.</small>
-        </div>
-        <div class="form-group">
-          <label for="option21">Option1</label>
-          <input type="text" class="form-control" id="option21", name="option21", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp" value="{{ option21 }}">
-          <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
-        </div>
-        <div class="form-group">
-          <label for="option22">Option2</label>
-          <input type="text" class="form-control" id="option22", name="option22", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp" value="{{ option22 }}">
-          <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
-        </div>
-        <div class="form-group">
-          <label for="option23">Option3</label>
-          <input type="text" class="form-control" id="option23", name="option23", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp" value="{{ option23 }}">
-          <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
-        </div>
-        <div class="form-group">
-          <h4>Question3</H4>
-          <label for="question3">Question name</label>
-          <input type="text" class="form-control" id="question3", name="question3", minlength="3", maxlength="200", required="True" aria-describedby="questionHelp" value="{{ question3 }}">
-          <small id="questionHelp" class="form-text text-muted">Min 3, max 200 characters. Must be unique.</small>
-        </div>
-        <div class="form-group">
-          <label for="option31">Option1</label>
-          <input type="text" class="form-control" id="option31", name="option31", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp" value="{{ option31 }}">
-          <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
-        </div>
-        <div class="form-group">
-          <label for="option32">Option2</label>
-          <input type="text" class="form-control" id="option32", name="option32", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp" value="{{ option32 }}">
-          <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
-        </div>
-        <div class="form-group">
-          <label for="option33">Option3</label>
-          <input type="text" class="form-control" id="option33", name="option33", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp" value="{{ option33 }}">
-          <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
-        </div>
-        <div class="form-group">
-          <h4>Question4</H4>
-          <label for="question4">Question name</label>
-          <input type="text" class="form-control" id="question4", name="question4", minlength="3", maxlength="200", required="True" aria-describedby="questionHelp" value="{{ question4 }}">
-          <small id="questionHelp" class="form-text text-muted">Min 3, max 200 characters. Must be unique.</small>
-        </div>
-        <div class="form-group">
-          <label for="option41">Option1</label>
-          <input type="text" class="form-control" id="option41", name="option41", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp" value="{{ option41 }}">
-          <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
-        </div>
-        <div class="form-group">
-          <label for="option42">Option2</label>
-          <input type="text" class="form-control" id="option42", name="option42", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp" value="{{ option42 }}">
-          <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
-        </div>
-        <div class="form-group">
-          <label for="option43">Option3</label>
-          <input type="text" class="form-control" id="option43", name="option43", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp" value="{{ option43 }}">
-          <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
-        </div>
-        <div class="form-group">
-          <h4>Question5</H4>
-          <label for="question5">Question name</label>
-          <input type="text" class="form-control" id="question5", name="question5", minlength="3", maxlength="200", required="True" aria-describedby="questionHelp" value="{{ question5 }}">
-          <small id="questionHelp" class="form-text text-muted">Min 3, max 200 characters. Must be unique.</small>
-        </div>
-        <div class="form-group">
-          <label for="option51">Option1</label>
-          <input type="text" class="form-control" id="option51", name="option51", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp" value="{{ option51 }}">
-          <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
-        </div>
-        <div class="form-group">
-          <label for="option52">Option2</label>
-          <input type="text" class="form-control" id="option52", name="option52", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp" value="{{ option52 }}">
-          <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
-        </div>
-        <div class="form-group">
-          <label for="option53">Option3</label>
-          <input type="text" class="form-control" id="option53", name="option53", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp" value="{{ option53 }}">
-          <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
-        </div>
-        <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <a class="btn btn-primary" href="/admin" role="button">Cancel</a>
-      </form>
+        <H3>{{ quizname }}</H3>
+        <form action="/admin" method="POST">
+          <input type="hidden" id="quizname", name="quizname", value="{{ quizname }}">
+          <input type="hidden" id="username", name="username", value="{{ username }}">
+          <H4>Category</H4>
+          <div class="form-group">
+            <label for="category">Choose category for your quiz:</label>
+            <select id="category" name="category">
+                <option value="Skills and Theory">Skills and Theory</option>
+                <option value="Popular Music">Popular Music</option>
+                <option value="Classical Music">Classical Music</option>
+                <option value="World Music">World Music</option>
+                <option value="Movies and Games">Movies and Games </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <h4>Question1</H4>
+            <label for="question1">Question name</label>
+            <input type="text" class="form-control" id="question1", name="question1", minlength="3", maxlength="200", required="True" aria-describedby="questionHelp" value="{{ question1 }}">
+            <small id="questionHelp" class="form-text text-muted">Min 3, max 200 characters. Must be unique.</small>
+          </div>
+          <div class="form-group">
+            <label for="option11">Option1</label>
+            <input type="text" class="form-control" id="option11", name="option11", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp" value="{{ option11 }}">
+            <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
+          </div>
+          <div class="form-group">
+            <label for="option12">Option2</label>
+            <input type="text" class="form-control" id="option12", name="option12", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp" value="{{ option12 }}">
+            <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
+          </div>
+          <div class="form-group">
+            <label for="option13">Option3</label>
+            <input type="text" class="form-control" id="option13", name="option13", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp" value="{{ option13 }}">
+            <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
+          </div>
+          <div class="form-group">
+            <h4>Question2</H4>
+            <label for="question2">Question name</label>
+            <input type="text" class="form-control" id="question2", name="question2", minlength="3", maxlength="200", required="True" aria-describedby="questionHelp" value="{{ question2 }}">
+            <small id="questionHelp" class="form-text text-muted">Min 3, max 200 characters. Must be unique.</small>
+          </div>
+          <div class="form-group">
+            <label for="option21">Option1</label>
+            <input type="text" class="form-control" id="option21", name="option21", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp" value="{{ option21 }}">
+            <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
+          </div>
+          <div class="form-group">
+            <label for="option22">Option2</label>
+            <input type="text" class="form-control" id="option22", name="option22", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp" value="{{ option22 }}">
+            <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
+          </div>
+          <div class="form-group">
+            <label for="option23">Option3</label>
+            <input type="text" class="form-control" id="option23", name="option23", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp" value="{{ option23 }}">
+            <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
+          </div>
+          <div class="form-group">
+            <h4>Question3</H4>
+            <label for="question3">Question name</label>
+            <input type="text" class="form-control" id="question3", name="question3", minlength="3", maxlength="200", required="True" aria-describedby="questionHelp" value="{{ question3 }}">
+            <small id="questionHelp" class="form-text text-muted">Min 3, max 200 characters. Must be unique.</small>
+          </div>
+          <div class="form-group">
+            <label for="option31">Option1</label>
+            <input type="text" class="form-control" id="option31", name="option31", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp" value="{{ option31 }}">
+            <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
+          </div>
+          <div class="form-group">
+            <label for="option32">Option2</label>
+            <input type="text" class="form-control" id="option32", name="option32", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp" value="{{ option32 }}">
+            <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
+          </div>
+          <div class="form-group">
+            <label for="option33">Option3</label>
+            <input type="text" class="form-control" id="option33", name="option33", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp" value="{{ option33 }}">
+            <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
+          </div>
+          <div class="form-group">
+            <h4>Question4</H4>
+            <label for="question4">Question name</label>
+            <input type="text" class="form-control" id="question4", name="question4", minlength="3", maxlength="200", required="True" aria-describedby="questionHelp" value="{{ question4 }}">
+            <small id="questionHelp" class="form-text text-muted">Min 3, max 200 characters. Must be unique.</small>
+          </div>
+          <div class="form-group">
+            <label for="option41">Option1</label>
+            <input type="text" class="form-control" id="option41", name="option41", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp" value="{{ option41 }}">
+            <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
+          </div>
+          <div class="form-group">
+            <label for="option42">Option2</label>
+            <input type="text" class="form-control" id="option42", name="option42", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp" value="{{ option42 }}">
+            <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
+          </div>
+          <div class="form-group">
+            <label for="option43">Option3</label>
+            <input type="text" class="form-control" id="option43", name="option43", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp" value="{{ option43 }}">
+            <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
+          </div>
+          <div class="form-group">
+            <h4>Question5</H4>
+            <label for="question5">Question name</label>
+            <input type="text" class="form-control" id="question5", name="question5", minlength="3", maxlength="200", required="True" aria-describedby="questionHelp" value="{{ question5 }}">
+            <small id="questionHelp" class="form-text text-muted">Min 3, max 200 characters. Must be unique.</small>
+          </div>
+          <div class="form-group">
+            <label for="option51">Option1</label>
+            <input type="text" class="form-control" id="option51", name="option51", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp" value="{{ option51 }}">
+            <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
+          </div>
+          <div class="form-group">
+            <label for="option52">Option2</label>
+            <input type="text" class="form-control" id="option52", name="option52", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp" value="{{ option52 }}">
+            <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
+          </div>
+          <div class="form-group">
+            <label for="option53">Option3</label>
+            <input type="text" class="form-control" id="option53", name="option53", minlength="1", maxlength="100", required="True" aria-describedby="optionHelp" value="{{ option53 }}">
+            <small id="optionHelp" class="form-text text-muted">Min 1, max 100 characters.</small>
+          </div>
+          <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <a class="btn btn-primary" href="/admin" role="button">Cancel</a>
+        </form>
+      {% endif %}
     {% endif %}
   {% else %}
     <a class="btn btn-primary" href="/login" role="button">Login</a>

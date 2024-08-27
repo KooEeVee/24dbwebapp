@@ -7,7 +7,8 @@
 {% endblock %}
 
 {% block contentrow1col1 %}
-  <p>Choose your username and password.</p>
+  {% if not username %}
+  <p>Choose your username.</p>
   <form action="/register" method="POST">
     <div class="form-group">
       <h4>Username</H4>
@@ -21,7 +22,9 @@
   <div class="alert alert-primary" role="alert">
     {{ message }}
   </div>
+  {% else %}
   <H3>{{ username }}</H3>
+  <p>Choose your password.</p>
   <form action="/registersuccess" method="POST">
     <input type="hidden" id="username", name="username", value="{{ username }}">
     <div class="form-group">
@@ -44,6 +47,7 @@
     <button type="submit" class="btn btn-primary">Submit</button>
     <a class="btn btn-primary" href="/" role="button">Cancel</a>
   </form>
+  {% endif %}
 {% endblock %}
 
 {% block rightcardheader1 %}
