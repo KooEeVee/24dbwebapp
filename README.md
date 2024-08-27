@@ -119,4 +119,4 @@ Misc tasks
 * [x]Fix login with wrong username
 * [x]User can rate a quiz only once
 * [x]Hide the username / quiz name if success
-* []First quest user answers problem
+* [x]First quest user answers problem

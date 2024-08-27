@@ -51,9 +51,12 @@
                                 <li class="nav-item active">
                                     <a class="nav-link" href="/">Quizzes</a>
                                 </li>
+                                {% if not session.username %}
                                 <li class="nav-item active">
                                     <a class="nav-link" href="/register">Register</a>
                                 </li>
+                                {% else %}
+                                {% endif %}
                                 {% if not session.username %}
                                 <li class="nav-item active">
                                     <a class="nav-link" href="/login">Login</a>

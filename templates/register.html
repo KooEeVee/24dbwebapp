@@ -19,9 +19,12 @@
     <button type="submit" class="btn btn-primary">Check Username</button>
   </form>
   <br>
-  <div class="alert alert-primary" role="alert">
-    {{ message }}
-  </div>
+    {% if message %}
+      <div class="alert alert-primary" role="alert">
+        {{ message }}
+      </div>
+    {% else %}
+    {% endif %}
   {% else %}
   <H3>{{ username }}</H3>
   <p>Choose your password.</p>
