@@ -240,7 +240,7 @@ def quizresult():
         correct_answers = 0
         answers = []
         quiz_id = request.form["quiz_id"]
-        if not users.check_ifplayed(quiz_id, username):
+        if not users.check_ifplayed(quiz_id, username) and username != "guest":
             if session["csrf_token"] != request.form["csrf_token"]:
                 abort(403)
             else:
@@ -322,8 +322,8 @@ def quizresult():
             correct_answer3 = quizzes.get_correctoption_label(question3_id)
             correct_answer4 = quizzes.get_correctoption_label(question4_id)
             correct_answer5 = quizzes.get_correctoption_label(question5_id)
-            message = f"""(The result wasn't saved. Are you a guest user?
-            Or you have already played this quiz.)"""
+            message = f"""The result wasn't saved. Are you a guest user?
+            Or you have already played this quiz."""
             leaderboard = users.calculate_leaderboard()
             ratings = quizzes.calculate_ratings()
             return render_template("quizresult.html", ratings=ratings, quiz_id=quiz_id,
