@@ -35,7 +35,3 @@ Music Quiz Platform offers users a fun place to refresh and test music related s
 - As an admin, publish quizzes
 - As an admin, see a list of own unpublished and published quizzes
 - As an admin, see the stats of own quizzes: how many users, results
-
-## Todo
-
-*[]Delete ratings

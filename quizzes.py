@@ -255,5 +255,4 @@ def delete_rating(username):
     sql = text("DELETE FROM ratings WHERE username=:username")
     db.session.execute(sql, {"username":username})
     db.session.commit()
-
     
