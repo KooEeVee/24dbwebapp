@@ -250,4 +250,10 @@ def delete_quiz_id(quizname):
     sql = text("DELETE FROM quizzes WHERE quiz_label=:quizname")
     db.session.execute(sql, {"quizname":quizname})
     db.session.commit()
+
+def delete_rating(username):
+    sql = text("DELETE FROM ratings WHERE username=:username")
+    db.session.execute(sql, {"username":username})
+    db.session.commit()
+
     

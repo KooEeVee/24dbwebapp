@@ -185,11 +185,13 @@ def accountremoved():
                     users.remove_user(username)
                     quizzes.delete_answer(username)
                     quizzes.delete_quiz(username)
+                    quizzes.delete_rating(username)
                     del session["username"]
                     return render_template("accountremoved.html")
                 else:
                     users.remove_user(username)
                     quizzes.delete_answer(username)
+                    quizzes.delete_rating(username)
                     del session["username"]
                     return render_template("accountremoved.html")
 
